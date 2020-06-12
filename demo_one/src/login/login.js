@@ -1,18 +1,19 @@
-import React from 'react'
-import {ThemeContext} from '../themeContext/context';
+import React, { Component } from 'react'
+import { Consumer } from '../AppContext';
+import Loginone from '../loginone/loginone';
 
-class ThemedButton extends React.Component {
-  render() {
-    let props = this.props;
-    let theme = this.context;
-    return (
-      <button
-        {...props}
-        style={{backgroundColor: theme.background}}
-      />
-    );
-  }
+export default class HomePage extends Component {
+    render() {
+        console.log(this.props);
+        return (
+            <div>
+                <Loginone/>
+                <Consumer>
+                    {
+                        ctx=><div>{ctx.pass.name}</div>
+                    }
+                </Consumer>
+            </div>
+        )
+    }
 }
-ThemedButton.contextType = ThemeContext;
-
-export default ThemedButton;

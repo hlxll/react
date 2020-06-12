@@ -1,24 +1,20 @@
-import React from 'react'
-class loginone extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            // date: new Date()
-            date: 'state数据'
-        };
-    }
-    componentDidMount(){
-        console.log(this.context); //{}
-      }
-    render(){
-        return(
-                <ThemeContext.Consumer>
-                    {
-                        battery => <h1>Battery : {battery}</h1>
-                    }
-                </ThemeContext.Consumer>
-        ) 
-        
+import React, { Component } from 'react'
+import { Consumer } from '../AppContext'
+
+export default class TopBar extends Component {
+    render() {
+        return (
+            <Consumer>
+                {
+                    ctx => <TopBarHandle {...ctx}/>
+                }
+            </Consumer>
+        )
     }
 }
-export default loginone
+
+function TopBarHandle(props){
+    return (<div className="tabBar">
+        {props.user.name}
+    </div>)
+}

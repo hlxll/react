@@ -3,3 +3,6 @@
   函数式组件和es6继承组件，继承组件使用props时候，前面加this。
 2: context
   使用context和vuex类似。设置了全局数据。使用的时候，可能会减少组件复用，但是有时候为了防止数据多层传递，也可以使用这个方法
+  使用context的时候，在文件中新建一个AppContext.js文件，在context时候，有两个组件，Provider Consumer是组件，用Provider传递数据
+  用Consumer接收数据，每个需要使用的地方都要引入这个js，只要在Provider中的子组件，就可以使用Consumer接收数据
+  
