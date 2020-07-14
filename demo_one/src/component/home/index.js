@@ -4,7 +4,7 @@ class Home extends Component{
     render(){
       return(
         <div>
-          Home
+          路由跳转home组件
         </div>
       )
     }
