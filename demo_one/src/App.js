@@ -7,7 +7,7 @@ import './App.css'
   BrowserRouter使用h5 history实现
   开发阶段建议使用hashRouter，上线之后使用BrowserRouter
 */
-import { HashRouter as Router ,Route, Link, NavLink} from 'react-router-dom'
+import { HashRouter as Router ,Route, Link, NavLink, Redirect} from 'react-router-dom'
 import news from './component/News';
 import {Provider,Consumer} from "./AppContext.js"
 // import { from } from 'rxjs';
@@ -27,6 +27,7 @@ class App extends Component{
         {/*activeClassName点击链接高亮 */}
         <NavLink to="/home" activeClassName="selected">home组件</NavLink><br/>
         <Link to="/news">news组件</Link>
+        <Redirect exact from="/" to="/home"></Redirect>
         <Route path="/home" component={home}></Route>
         <Route path="/news" component={news}></Route> 
         {/**
@@ -36,7 +37,7 @@ class App extends Component{
         <Route path="/about" children={(props)=>{
           console.log(props)
           return(
-            <div>children</div>
+            <div>一直显示的children</div>
           )
         }}/>
       </div>
@@ -44,22 +45,22 @@ class App extends Component{
     )
   }
 }
-function Child(props){
-  return (
-  <div>
-    <p>{props.user.name}</p>
-  </div>
-  );
-}
+// function Child(props){
+//   return (
+//   <div>
+//     <p>{props.user.name}</p>
+//   </div>
+//   );
+// }
 
-const store = {
-  user: {
-    name: '跨层级通讯',
-  },
-  pass: {
-    name: 'huanglin'
-  }
-}
+// const store = {
+//   user: {
+//     name: '跨层级通讯',
+//   },
+//   pass: {
+//     name: 'huanglin'
+//   }
+// }
 
 // function App() {
 //   return (
