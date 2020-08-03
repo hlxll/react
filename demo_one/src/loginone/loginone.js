@@ -4,17 +4,14 @@ import { Consumer } from '../AppContext'
 export default class TopBar extends Component {
     render() {
         return (
-            <Consumer>
+            <div>
+                <Consumer>
                 {
-                    ctx => <TopBarHandle {...ctx}/>
+                    ctx=><div>孙组件使用Consumer得到的数据{ctx.pass.name}</div>
                 }
-            </Consumer>
+                </Consumer>
+            </div>
+            
         )
     }
-}
-
-function TopBarHandle(props){
-    return (<div className="tabBar">
-        {props.user.name}
-    </div>)
 }

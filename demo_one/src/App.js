@@ -10,6 +10,7 @@ import './App.css'
 import { HashRouter as Router ,Route, Link, NavLink, Redirect} from 'react-router-dom'
 import news from './component/News';
 import {Provider,Consumer} from "./AppContext.js"
+import Login from './login/login.js'
 // import { from } from 'rxjs';
 // //跨层级通讯  Provider Consumer是组件
 // const Context = React.createContext();
@@ -18,10 +19,28 @@ import {Provider,Consumer} from "./AppContext.js"
 import home from './component/home'
 class App extends Component{
   render(){
+    const store = {
+      user: {
+        name: '跨层级通讯',
+      },
+      pass: {
+        name: 'huanglin'
+      }
+    }
     return(
       <Router>
       {/*必须放置在路由容器 */}
       <div>
+        <Provider value={store}>
+          context传递数据的方式
+          只要在Provider中的子组件，就可以使用Consumer接收context数据
+          <Consumer>
+            {
+              ctx => <Login {...ctx}>父节点引用组件，组件中可以用props调用</Login>
+            }
+          </Consumer>
+          
+        </Provider>
         {/*都必须存在根节点 */}
         <h1>react路由</h1>
         {/*activeClassName点击链接高亮 */}

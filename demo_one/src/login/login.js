@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Consumer } from '../AppContext';
-import Loginone from '../loginone/loginone';
+import { Consumer } from '../AppContext.js';
+import Loginone from '../loginone/loginone.js';
 import store from '../store'
 import {List, Input} from 'antd'
 export default class HomePage extends Component {
@@ -22,14 +22,19 @@ export default class HomePage extends Component {
         this.takeredux = this.takeredux.bind(this)
         store.subscribe(this.listener)//监听store
     }
+    componentDidMount() {
+        console.log('组件被渲染到dom中后执行')
+        console.log(this.state)
+    }
     render() {
         const count = this.state.ThunkNum
         return (
             <div>
+                <p>{this.props.children}</p>
                 <Loginone/>
                 <Consumer>
                     {
-                        ctx=><div>{ctx.pass.name}</div>
+                        ctx=><div>Consumer得到的数据，{ctx.pass.name}</div>
                     }
                 </Consumer>
                 <Input onChange={this.changeValue} value={this.state.inputValue} />
