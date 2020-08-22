@@ -6,11 +6,45 @@ import { HashRouter as Router, Route, Link, Switch, Redirect, Prompt } from 'rea
 import detail from './detail.js'
 import NotFound from './NotFound.js'
 class Home extends Component{
+  constructor(props){
+    super(props)
+    this.setStateFun = this.setStateFun.bind(this)
+    this.state = {
+      name: 'huanglin',
+      age: 12
+    }
+    
+    console.log('construct')
+  }
+  componentWillMount() {
+    console.log('挂在')
+  }
+  componentDidMount() {
+    console.log('挂在成功')
+  }
+  componentWillReceiveProps() {
+    console.log('属性prop改变')
+  }
+  shouldComponentUpdate() {
+    //return返回true或false，是否更新
+    console.log('状态是否改变')
+    return true;
+  }
+  componentWillUpdate() {
+    console.log('状态改变')
+  }
+  componentDidUpdate() {
+    console.log('更新')
+  }
+  componentWillUnmount(){
+    console.log('卸载')
+  }
     render(){
       return(
         <Router>
           <div>
             home组件
+            <span onClick={this.setStateFun}>改变state</span>
             <Link to="/home/login">去login</Link>
             <Link to="/home/useRender">去render</Link> 
             默认子组件login
@@ -24,7 +58,7 @@ class Home extends Component{
               <Route path="/home/login/:id" component={detail}></Route>
               <Route path="/home/useRender" render = {(props)=>{
                 console.log('render'+props)
-                //1:history主要是做函数氏导航
+                //1:history主要是做函数式导航
                 //2:location代表的url地址信息
                 //3:match路由传参/news/14
                 return (
@@ -43,6 +77,16 @@ class Home extends Component{
           </div>
         </Router>
       )
+    }
+    setStateFun() {
+      //只会更新对应状态，不会覆盖
+      //该方法是异步的,如果想setState之后立即拿到最新的值，需要使用回调
+      this.setState({  
+        name: 'xulaoda'
+      },function() {
+        console.log(this.state)
+      })
+      console.log(this.state)
     }
   }
   export default Home
