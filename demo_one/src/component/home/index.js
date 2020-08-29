@@ -17,10 +17,10 @@ class Home extends Component{
     console.log('construct')
   }
   componentWillMount() {
-    console.log('挂在')
+    console.log('挂载')
   }
   componentDidMount() {
-    console.log('挂在成功')
+    console.log('挂载成功')
   }
   componentWillReceiveProps() {
     console.log('属性prop改变')
@@ -44,7 +44,9 @@ class Home extends Component{
         <Router>
           <div>
             home组件
-            <span onClick={this.setStateFun}>改变state</span>
+            <p onClick={this.setStateFun}>改变state</p>
+            <p>默认props数据：{this.props.defaultColor}</p>
+            {/* <p>{this.props.children}</p> */}
             <Link to="/home/login">去login</Link>
             <Link to="/home/useRender">去render</Link> 
             默认子组件login
@@ -88,5 +90,9 @@ class Home extends Component{
       })
       console.log(this.state)
     }
-  }
+}
+//为组件定义默认的props，一般为了prop数据不能为空定义
+Home.defaultProps = {
+  defaultColor: 'red'
+}
   export default Home
