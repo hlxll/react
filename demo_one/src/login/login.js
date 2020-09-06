@@ -16,9 +16,9 @@ export default class HomePage extends Component {
         this.addAll = this.addAll.bind(this)
         this.listener = this.listener.bind(this)
         this.addOne = this.addOne.bind(this)
-        this.reduxpromise = this.redux1.bind(this)
-        this.reduxpromise = this.redux2.bind(this)
-        this.reduxpromise = this.redux3.bind(this)
+        this.redux1 = this.redux1.bind(this)
+        this.redux2 = this.redux2.bind(this)
+        this.redux3 = this.redux3.bind(this)
         this.takeredux = this.takeredux.bind(this)
         store.subscribe(this.listener)//监听store
     }
@@ -34,7 +34,7 @@ export default class HomePage extends Component {
                 <Loginone/>
                 <Consumer>
                     {
-                        ctx=><div>Consumer得到的数据，{ctx.pass.name}</div>
+                        ctx=><div>Consumer得到的数据，{ctx.user.name}</div>
                     }
                 </Consumer>
                 <Input onChange={this.changeValue} value={this.state.inputValue} />
