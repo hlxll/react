@@ -16,6 +16,7 @@ import Login from './login/login.js'
 // const Context = React.createContext();
 // const Provider = Context.Provider;
 // const Consumer = Context.Consumer;
+//beizhu
 import home from './component/home'
 class App extends Component{
   render(){
