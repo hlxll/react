@@ -1,0 +1,7 @@
+.loginFooter{
+    display: flex;
+    width: 100%;
+}
+.loginFooter div{
+    width: 33%;
+}
