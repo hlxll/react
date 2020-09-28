@@ -3,6 +3,9 @@ import { HashRouter as Router, Route, Link,  Switch} from "react-router-dom";
 import {Provider,Consumer} from "./AppContext.js"
 import Login from './login/login'
 import Layout from './Components/LayOut/LayOut'
+import LeftLogin from './login/loginleft'
+import LoginRight from './login/LoginRight'
+
 import routes from './Router'
 class App extends Component{
   render(){
@@ -49,7 +52,13 @@ class App extends Component{
         <Provider value={store}>
           <Router>
             <Switch>
-              <Route path="/login" component={Login}></Route>
+              <Login>
+                <Switch>
+                  <Route path="/login/left" component={LeftLogin}></Route>
+                  <Route path="/login/right" component={LoginRight}></Route>
+                </Switch>
+              </Login>
+              
               <Route path="/" render={props => LayoutRouter}></Route>
             </Switch>
           </Router>

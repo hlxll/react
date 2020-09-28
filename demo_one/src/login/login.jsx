@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import Loginleft from './loginleft'
-import LoginCenter from './LoginCenter'
-import LoginRight from './LoginRight.jsx'
 export default class HomePage extends Component {
     constructor(props){
         super(props)
@@ -13,9 +10,6 @@ export default class HomePage extends Component {
         return (
                 <div>
                     <div>
-                        <Loginleft />
-                        <LoginCenter />
-                        <LoginRight />
                         <div className="loginFooter">
                             <div>
                                 <button>1</button>
@@ -28,6 +22,7 @@ export default class HomePage extends Component {
                             </div>
                         </div>
                     </div>
+                    {this.props.children}
                 </div>
         )
     }
