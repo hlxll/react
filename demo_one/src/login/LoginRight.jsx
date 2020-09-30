@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-export default class loginleft extends Component {
+import {connect} from 'react-reducer'
+class loginleft extends Component {
     constructor(props){
         super(props)
     }
@@ -14,3 +15,16 @@ export default class loginleft extends Component {
         )
     }
 }
+// const mapStateToProps = (state) =>{
+//     return{
+//         homeData:state.homeData
+//     }
+// }
+
+// const mapDispatchToProps = (dispatch) =>{
+//     return {
+//         homeDataActions:bindActionCreators(homeDataActions,dispatch)
+//     }
+// }
+
+// export default connect(mapStateToProps,mapDispatchToProps)(loginleft)
