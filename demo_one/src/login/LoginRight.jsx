@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import {connect} from 'react-reducer'
-class loginleft extends Component {
+export default class loginleft extends Component {
     constructor(props){
         super(props)
     }

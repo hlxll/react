@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import store from "../Store";
+import {sendAction} from '../Store/actionCreators'
 export default class HomePage extends Component {
     constructor(props){
         super(props)
@@ -6,13 +8,25 @@ export default class HomePage extends Component {
     componentDidMount() {
         console.log('组件被渲染到dom中后执行')
     }
+    handleClick = () => {
+        const action = sendAction();
+        store.dispatch(action)
+    }
+    componentDidMount(){
+        store.subscribe(()=> {
+            console.log(store.getState())
+            this.setState({})
+            console.log(store.getState())
+        })
+    }
     render() {
         return (
                 <div>
                     <div>
                         <div className="loginFooter">
                             <div>
-                                <button>1</button>
+                                <button onClick={this.handleClick}>1</button>
+                                
                             </div>
                             <div>
                                 <button>2</button>

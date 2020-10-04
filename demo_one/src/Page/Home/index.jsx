@@ -8,7 +8,6 @@ class Home extends Component{
       name: 'huanglin',
       age: 12
     }
-    
     console.log('construct')
   }
   componentWillMount() {

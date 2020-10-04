@@ -54,8 +54,8 @@ class App extends Component{
             <Switch>
               <Login>
                 <Switch>
-                  <Route path="/login/left" component={LeftLogin}></Route>
-                  <Route path="/login/right" component={LoginRight}></Route>
+                  <Route exact path="/login/left" component={LeftLogin}></Route>
+                  <Route exact path="/login/right" component={LoginRight}></Route>
                 </Switch>
               </Login>
               
