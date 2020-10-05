@@ -4,14 +4,14 @@ import * as constants from './actionTypes'
 const defaultState = {
     homeData: {},
     sowingData: [],
-    sendData: {}
+    sendData: []
 };
 
 //第二步，处理dispatch传递过来的数据
 export default (state = defaultState, action)=>{
     if(action.type === constants.INIT_HOME_DATA){
         const newState = JSON.parse(JSON.stringify(state));
-        newState.homeData = action.homeData;
+        newState.homeData = action;
         return newState;
     }else if(action.type === constants.INIT_SOWING_DATA){
         const newState = JSON.parse(JSON.stringify(state));

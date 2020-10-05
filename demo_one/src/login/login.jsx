@@ -29,7 +29,7 @@ export default class HomePage extends Component {
                                 
                             </div>
                             <div>
-                                <button>2</button>
+                                <button onClick={this.addClick}>+</button>
                             </div>
                             <div>
                                 <button>3</button>

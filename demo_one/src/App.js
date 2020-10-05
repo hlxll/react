@@ -52,14 +52,14 @@ class App extends Component{
         <Provider value={store}>
           <Router>
             <Switch>
+              <Route path="/" render={props => LayoutRouter}></Route>
               <Login>
                 <Switch>
-                  <Route exact path="/login/left" component={LeftLogin}></Route>
-                  <Route exact path="/login/right" component={LoginRight}></Route>
+                  <Route path="/login/left" component={LeftLogin}></Route>
+                  <Route path="/login/right" component={LoginRight}></Route>
                 </Switch>
               </Login>
               
-              <Route path="/" render={props => LayoutRouter}></Route>
             </Switch>
           </Router>
         </Provider>

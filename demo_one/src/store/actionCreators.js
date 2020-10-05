@@ -37,9 +37,13 @@ import * as constants from './actionTypes'
 //     }
 // };
 //第一步
- export const sendAction = ()=>{
-     return {
-         type: constants.SEND_TYPE,
-         value: "reduxcer数据传递"
+ export const sendAction = (data)=>{
+     return (dispatch)=>{
+         const senddata = data
+         dispatch({
+            type: constants.SEND_TYPE,
+            senddata
+         })
+         
      }
  }

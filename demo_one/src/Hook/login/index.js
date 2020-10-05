@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { useHistory, useLocation, useParams } from "react-router-dom"
 import ChildIndex from './childIndex.js'
-
 export const AppContext = React.createContext({});
 //共享对于组件树而言是全局的数据
 function HomeButton() {
