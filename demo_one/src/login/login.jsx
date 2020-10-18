@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import store from "../Store";
-import {sendAction} from '../Store/actionCreators'
-export default class HomePage extends Component {
+import {sendAction, getSowingDataAction} from '../Store/actionCreators'
+
+import { connect } from 'react-redux';
+class HomePage extends Component {
     constructor(props){
         super(props)
+        this.handleClick = this.handleClick.bind(this)
     }
     componentDidMount() {
         console.log('组件被渲染到dom中后执行')
@@ -11,6 +14,9 @@ export default class HomePage extends Component {
     handleClick = () => {
         const action = sendAction();
         store.dispatch(action)
+    }
+    addClick = () =>{
+
     }
     componentDidMount(){
         store.subscribe(()=> {
@@ -26,7 +32,6 @@ export default class HomePage extends Component {
                         <div className="loginFooter">
                             <div>
                                 <button onClick={this.handleClick}>1</button>
-                                
                             </div>
                             <div>
                                 <button onClick={this.addClick}>+</button>
@@ -41,3 +46,5 @@ export default class HomePage extends Component {
         )
     }
 }
+
+export default HomePage;

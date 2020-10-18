@@ -18,10 +18,9 @@ export default (state = defaultState, action)=>{
         newState.sowingData = action.sowingData;
         return newState;
     }else if(action.type === constants.SEND_TYPE){
-        console.log(state, action)
         //state旧的state，action新数据
         const newState = JSON.parse(JSON.stringify(state));
-        newState.sendData = action;
+        newState.sendData = action.sendData;
         return newState;
     }
     return state;

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import Header from './common/head'
 export default class loginleft extends Component {
     constructor(props){
         super(props)
@@ -9,6 +10,7 @@ export default class loginleft extends Component {
     render() {
         return (
             <div>
+                {/* <Header /> */}
                 left
             </div>
         )

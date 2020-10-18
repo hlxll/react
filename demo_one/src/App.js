@@ -49,17 +49,16 @@ class App extends Component{
       </Layout>
     )
     return(
-        <Provider value={store}>
+        <Provider store={store}>
           <Router>
             <Switch>
-              <Route path="/" render={props => LayoutRouter}></Route>
-              <Login>
+            <Login>
                 <Switch>
                   <Route path="/login/left" component={LeftLogin}></Route>
                   <Route path="/login/right" component={LoginRight}></Route>
                 </Switch>
               </Login>
-              
+              <Route path="/index" render={props => LayoutRouter}></Route>
             </Switch>
           </Router>
         </Provider>

@@ -20,29 +20,34 @@ import * as constants from './actionTypes'
 // };
 
 // 0. 获取轮播图列表数据
-// export const getSowingDataAction = () => {
-//     return (dispatch)=>{
-//         // 请求网络数据
-//         getSowingData().then((res)=>{
-//             if(res.status_code === 200){
-//                 const sowingData = res.result;
-//                 dispatch({
-//                     type: constants.INIT_SOWING_DATA,
-//                     sowingData
-//                 })
-//             }
-//         }).catch(()=>{
-//             alert('首页数据请求失败！')
-//         })
-//     }
-// };
+export const getSowingDataAction = () => {
+    return (dispatch)=>{
+        // 请求网络数据
+        // getSowingData().then((res)=>{
+        //     if(res.status_code === 200){
+        //         const sowingData = res.result;
+        //         dispatch({
+        //             type: constants.INIT_SOWING_DATA,
+        //             sowingData
+        //         })
+        //     }
+        // }).catch(()=>{
+        //     alert('首页数据请求失败！')
+        // })
+        const sowingData = {name:'dingyi'};
+        dispatch({
+            type: constants.INIT_SOWING_DATA,
+            sowingData
+        })
+    }
+};
 //第一步
  export const sendAction = (data)=>{
      return (dispatch)=>{
-         const senddata = data
+         const sendData = data
          dispatch({
             type: constants.SEND_TYPE,
-            senddata
+            sendData
          })
          
      }
