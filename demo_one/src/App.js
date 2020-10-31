@@ -41,17 +41,18 @@ class App extends Component{
         }
       </Layout>
     )
+    // switch是让路由只显示一个，当配置404页面，可以使用这个
     return(
         <Provider store={store}>
           <Router>
             <Switch>
               <Route path="/index" render={props => LayoutRouter}></Route>
-              <Login>
+              {/* <Login>
                 <Switch>
                   <Route path="/login/left" component={LeftLogin}></Route>
                   <Route path="/login/right" component={LoginRight}></Route>
                 </Switch>
-              </Login>
+              </Login> */}
               
             </Switch>
           </Router>

@@ -10,5 +10,5 @@ const enhancer = composeEnhancers(
 );
 
 const store = createStore(reducer);
-sagaMiddle.run(helloSaga)
+// sagaMiddle.run(helloSaga)
 export default store;
