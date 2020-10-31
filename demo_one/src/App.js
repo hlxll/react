@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route, Link,  Switch} from "react-router-dom";
 import {Provider,Consumer} from "./AppContext.js"
 import Login from './login/login'
+import store from './Store'
 import Layout from './Components/LayOut/LayOut'
 import LeftLogin from './login/loginleft'
 import LoginRight from './login/LoginRight'
@@ -9,14 +10,6 @@ import LoginRight from './login/LoginRight'
 import routes from './Router'
 class App extends Component{
   render(){
-    const store = {
-      user: {
-        name: '跨层级通讯',
-      },
-      pass: {
-        name: 'huanglin'
-      }
-    }
     let LayoutRouter = (
       <Layout>
         {/* 定义全局组件，layout，其他组件都在这个组件内部 */}
@@ -52,13 +45,14 @@ class App extends Component{
         <Provider store={store}>
           <Router>
             <Switch>
-            <Login>
+              <Route path="/index" render={props => LayoutRouter}></Route>
+              <Login>
                 <Switch>
                   <Route path="/login/left" component={LeftLogin}></Route>
                   <Route path="/login/right" component={LoginRight}></Route>
                 </Switch>
               </Login>
-              <Route path="/index" render={props => LayoutRouter}></Route>
+              
             </Switch>
           </Router>
         </Provider>

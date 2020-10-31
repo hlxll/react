@@ -1,9 +1,12 @@
 import React, {Component} from 'react';
 import LKHeader from "../Header/LKHeader";
 import LKAside from "../Aside/LKAside";
-
+import { connect } from 'react-redux';
+import {pushNameAge} from '../../Store/actionCreators.js'
 class LayOut extends Component {
     render() {
+        const nameage = this.props
+        console.log(nameage)
         return (
             <div>
                 <LKHeader/>
@@ -14,6 +17,21 @@ class LayOut extends Component {
             </div>
         );
     }
+    componentDidMount(){
+        this.props.setNameAge(['huanglin',12])
+    }
 }
-
-export default LayOut;
+const mapStateToProps = (state)=>{
+    return{
+        nameAndAge: state.nameAndAge
+    }
+}
+const mapDispatchToProps = (dispatch)=>{
+    return {
+        setNameAge(data){
+            const action = pushNameAge(data)
+            dispatch(action)
+        }
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(LayOut);

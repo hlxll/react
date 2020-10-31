@@ -9,6 +9,6 @@ const enhancer = composeEnhancers(
     applyMiddleware(thunk)//将所有中间件组成一个数组，依次执行
 );
 
-const store = createStore(reducer, applyMiddleware(sagaMiddle));
+const store = createStore(reducer);
 sagaMiddle.run(helloSaga)
 export default store;
