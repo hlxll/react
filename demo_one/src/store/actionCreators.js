@@ -52,3 +52,12 @@ export const getSowingDataAction = () => {
          
      }
  }
+ export const pushNameAge = (data)=>{
+     return (dispatch)=>{
+         const action = data;
+         dispatch({
+             type: constants.NAME_AGE,
+             action
+         })
+     }
+ }

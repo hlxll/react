@@ -1,8 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
+import {AppContext} from './index.js'
 function ChildIndex(){
+    const {username} = useContext(AppContext)
+    
     return (
         <div>
-            <p>login子路由</p>
+            <p>login孙路由{username}</p>
         </div>
     )
 }

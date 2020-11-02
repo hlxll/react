@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import {AppContext} from './index.js'
+import LoginChild from './loginchild.js'
 function ChildIndex(){
     // 这个是组件互享的数据，使用这个钩子获得互享数据
     const { username } = useContext(AppContext)
@@ -12,6 +13,8 @@ function ChildIndex(){
         <div>
             childIndex组件
             <p>{username}</p>
+    <p>{}</p>
+            <LoginChild />
         </div>
     )
 }
