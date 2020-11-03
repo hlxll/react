@@ -46,7 +46,13 @@ class App extends Component{
         <Provider store={store}>
           <Router>
             <Switch>
+<<<<<<< HEAD
               <Route path="/" render={props => LayoutRouter}></Route>
+=======
+              <Route path="/index" render={props => LayoutRouter}></Route>
+<<<<<<< HEAD
+=======
+>>>>>>> 5458bed271690e1c5a17ff0dac8083bd6b86ce8b
               {/* <Login>
                 <Switch>
                   <Route path="/login/left" component={LeftLogin}></Route>
@@ -54,6 +60,7 @@ class App extends Component{
                 </Switch>
               </Login> */}
               
+>>>>>>> fe7e89c51f19f30834d486b5da5b3d5f0ee86a3a
             </Switch>
           </Router>
         </Provider>
