@@ -4,6 +4,7 @@ import LKAside from "../Aside/LKAside";
 import { connect } from 'react-redux';
 import {pushNameAge} from '../../Store/actionCreators.js'
 import Hook from '../../Hook/login'
+import Refs from '../../Ref/index'
 class LayOut extends Component {
     render() {
         const nameage = this.props
@@ -15,6 +16,7 @@ class LayOut extends Component {
                     <LKAside/>
                 </div>
                 <Hook/>
+                <Refs/>
             </div>
         );
     }

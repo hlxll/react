@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { useHistory, useLocation, useParams } from "react-router-dom"
 import ChildIndex from './childIndex.js'
+import { globalContext, globalData } from './qlabel.js'
+const { Provider } = globalContext
 export const AppContext = React.createContext({});
 //共享对于组件树而言是全局的数据
 function HomeButton() {
@@ -54,6 +56,8 @@ function HomeButton() {
     })
     return count;
   }
+
+
   return (
     <div>
       <p>{nameArr[1]}</p>
@@ -75,11 +79,6 @@ function HomeButton() {
           <ChildIndex/>
         </div>
       </AppContext.Provider>
-      <AppContext.Consumer>
-        {theme=>(
-          <ChildIndex theme={theme}/>
-        )}
-      </AppContext.Consumer>
     </div>
     
   );
