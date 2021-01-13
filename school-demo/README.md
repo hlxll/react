@@ -30,3 +30,6 @@
         'less-loader'
     ),
   },
+  # 代理设置
+    安装依赖http-proxy-middleware
+    在src下创建setupProxy文件，设置代理
