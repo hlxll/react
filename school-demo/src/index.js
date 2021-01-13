@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <div className="title">开始</div>
+    开始
   </React.StrictMode>,
   document.getElementById('root')
 );
