@@ -1,9 +1,11 @@
 import { Component } from "react"
+import './index.less'
+import Head from '../../component/head'
 class Home extends Component {
     render() {
         return (
-            <div>
-                Home
+            <div className="home">
+                <Head></Head>
             </div>
         )
     }
