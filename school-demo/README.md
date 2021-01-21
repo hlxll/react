@@ -33,6 +33,8 @@
   # 代理设置
     安装依赖http-proxy-middleware
     在src下创建setupProxy文件，设置代理
+  # 引入antd
+    引入antd，先安装依赖，在最顶层css文件引文@import '~antd/dist/antd.css';
 
 # node配置
   使用npx express-generator创建node框架

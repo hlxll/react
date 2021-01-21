@@ -9,8 +9,8 @@ import Home from './view/home'
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Route path="/" component={Home} />
-      <Route path="/login" component={Login} />
+      <Route path="/" exact component={Home} />
+      <Route path="/login" exact component={Login} />
     </Router>
   </React.StrictMode>,
   document.getElementById('root')
