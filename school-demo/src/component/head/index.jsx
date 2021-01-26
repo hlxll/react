@@ -6,28 +6,28 @@ import {
     DownOutlined,
     MobileOutlined,
     WechatOutlined
-  } from '@ant-design/icons';
-  const menu = (
+} from '@ant-design/icons';
+const menu = (
     <Menu>
-      <Menu.Item>
-        1asdasd
+        <Menu.Item>
+            1asdasd
       </Menu.Item>
-      <Menu.Item>
-        2
+        <Menu.Item>
+            2
       </Menu.Item>
-      <Menu.Item>
-       3
+        <Menu.Item>
+            3
       </Menu.Item>
     </Menu>
-  );
+);
 class Head extends Component {
-    constructor(prop){
+    constructor(prop) {
         super(prop)
         this.state = {
             condition: true
         }
     }
-    render() {
+    render () {
         return (
             <div className="Head">
                 <div className="loginTitle">
@@ -38,13 +38,13 @@ class Head extends Component {
                     <div className="mail">
                         <MailOutlined />
                         <Button type="text">消息</Button>
-                        <DownOutlined style={{ fontSize: '12px' }}/>
+                        <DownOutlined style={{ fontSize: '12px' }} />
                     </div>｜
                     <div className="order">
                         <div className="orderBtn">
                             查看订单
                             <Dropdown overlay={menu} placement="bottomLeft">
-                                <DownOutlined style={{ fontSize: '12px' }} className="orderIcon"/>                
+                                <DownOutlined style={{ fontSize: '12px' }} className="orderIcon" />
                             </Dropdown>
                         </div>
                     </div>|

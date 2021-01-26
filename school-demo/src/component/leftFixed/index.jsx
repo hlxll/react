@@ -1,4 +1,5 @@
 import { Component } from "react"
+import './index.less'
 import {
     CloseOutlined,
     UserOutlined,
@@ -6,33 +7,78 @@ import {
     MedicineBoxOutlined,
     MoneyCollectOutlined,
     QrcodeOutlined
-  } from '@ant-design/icons';
+} from '@ant-design/icons';
+import { Tooltip } from 'antd'
+import SmallLogin from '../login'
 class LeftFixed extends Component {
-    render() {
+    constructor() {
+        super()
+        this.state = {
+            SureClose: true,
+            openLogin: false
+        }
+        this.closeLeft = this.closeLeft.bind(this)
+        this.openLeft = this.openLeft.bind(this)
+        this.closeMailLogin = this.closeMailLogin.bind(this)
+    }
+    closeLeft () {
+        this.setState({
+            SureClose: false
+        })
+    }
+    openLeft () {
+        this.setState({
+            SureClose: true
+        })
+    }
+    closeMailLogin () {
+        this.setState({
+            openLogin: true
+        })
+    }
+    render () {
         return (
             <div className="leftMain">
-                <div>
-                    <div>
-                        <CloseOutlined />
+                <div className={this.state.SureClose ? 'leftMainContent' : 'leftMainContentClosed'}>
+                    <div className="closeIcon">
+                        <Tooltip title="关闭">
+                            <CloseOutlined className="closeClick" onClick={this.closeLeft} />
+                        </Tooltip>
                     </div>
-                    <div>
-                        <UserOutlined />
+                    <div className="peopleIcon">
+                        <div className="peopleLong">
+                            <Tooltip title="用户">
+                                <UserOutlined style={{ fontSize: '24px' }} />
+                                <MailOutlined style={{ fontSize: '24px', marginLeft: '9px', marginRight: '9px' }} />
+                                <span>加入会员，立即开始精彩旅程</span>
+                            </Tooltip>
+                        </div>
                     </div>
-                    <div>
+                    <div className={this.state.openLogin ? 'whiteMailIcon' : 'mailIcon'} onClick={this.closeMailLogin}>
                         <MailOutlined />
-                        消息
+                        <div>消息</div>
+                        <div className={this.state.openLogin ? 'smallLogin' : 'closeLogin'}>
+                            <SmallLogin />
+                        </div>
                     </div>
-                    <div>
+                    <div className="mailIcon">
                         <MedicineBoxOutlined />
-                        订单
+                        <div>订单</div>
                     </div>
-                    <div>
+                    <div className="moneyIcon">
                         <MoneyCollectOutlined />
-                        账户
+                        <div>账户</div>
                     </div>
-                    <div>
+                    <div className="qrCodeIcon">
                         <QrcodeOutlined />
-                        扫码
+                        <div>扫码</div>
+                    </div>
+                </div>
+                <div className={this.state.SureClose ? 'leftMainImgClosed' : 'leftMainImg'}>
+                    <div className="openRadius">
+                        <div className="radius" onClick={this.openLeft}>
+                            <UserOutlined />
+                        </div>
                     </div>
                 </div>
             </div>
