@@ -38,3 +38,5 @@
 
 # node配置
   使用npx express-generator创建node框架
+  ## 安装nodemon
+    安装依赖，添加nodemon.json文件，在package中添加nodemon启动方法
