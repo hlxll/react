@@ -1,5 +1,5 @@
 import { Component } from "react"
-import { Button } from 'antd';
+import { Button, Menu, Dropdown } from 'antd';
 import './index.less'
 import {
     MailOutlined,
@@ -7,7 +7,26 @@ import {
     MobileOutlined,
     WechatOutlined
   } from '@ant-design/icons';
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        1asdasd
+      </Menu.Item>
+      <Menu.Item>
+        2
+      </Menu.Item>
+      <Menu.Item>
+       3
+      </Menu.Item>
+    </Menu>
+  );
 class Head extends Component {
+    constructor(prop){
+        super(prop)
+        this.state = {
+            condition: true
+        }
+    }
     render() {
         return (
             <div className="Head">
@@ -22,8 +41,12 @@ class Head extends Component {
                         <DownOutlined style={{ fontSize: '12px' }}/>
                     </div>｜
                     <div className="order">
-                        <Button type="text">查看订单</Button>
-                        <DownOutlined style={{ fontSize: '12px' }}/>
+                        <div className="orderBtn">
+                            查看订单
+                            <Dropdown overlay={menu} placement="bottomLeft">
+                                <DownOutlined style={{ fontSize: '12px' }} className="orderIcon"/>                
+                            </Dropdown>
+                        </div>
                     </div>|
                     <div className="integral">
                         <Button type="text">积分商城</Button>
@@ -32,7 +55,6 @@ class Head extends Component {
                     <div className="mobile">
                         <MobileOutlined />
                     </div>
-                    
                     <WechatOutlined />
                 </div>
             </div>
