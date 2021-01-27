@@ -14,7 +14,7 @@ class LeftFixed extends Component {
     constructor() {
         super()
         this.state = {
-            SureClose: true,
+            SureClose: false,
             openLogin: false
         }
         this.closeLeft = this.closeLeft.bind(this)
@@ -32,8 +32,10 @@ class LeftFixed extends Component {
         })
     }
     closeMailLogin () {
-        this.setState({
-            openLogin: true
+        this.setState((state)=>{
+            return {
+                openLogin: !state.openLogin
+            }
         })
     }
     render () {
@@ -54,9 +56,9 @@ class LeftFixed extends Component {
                             </Tooltip>
                         </div>
                     </div>
-                    <div className={this.state.openLogin ? 'whiteMailIcon' : 'mailIcon'} onClick={this.closeMailLogin}>
-                        <MailOutlined />
-                        <div>消息</div>
+                    <div className={this.state.openLogin ? 'whiteMailIcon' : 'mailIcon'}>
+                        <MailOutlined onClick={this.closeMailLogin} />
+                        <div onClick={this.closeMailLogin}>消息</div>
                         <div className={this.state.openLogin ? 'smallLogin' : 'closeLogin'}>
                             <SmallLogin />
                         </div>
