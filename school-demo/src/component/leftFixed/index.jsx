@@ -15,11 +15,15 @@ class LeftFixed extends Component {
         super()
         this.state = {
             SureClose: false,
-            openLogin: false
+            openLogin: false,
+            orderLogin: false,
+            moneyLogin: false
         }
         this.closeLeft = this.closeLeft.bind(this)
         this.openLeft = this.openLeft.bind(this)
         this.closeMailLogin = this.closeMailLogin.bind(this)
+        this.closeOrderLogin = this.closeOrderLogin.bind(this)
+        this.closeMoneyLogin = this.closeMoneyLogin.bind(this)
     }
     closeLeft () {
         this.setState({
@@ -32,9 +36,29 @@ class LeftFixed extends Component {
         })
     }
     closeMailLogin () {
-        this.setState((state)=>{
+        this.setState((state) => {
             return {
-                openLogin: !state.openLogin
+                openLogin: !state.openLogin,
+                orderLogin: false,
+                moneyLogin: false,
+            }
+        })
+    }
+    closeOrderLogin () {
+        this.setState((state) => {
+            return {
+                orderLogin: !state.orderLogin,
+                moneyLogin: false,
+                openLogin: false
+            }
+        })
+    }
+    closeMoneyLogin () {
+        this.setState((state) => {
+            return {
+                moneyLogin: !state.moneyLogin,
+                orderLogin: false,
+                openLogin: false
             }
         })
     }
@@ -60,16 +84,22 @@ class LeftFixed extends Component {
                         <MailOutlined onClick={this.closeMailLogin} />
                         <div onClick={this.closeMailLogin}>消息</div>
                         <div className={this.state.openLogin ? 'smallLogin' : 'closeLogin'}>
-                            <SmallLogin />
+                            <SmallLogin openLogin={this.closeMailLogin} />
                         </div>
                     </div>
-                    <div className="mailIcon">
-                        <MedicineBoxOutlined />
-                        <div>订单</div>
+                    <div className={this.state.orderLogin ? 'whiteMailIcon' : 'mailIcon'}>
+                        <MedicineBoxOutlined onClick={this.closeOrderLogin} />
+                        <div onClick={this.closeOrderLogin}>订单</div>
+                        <div className={this.state.orderLogin ? 'smallLogin' : 'closeLogin'}>
+                            <SmallLogin openLogin={this.closeOrderLogin} />
+                        </div>
                     </div>
-                    <div className="moneyIcon">
-                        <MoneyCollectOutlined />
-                        <div>账户</div>
+                    <div className={this.state.moneyLogin ? 'whiteMailIcon' : 'moneyIcon'}>
+                        <MoneyCollectOutlined onClick={this.closeMoneyLogin} />
+                        <div onClick={this.closeMoneyLogin}>账户</div>
+                        <div className={this.state.moneyLogin ? 'smallLogin' : 'closeLogin'}>
+                            <SmallLogin openLogin={this.closeMoneyLogin} />
+                        </div>
                     </div>
                     <div className="qrCodeIcon">
                         <QrcodeOutlined />
