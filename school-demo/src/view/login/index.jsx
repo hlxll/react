@@ -1,9 +1,13 @@
 import { Component } from "react"
+import SmallLogin from '../../component/login'
 class Home extends Component {
-    render() {
+    constructor(props) {
+        super()
+    }
+    render () {
         return (
             <div>
-                login
+                <SmallLogin />
             </div>
         )
     }

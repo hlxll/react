@@ -1,12 +1,13 @@
-import { Component, React } from "react"
+import React from "react"
 import {
     CloseOutlined,
     LockOutlined,
     UserOutlined
 } from '@ant-design/icons';
-import { Tooltip, Radio, Form, Input, Button } from 'antd'
+import { Tooltip, Radio, Form, Input, Button, message } from 'antd'
 import './index.less'
-class SmallLogin extends Component {
+import * as userApi from '../../api/user'
+class SmallLogin extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -20,16 +21,20 @@ class SmallLogin extends Component {
                 numArr: "0,1,2,3,4,5,6,7,8,9".split(",")
             },
             code: "",
-            numCode: [],
+            numCode: [],// 验证码数据
             size: 4
         }
+        this.userFormRef = React.createRef();
+        this.teleFormRef = React.createRef();
         this.onChange = this.onChange.bind(this)
-        this.onFormUserChange = this.onFormUserChange.bind(this)
+        this.onUserPassFinish = this.onUserPassFinish.bind(this)
+        this.onUserPassFailed = this.onUserPassFailed.bind(this)
         this.CreateVerification = this.CreateVerification.bind(this)
         this.refresh = this.refresh.bind(this)
         this.randomNum = this.randomNum.bind(this)
         this.randomColor = this.randomColor.bind(this)
-        this.submitLogin = this.submitLogin.bind(this)
+        this.onTelePassFailed = this.onTelePassFailed.bind(this)
+        this.onTelePassFinish = this.onTelePassFinish.bind(this)
     }
     componentDidMount () {
         this.CreateVerification()
@@ -39,10 +44,27 @@ class SmallLogin extends Component {
         this.setState({
             value: e.target.value
         })
+        if (e.target.value === 2) {
+            this.userFormRef.current.resetFields()
+        } else {
+            this.teleFormRef.current.resetFields()
+        }
     }
-    onFormUserChange () {
-
+    async onUserPassFinish (value) {
+        console.log(value)
+        console.log(this.state.numCode)
+        let resData = await userApi.login()
+        if (resData.status === 200 && resData.data.login) {
+            message.success('登录成功');
+        } else {
+            message.success('账号或密码错误');
+        }
     }
+    onUserPassFailed () { }
+    onTelePassFinish (value) {
+        console.log(value)
+    }
+    onTelePassFailed () { }
     // 创建验证码
     CreateVerification () {
         var con = document.getElementById(this.state.options.id);
@@ -173,9 +195,6 @@ class SmallLogin extends Component {
             ctx.fill();
         }
     }
-    submitLogin () {
-        console.log(this.state.numCode)
-    }
     render () {
         return (
             <div className="login">
@@ -194,19 +213,39 @@ class SmallLogin extends Component {
                     <div className={this.state.value === 1 ? 'UsernamePassword' : 'LoginNone'}>
                         <Form
                             layout="horizontal"
-                            onValuesChange={this.onFormUserChange}
+                            ref={this.userFormRef}
+                            onFinish={this.onUserPassFinish}
+                            onFinishFailed={this.onUserPassFailed}
                         >
-                            <Form.Item>
+                            <Form.Item
+                                name="username"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your username!',
+                                    },
+                                ]}
+                            >
                                 <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="手机号/邮箱/用户名" />
                             </Form.Item>
-                            <Form.Item>
+                            <Form.Item
+                                name="password"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your password!',
+                                    },
+                                ]}
+                            >
                                 <Input
                                     prefix={<LockOutlined className="site-form-item-icon" />}
                                     type="password"
                                     placeholder="请输入密码"
                                 />
                             </Form.Item>
-                            <Form.Item>
+                            <Form.Item
+                                name="code"
+                            >
                                 <div className="Verification">
                                     <Input placeholder="请输入验证码" />
                                     <div className="VerificationContent" id="VerificationCode" />
@@ -214,30 +253,47 @@ class SmallLogin extends Component {
                                 <Button type="text" className="VerificationBtn" onClick={this.refresh}>换一张</Button>
                             </Form.Item>
                             <Form.Item>
-                                <Button type="primary" min-width="264px" onClick={this.submitLogin} className="loginBtn">登录</Button>
+                                <Button type="primary" htmlType="submit" min-width="264px" className="loginBtn">登录</Button>
                             </Form.Item>
                         </Form>
                     </div>
                     <div className={this.state.value === 2 ? 'telephonePassword' : 'LoginNone'} >
                         <Form
                             layout="horizontal"
-                            onValuesChange={this.onFormValuesChange}
+                            ref={this.teleFormRef}
+                            onFinish={this.onTelePassFinish}
+                            onFinishFailed={this.onTelePassFailed}
                         >
-                            <Form.Item>
+                            <Form.Item
+                                name="telephone"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your telephone!',
+                                    },
+                                ]}
+                            >
                                 <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="请输入手机号" />
                             </Form.Item>
-                            <Form.Item>
-                                <div className="Verification">
-                                    <Input
-                                        prefix={<LockOutlined className="site-form-item-icon" />}
-                                        type="password"
-                                        placeholder="请输入验证码"
-                                    />
-                                </div>
+                            <Form.Item
+                                name="password"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your code!',
+                                    },
+                                ]}
+                            >
+                                <Input
+                                    className="Verification"
+                                    prefix={<LockOutlined className="site-form-item-icon" />}
+                                    type="password"
+                                    placeholder="请输入验证码"
+                                />
                                 <Button type="info" className="VerificationBtn">获取验证码</Button>
                             </Form.Item>
                             <Form.Item>
-                                <Button type="primary" min-width="264px" onClick={this.submitLogin} className="loginBtn">登录</Button>
+                                <Button type="primary" htmlType="submit" min-width="264px" className="loginBtn">登录</Button>
                             </Form.Item>
                         </Form>
                     </div>
