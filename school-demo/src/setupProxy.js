@@ -4,7 +4,7 @@ module.exports = function (app) {
   // api代理到http://localhost:3000/上
     app.use(createProxyMiddleware('/api',
         {
-            target: 'http://localhost:3000/',
+            target: 'http://localhost:8081/',
             // 如果不写下面的，会代理到http://localhost:3000/api上
             pathRewrite: {
                 '^/api': '',

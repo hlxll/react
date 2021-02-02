@@ -9,7 +9,7 @@ import Home from './view/home'
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Route path="/" exact component={Home} />
+      <Route path="/home" component={Home} />
       <Route path="/login" exact component={Login} />
     </Router>
   </React.StrictMode>,

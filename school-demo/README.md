@@ -41,6 +41,7 @@
   ## 安装nodemon
     安装依赖，添加nodemon.json文件，在package中添加nodemon启动方法
 # 安装mongodb
+  重新安装mongodb，记得使用export PATH=/usr/local/mongodb/bin:$PATH
   先进入mongodb安装目录/usr/local/mongodb/bin使用
   mongod --dbpath /usr/local/var/mongodb -logpath /usr/local/var/log/mongodb/mongo.log --fork
   服务启动，一定要正确关闭服务，在bin目录下，./mongo之后使用use admin，db.shutdownServer()关闭服务

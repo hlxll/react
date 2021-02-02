@@ -199,7 +199,7 @@ class SmallLogin extends React.Component {
         return (
             <div className="login">
                 <div className="loginType">
-                    <div className="loginClose">
+                    <div className={this.props.openLogin?'loginClose':'notHaveProp'}>
                         <Tooltip title="关闭">
                             <CloseOutlined className="closeClick" onClick={this.props.openLogin} />
                         </Tooltip>

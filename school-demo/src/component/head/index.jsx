@@ -1,5 +1,6 @@
 import { Component } from "react"
 import { Button, Menu, Dropdown } from 'antd';
+import { NavLink as Link } from 'react-router-dom'
 import './index.less'
 import {
     MailOutlined,
@@ -10,7 +11,7 @@ import {
 const menu = (
     <Menu>
         <Menu.Item>
-            1asdasd
+            1asd
       </Menu.Item>
         <Menu.Item>
             2
@@ -32,7 +33,7 @@ class Head extends Component {
             <div className="Head">
                 <div className="loginTitle">
                     <div className="loginBtn">
-                        请<Button type="text">登录</Button>
+                        请<Link to={{pathname: '/login'}}> 登录 </Link>
                         或<Button type="text">免费注册</Button>
                     </div>|
                     <div className="mail">
@@ -43,7 +44,7 @@ class Head extends Component {
                     <div className="order">
                         <div className="orderBtn">
                             查看订单
-                            <Dropdown overlay={menu} placement="bottomLeft">
+                            <Dropdown overlay={menu} placement="bottomRight">
                                 <DownOutlined style={{ fontSize: '12px' }} className="orderIcon" />
                             </Dropdown>
                         </div>
