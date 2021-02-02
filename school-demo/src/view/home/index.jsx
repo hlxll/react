@@ -1,6 +1,8 @@
 import React,{ Component } from "react"
 import { Input, Image, Button } from 'antd';
-import { BrowserRouter as Router, NavLink as Link, Route } from 'react-router-dom'
+// import { BrowserRouter as Router, NavLink as Link , Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, NavLink as Link , Route, Switch, Redirect } from 'react-router-dom'
+import { withRouter } from "react-router"
 import './index.less'
 import Head from '../../component/head'
 import LeftFixed from '../../component/leftFixed'
@@ -17,19 +19,39 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            componentNum: 1
+            componentNum: 0
         }
         this.onSearch = this.onSearch.bind(this)
-        this.toHomeChildRouter = this.toHomeChildRouter.bind(this)
     }
     onSearch() {}
     toHomeChildRouter (index) {
-        console.log(index)
-        this.props.history.push("/home/planeTicket")
         this.setState({
             componentNum: index
         })
-        
+        if(index == 0){
+            this.props.history.replace('/main')
+        }
+        if(index == 1){
+            this.props.history.replace('/planeTicket')
+        }
+        if(index == 2){
+            this.props.history.replace('/hotel')
+        }
+        if(index == 3){
+            this.props.history.replace('/trainTickets')
+        }
+        if(index == 4){
+            this.props.history.replace('/holiday')
+        }
+        if(index == 5){
+            this.props.history.replace('/groupBuying')
+        }
+        if(index == 6){
+            this.props.history.replace('/tickets')
+        }
+        if(index == 7){
+            this.props.history.replace('/local')
+        }
     }
     render () {
         return (
@@ -43,7 +65,7 @@ class Home extends Component {
                         <Search placeholder="搜索目的地" onSearch={this.onSearch} enterButton />
                     </div>
                     <div className="telePeople">
-                        <Image className="img"/>
+                        <Image className="img" />
                         <div className="content">
                             <p><span>国内客服</span>95117</p>
                             <p><span>国外客服</span>1234567</p>
@@ -58,16 +80,19 @@ class Home extends Component {
                     <Button type="text" size="large" className={this.state.componentNum==4?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '4')}>度假</Button>
                     <Button type="text" size="large" className={this.state.componentNum==5?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '5')}>团购</Button>
                     <Button type="text" size="large" className={this.state.componentNum==6?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '6')}>门票</Button>
-                    <Button type="text" size="large" className={this.state.componentNum===7?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '7')}>当地人</Button>
+                    <Button type="text" size="large" className={this.state.componentNum==7?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '7')}>当地人</Button>
                     <Router>
-                        <Route path="/home/main" component={Main} />
-                        <Route path="/home/planeTicket" component={PlaneTicket} />
-                        <Route path="/home/hotel" component={Hotel} />
-                        <Route path="/home/trainTickets" component={TrainTickets} />
-                        <Route path="/home/holiday" component={Holiday} />
-                        <Route path="/home/groupBuying" component={GroupBuying} />
-                        <Route path="/home/tickets" component={Tickets} />
-                        <Route path="/home/local" component={Local} />
+                        <Switch>
+                            <Route path="/main" component={Main} />
+                            <Route path="/planeTicket" component={PlaneTicket} />
+                            <Route path="/hotel" component={Hotel} />
+                            <Route path="/trainTickets" component={TrainTickets} />
+                            <Route path="/holiday" component={Holiday} />
+                            <Route path="/groupBuying" component={GroupBuying} />
+                            <Route path="/tickets" component={Tickets} />
+                            <Route path="/local" component={Local} />
+                            <Route path="/" exact component={Main} />
+                        </Switch>
                     </Router>
                 </div>
                 <div className="fixedFixed">
@@ -77,4 +102,4 @@ class Home extends Component {
         )
     }
 }
-export default Home
+export default withRouter(Home)

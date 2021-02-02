@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Login from './view/login'
 import Home from './view/home'
-
 ReactDOM.render(
   <React.StrictMode>
-    <Router>
-      <Route path="/home" component={Home} />
-      <Route path="/login" exact component={Login} />
-    </Router>
+    
+      <Router>
+        <Switch>
+          <Route path="/login" exact component={Login} />
+          <Route path="/" component={Home} />
+        </Switch>
+      </Router>
+    
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
