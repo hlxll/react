@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import { Menu, Button, Form, Input, Select, Radio, DatePicker } from 'antd';
+import Multipass from './multipass'
 import './planeForm.less'
 import {
     MailOutlined,
@@ -32,6 +33,12 @@ class PlaneForm extends Component {
         this.OneOnFinishFailed = this.OneOnFinishFailed.bind(this)
         this.oneRadioOnChange = this.oneRadioOnChange.bind(this)
         this.twoRadioOnChange = this.twoRadioOnChange.bind(this)
+        this.TwoOnFinish = this.TwoOnFinish.bind(this)
+        this.TwoOnFinishFailed = this.TwoOnFinishFailed.bind(this)
+        this.onStartCityChange = this.onStartCityChange.bind(this)
+        this.onStartCitySearch = this.onStartCitySearch.bind(this)
+        this.onArriverCityChange = this.onArriverCityChange.bind(this)
+        this.onArriverCitySearch = this.onArriverCitySearch.bind(this)
     }
     handleClick (e) {
         this.setState({ current: e.key });
@@ -43,6 +50,12 @@ class PlaneForm extends Component {
     OneOnFinishFailed () {
         console.log('不成功')
     }
+    TwoOnFinish (e) {
+        console.log(e)
+    }
+    TwoOnFinishFailed () {
+        console.log('不成功')
+    }
     oneRadioOnChange (e) {
         this.setState({
             oneRadio: e.target.value
@@ -52,6 +65,19 @@ class PlaneForm extends Component {
         this.setState({
             twoRadio: e.target.value
         })
+    }
+    // 智能搜索的起始城市选择
+    onStartCityChange () {
+
+    }
+    onStartCitySearch () {
+
+    }
+    onArriverCityChange () {
+
+    }
+    onArriverCitySearch () {
+
     }
     render(){
         return(
@@ -159,8 +185,8 @@ class PlaneForm extends Component {
                         className="OutForm"
                         initialValues={{ remember: true }}
                         {...formItemLayout}
-                        onFinish={this.OneOnFinish}
-                        onFinishFailed={this.OneOnFinishFailed}
+                        onFinish={this.TwoOnFinish}
+                        onFinishFailed={this.TwoOnFinishFailed}
                         >
                         <Form.Item className="one">
                             <Radio.Group onChange={this.twoRadioOnChange} value={this.state.twoRadio}>
@@ -170,69 +196,121 @@ class PlaneForm extends Component {
                                 <Radio value="four">多程</Radio>
                             </Radio.Group>
                         </Form.Item>
-                        <Form.Item
-                            className="two"
-                            name="start"
-                            rules={[
-                            {
-                                required: true,
-                            },
-                            ]}
-                        >
-                            <Select
-                                placeholder="输入国家地区城市/机场"
-                                allowClear
-                            >
-                            <Option value="male">male</Option>
-                            <Option value="female">female</Option>
-                            <Option value="other">other</Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item name="startTime" 
-                            rules={[
+                        {
+                            this.state.twoRadio == 'one'||this.state.twoRadio=='two'?
+                            <>
+                            <Form.Item
+                                className="two"
+                                name="start"
+                                rules={[
                                 {
                                     required: true,
                                 },
                                 ]}
-                            className="three">
-                            <DatePicker />
-                        </Form.Item>
-                        <Form.Item
-                            name="arrive"
-                            className="four"
-                            rules={[
-                            {
-                                required: true,
-                            },
-                            ]}
-                        >
-                            <Select
-                                placeholder="输入国家地区城市/机场"
-                                allowClear
                             >
-                            <Option value="male">male</Option>
-                            <Option value="female">female</Option>
-                            <Option value="other">other</Option>
-                            </Select>
-                        </Form.Item>
-                        <Form.Item name="arriveTime" 
-                            rules={this.state.oneRadio=='one'?[]:[
+                                <Select
+                                    placeholder="输入国家地区城市/机场"
+                                    allowClear
+                                >
+                                <Option value="male">male</Option>
+                                <Option value="female">female</Option>
+                                <Option value="other">other</Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="startTime" 
+                                rules={[
+                                    {
+                                        required: true,
+                                    },
+                                    ]}
+                                className="three">
+                                <DatePicker />
+                            </Form.Item>
+                            <Form.Item
+                                name="arrive"
+                                className="four"
+                                rules={[
                                 {
                                     required: true,
                                 },
                                 ]}
-                            className="five">
+                            >
+                                <Select
+                                    placeholder="输入国家地区城市/机场"
+                                    allowClear
+                                >
+                                <Option value="male">male</Option>
+                                <Option value="female">female</Option>
+                                <Option value="other">other</Option>
+                                </Select>
+                            </Form.Item>
+                            <Form.Item name="arriveTime" 
+                                rules={this.state.twoRadio=='one'?[]:[
+                                    {
+                                        required: true,
+                                    },
+                                    ]}
+                                className="five">
+                                {
+                                    this.state.twoRadio=='one'?
+                                    <DatePicker disabled/>:<DatePicker />
+                                }
+                                
+                            </Form.Item>
+                            </>:
+                            <>
                             {
-                                this.state.oneRadio=='one'?
-                                <DatePicker disabled/>:<DatePicker />
+                                this.state.twoRadio=='three'?
+                                <>
+                                    <Form.Item name="startCity" className="startCity">
+                                        <Select
+                                            showSearch
+                                            style={{ width: 100 }}
+                                            placeholder="输入城市"
+                                            optionFilterProp="children"
+                                            onChange={this.onStartCityChange}
+                                            onSearch={this.onStartCitySearch}
+                                            filterOption={(input, option) =>
+                                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                            }
+                                        >
+                                            <Option value="jack">Jack</Option>
+                                            <Option value="lucy">Lucy</Option>
+                                            <Option value="tom">Tom</Option>
+                                        </Select>
+                                    </Form.Item>
+                                    <Form.Item name="arriverCity" className="arriverCity">
+                                        <Select
+                                            showSearch
+                                            style={{ width: 300 }}
+                                            placeholder="输入城市"
+                                            optionFilterProp="children"
+                                            onChange={this.onArriverCityChange}
+                                            onSearch={this.onArriverCitySearch}
+                                            filterOption={(input, option) =>
+                                            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                            }
+                                        >
+                                            <Option value="jack">Jack</Option>
+                                            <Option value="lucy">Lucy</Option>
+                                            <Option value="tom">Tom</Option>
+                                        </Select>
+                                    </Form.Item>
+                                </>:
+                                <Multipass/>
                             }
-                            
-                        </Form.Item>
-                        <Form.Item>
-                            <Button type="primary" htmlType="submit" className="submitOneForm">
-                                立即搜索
-                            </Button>
-                        </Form.Item>
+                                
+                            </>
+                        }
+                        {
+                            this.state.twoRadio!='four'?
+                            <Form.Item className="submitTwoForm">
+                                <Button type="primary" htmlType="submit">
+                                    立即搜索
+                                </Button>
+                            </Form.Item>:''
+                        }
+                        
                     </Form>
                 }
                 </div>

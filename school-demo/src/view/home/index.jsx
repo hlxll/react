@@ -73,14 +73,14 @@ class Home extends Component {
                     </div>
                 </div>
                 <div className="ComponentRouter">
-                    <Button type="text" size="large" className={this.state.componentNum==0?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '0')}>首页</Button>
-                    <Button type="text" size="large" className={this.state.componentNum==1?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '1')}>机票</Button>
-                    <Button type="text" size="large" className={this.state.componentNum==2?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '2')}>酒店</Button>
-                    <Button type="text" size="large" className={this.state.componentNum==3?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '3')}>火车票</Button>
-                    <Button type="text" size="large" className={this.state.componentNum==4?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '4')}>度假</Button>
-                    <Button type="text" size="large" className={this.state.componentNum==5?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '5')}>团购</Button>
-                    <Button type="text" size="large" className={this.state.componentNum==6?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '6')}>门票</Button>
-                    <Button type="text" size="large" className={this.state.componentNum==7?'clickEd':''} onClick={this.toHomeChildRouter.bind(this, '7')}>当地人</Button>
+                    <Button type="text" size="large" className={this.state.componentNum==0?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '0')}>首页</Button>
+                    <Button type="text" size="large" className={this.state.componentNum==1?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '1')}>机票</Button>
+                    <Button type="text" size="large" className={this.state.componentNum==2?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '2')}>酒店</Button>
+                    <Button type="text" size="large" className={this.state.componentNum==3?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '3')}>火车票</Button>
+                    <Button type="text" size="large" className={this.state.componentNum==4?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '4')}>度假</Button>
+                    <Button type="text" size="large" className={this.state.componentNum==5?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '5')}>团购</Button>
+                    <Button type="text" size="large" className={this.state.componentNum==6?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '6')}>门票</Button>
+                    <Button type="text" size="large" className={this.state.componentNum==7?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '7')}>当地人</Button>
                     <Router>
                         <Switch>
                             <Route path="/main" component={Main} />
