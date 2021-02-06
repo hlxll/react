@@ -2,6 +2,11 @@ import {Component} from 'react'
 import { Menu, Image} from 'antd';
 import PlaneForm from '../planeTicket/planeForm'
 import HotelForm from '../hotel/hotelForm'
+import TrainForm from '../trainTickets/trainForm'
+import Holiday from '../holiday/holidayForm'
+import Ticket from '../tickets/ticketFrom'
+import GroupBuy from '../groupBuying/groupBuyForm'
+import FreeForm from '../free/freeForm'
 import {
   MailOutlined,
   CalendarOutlined
@@ -65,19 +70,19 @@ class Main extends Component {
                                 this.state.formType==2?<HotelForm />:''
                             }
                             {
-                                this.state.formType==3?<PlaneForm />:''
+                                this.state.formType==3?<TrainForm />:''
                             }
                             {
-                                this.state.formType==4?<PlaneForm />:''
+                                this.state.formType==4?<Holiday />:''
                             }
                             {
-                                this.state.formType==5?<PlaneForm />:''
+                                this.state.formType==5?<Ticket />:''
                             }
                             {
-                                this.state.formType==6?<PlaneForm />:''
+                                this.state.formType==6?<GroupBuy />:''
                             }
                             {
-                                this.state.formType==7?<PlaneForm />:''
+                                this.state.formType==7?<FreeForm />:''
                             }
                         </div>
                     </div>
