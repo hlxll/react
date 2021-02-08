@@ -1,13 +1,11 @@
 import {Component} from 'react'
-import { Menu, Button, Form, Input, Select, Radio, DatePicker } from 'antd';
+import { Menu, Button, Form, Space, Select, Radio, DatePicker } from 'antd';
+import {NavLink as Link} from 'react-router-dom'
 import Multipass from './multipass'
 import './planeForm.less'
 import {
     MailOutlined,
-    CalendarOutlined,
     AppstoreOutlined,
-    SettingOutlined,
-    LinkOutlined,
   } from '@ant-design/icons';
   const { Option } = Select;
   const formItemLayout = {
@@ -94,8 +92,18 @@ class PlaneForm extends Component {
                         </Menu>
                     </div>
                     <div className="headRight">
-                        <Button type="link">出票状态查询</Button>
-                        <Button type="link">退票改签</Button>
+                        {
+                            (this.props.plane&&this.props.plane=='plane')?
+                            <>
+                                <Link to={{pathname: ''}}>我的订单</Link>
+                            </>:
+                            <>
+                            <Space>
+                                <Link to={{pathname: ''}}>出票状态查询</Link>
+                                <Link to={{pathname: ''}}>退票改签</Link>
+                            </Space>
+                            </>
+                        }
                     </div>
                 </div>
                 <div className="TwoForm">

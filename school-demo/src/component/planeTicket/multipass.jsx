@@ -8,13 +8,13 @@ class Multipass extends Component {
         this.state = {
             multipassList: [
                 {
-                    start: '',
-                    arriver: '',
-                    time: ''
+                    start: '1',
+                    arriver: '1',
+                    time: '1'
                 },
                 {
-                    start: '',
-                    arriver: '',
+                    start: '2',
+                    arriver: '3',
                     time: ''
                 },
                 {
@@ -24,29 +24,8 @@ class Multipass extends Component {
                 }
             ]
         }
-        this.onstartCityChange = this.onstartCityChange.bind(this)
-        this.onstartCitySearch = this.onstartCitySearch.bind(this)
-        this.onarriverCityChange = this.onarriverCityChange.bind(this)
-        this.onarriverCitySearch = this.onarriverCitySearch.bind(this)
         this.addMultipass = this.addMultipass.bind(this)
         this.searchMultipass = this.searchMultipass.bind(this)
-    }
-    onstartCityChange (index){
-        console.log(index)
-        this.setState((state)=>{
-            return{
-                multipassList: {}
-            }
-        })
-    }
-    onstartCitySearch () {
-
-    }
-    onarriverCityChange () {
-
-    }
-    onarriverCitySearch () {
-
     }
     // 添加行程
     addMultipass () {
@@ -56,9 +35,9 @@ class Multipass extends Component {
             arriver: '',
             time: ''
         })
-        // this.setState({
-        //     multipassList: mulList
-        // })
+        this.setState({
+            multipassList: mulList
+        })
     }
     searchMultipass(){
         console.log(this.state.multipassList)
@@ -67,17 +46,15 @@ class Multipass extends Component {
         return(
             <div className="multipassComponent">
                 {
-                    this.state.multipassList.forEach((item, index)=>
+                    this.state.multipassList.map((d, index) => {
+                    return (
                         <div className="listData" key={index}>
                             <span>第{index+1}程</span>
                             <Select
-                                value={item.start}
                                 showSearch
                                 style={{ width: 150, marginLeft: 10 }}
                                 placeholder="出发城市"
                                 optionFilterProp="children"
-                                onChange={this.onstartCityChange(index)}
-                                onSearch={this.onstartCitySearch}
                                 filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
@@ -91,8 +68,6 @@ class Multipass extends Component {
                                 style={{ width: 150, marginLeft: 10 }}
                                 placeholder="到达城市"
                                 optionFilterProp="children"
-                                onChange={this.onarriverCityChange}
-                                onSearch={this.onarriverCitySearch}
                                 filterOption={(input, option) =>
                                 option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                                 }
@@ -104,6 +79,7 @@ class Multipass extends Component {
                             <DatePicker placeholder="日期" style={{ width: 150, marginLeft: 10 }}/>
                         </div>
                     )
+                    })    
                 }
                 <Button type="text" className="addMultipassBtn" onClick={this.addMultipass}>添加更多航程</Button>
                 <Button type="primary" onClick={this.searchMultipass}>立即搜索</Button>

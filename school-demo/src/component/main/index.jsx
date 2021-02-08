@@ -90,7 +90,7 @@ class Main extends Component {
                         </div>
                     </div>
                     <div className="img">
-                        <Image />
+                        <Image src="./img/formRight.png"/>
                     </div>
                 </div>
                 {/* 机票展示部分 */}
@@ -103,6 +103,10 @@ class Main extends Component {
                 </div>
                 <div className="intervalImg">
                     <IntervalImg />
+                </div>
+                <div className="footBack">
+                    <p>旅游，触手可及</p>
+                    <Image src="./img/erCode.png" style={{height: 200}}/>
                 </div>
             </div>
         )

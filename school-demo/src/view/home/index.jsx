@@ -57,21 +57,24 @@ class Home extends Component {
         return (
             <div className="home">
                 <Head />
-                <div className="goWhereInput">
-                    <div className="leftImg">
-                        <Image />
-                    </div>
-                    <div className="input">
-                        <Search placeholder="搜索目的地" onSearch={this.onSearch} enterButton />
-                    </div>
-                    <div className="telePeople">
-                        <Image className="img" />
-                        <div className="content">
-                            <p><span>国内客服</span>95117</p>
-                            <p><span>国外客服</span>1234567</p>
+                {
+                    this.state.componentNum==0?
+                    <div className="goWhereInput">
+                        <div className="leftImg">
+                            <Image style={{width: 100, height: 40}} src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"/>
                         </div>
-                    </div>
-                </div>
+                        <div className="input">
+                            <Search placeholder="搜索目的地" onSearch={this.onSearch} enterButton />
+                        </div>
+                        <div className="telePeople">
+                            <Image style={{width: 100, height: 40}} className="img" src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"/>
+                            <div className="content">
+                                <p><span>国内客服</span>95117</p>
+                                <p><span>国外客服</span>1234567</p>
+                            </div>
+                        </div>
+                    </div>:''
+                }
                 <div className="ComponentRouter">
                     <Button type="text" size="large" className={this.state.componentNum==0?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '0')}>首页</Button>
                     <Button type="text" size="large" className={this.state.componentNum==1?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '1')}>机票</Button>
@@ -81,20 +84,21 @@ class Home extends Component {
                     <Button type="text" size="large" className={this.state.componentNum==5?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '5')}>团购</Button>
                     <Button type="text" size="large" className={this.state.componentNum==6?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '6')}>门票</Button>
                     <Button type="text" size="large" className={this.state.componentNum==7?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '7')}>当地人</Button>
-                    <Router>
-                        <Switch>
-                            <Route path="/main" component={Main} />
-                            <Route path="/planeTicket" component={PlaneTicket} />
-                            <Route path="/hotel" component={Hotel} />
-                            <Route path="/trainTickets" component={TrainTickets} />
-                            <Route path="/holiday" component={Holiday} />
-                            <Route path="/groupBuying" component={GroupBuying} />
-                            <Route path="/tickets" component={Tickets} />
-                            <Route path="/local" component={Local} />
-                            <Route path="/" exact component={Main} />
-                        </Switch>
-                    </Router>
+                    
                 </div>
+                <Router>
+                    <Switch>
+                        <Route path="/main" component={Main} />
+                        <Route path="/planeTicket" component={PlaneTicket} />
+                        <Route path="/hotel" component={Hotel} />
+                        <Route path="/trainTickets" component={TrainTickets} />
+                        <Route path="/holiday" component={Holiday} />
+                        <Route path="/groupBuying" component={GroupBuying} />
+                        <Route path="/tickets" component={Tickets} />
+                        <Route path="/local" component={Local} />
+                        <Route path="/" exact component={Main} />
+                    </Switch>
+                </Router>
                 <div className="fixedFixed">
                     <LeftFixed />
                 </div>

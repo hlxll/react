@@ -81,7 +81,6 @@ class PlaneTickets extends Component {
                                         </Col>
                                     )
                                 }
-                                
                             })
                         }
                         </Row>
