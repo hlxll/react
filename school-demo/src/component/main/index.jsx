@@ -7,6 +7,9 @@ import Holiday from '../holiday/holidayForm'
 import Ticket from '../tickets/ticketFrom'
 import GroupBuy from '../groupBuying/groupBuyForm'
 import FreeForm from '../free/freeForm'
+import PlaneTicket from './common/planeTicket'
+import Hotel from './common/hotel'
+import IntervalImg from './common/intervalImg'
 import {
   MailOutlined,
   CalendarOutlined
@@ -89,6 +92,17 @@ class Main extends Component {
                     <div className="img">
                         <Image />
                     </div>
+                </div>
+                {/* 机票展示部分 */}
+                <div className="mainPlaneTicket">
+                    <PlaneTicket />
+                </div>
+                {/* 酒店展示部分 */}
+                <div className="mainHotel">
+                    <Hotel />
+                </div>
+                <div className="intervalImg">
+                    <IntervalImg />
                 </div>
             </div>
         )
