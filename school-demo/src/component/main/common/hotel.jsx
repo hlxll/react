@@ -1,9 +1,7 @@
 import {Component} from 'react'
-import { Menu, Row, Col, Button, Image } from 'antd'
+import { Menu, Row, Col, Image } from 'antd'
 import {
-    MailOutlined,
-    SwapRightOutlined,
-    SwapOutlined
+    MailOutlined
   } from '@ant-design/icons';
 import './hotel.less'
 

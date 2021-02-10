@@ -19,8 +19,6 @@ class Main extends Component {
     constructor(props){
         super(props)
         this.state = {
-            mode: '',
-            theme: '',
             formType: 1
         }
         this.selectForm = this.selectForm.bind(this)
@@ -39,8 +37,6 @@ class Main extends Component {
                             className="leftMenu"
                             style={{ width: 100, height: 280 }}
                             defaultSelectedKeys={['1']}
-                            mode={this.state.mode}
-                            theme={this.state.theme}
                             onSelect={this.selectForm}
                         >
                             <Menu.Item key="1" icon={<MailOutlined />}>
@@ -105,8 +101,11 @@ class Main extends Component {
                     <IntervalImg />
                 </div>
                 <div className="footBack">
-                    <p>旅游，触手可及</p>
-                    <Image src="./img/erCode.png" style={{height: 200}}/>
+                    <div style={{marginRight: 100}}>
+                       <p>旅游，触手可及</p> 
+                       <p style={{color: 'rgba(255,255,255,0.4)'}}>乘飞机，特价机票飞不出手心：住酒店，预约担保同房低价</p>
+                    </div>
+                    <Image src="./img/erCode.png" style={{height: 100, width: 100}}/>
                 </div>
             </div>
         )

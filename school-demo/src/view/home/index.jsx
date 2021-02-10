@@ -19,9 +19,41 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            componentNum: 0
+            componentNum: ''
         }
         this.onSearch = this.onSearch.bind(this)
+    }
+    componentDidMount(){
+        console.log(this.props.location.pathname)
+        let pathName = this.props.location.pathname
+        let index = '0'
+        if(pathName == '/main'){
+            index = '0'
+        }
+        if(pathName == '/planeTicket'){
+            index = '1'
+        }
+        if(pathName == '/hotel'){
+            index = '2'
+        }
+        if(pathName == '/trainTickets'){
+            index = '3'
+        }
+        if(pathName == '/holiday'){
+            index = '4'
+        }
+        if(pathName == '/groupBuying'){
+            index = '5'
+        }
+        if(pathName == '/tickets'){
+            index = '6'
+        }
+        if(pathName == '/local'){
+            index = '7'
+        }
+        this.setState({
+            componentNum: index
+        })
     }
     onSearch() {}
     toHomeChildRouter (index) {
@@ -84,7 +116,6 @@ class Home extends Component {
                     <Button type="text" size="large" className={this.state.componentNum==5?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '5')}>团购</Button>
                     <Button type="text" size="large" className={this.state.componentNum==6?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '6')}>门票</Button>
                     <Button type="text" size="large" className={this.state.componentNum==7?'clickEd':'Noclick'} onClick={this.toHomeChildRouter.bind(this, '7')}>当地人</Button>
-                    
                 </div>
                 <Router>
                     <Switch>
