@@ -1,14 +1,10 @@
-import {Component} from 'react'
+import { Component } from "react";
 class GroupBuying extends Component {
-    constructor(props){
-        super(props)
-    }
-    render(){
-        return(
-            <div>
-                groupBuying
-            </div>
-        )
-    }
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return <div>groupBuying</div>;
+  }
 }
-export default GroupBuying
+export default GroupBuying;
