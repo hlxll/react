@@ -1,0 +1,95 @@
+.holiday {
+  background-color: #e3f7f7;
+  display: flex;
+  .holidayInput {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-left: 10%;
+    padding-top: 20px;
+    width: 75%;
+    .searchInput {
+      width: 50%;
+    }
+    .toMoreSearch {
+      width: auto;
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+      color: #ff7145;
+      cursor: pointer;
+      .toBottom {
+        margin: 0;
+      }
+      .rotateIcon {
+        margin: 0;
+        transform: rotate(180deg);
+      }
+    }
+    .moreQueryForm {
+      width: 100%;
+      padding-top: 20px;
+      #MoreQuery {
+        padding-left: 10px;
+        background-color: #fff;
+      }
+    }
+    .NoneQueryForm {
+      display: none;
+    }
+    .holidayData {
+      width: 100%;
+      padding-top: 10px;
+      .head {
+        width: 100%;
+        display: flex;
+        .headAllNum {
+          width: 150px;
+          border-top: 2px solid #ff7145;
+        }
+        .headInput {
+          margin-left: auto;
+        }
+      }
+      .ListMain {
+        width: 100%;
+        padding-top: 10px;
+        .Datalist {
+          width: 100%;
+          border-top: 1px solid #ddd;
+          background-color: #fff;
+          display: flex;
+          .content {
+            margin-left: 10px;
+            line-height: 28px;
+            .contentTitle {
+              color: #00bcd4;
+              font-size: 16px;
+            }
+            .type {
+              width: 60px;
+              height: auto;
+              border: 1px solid #00bcd4;
+            }
+          }
+          .money {
+            margin-left: auto;
+            .forPeopleMOney {
+              font-size: 18px;
+              color: #ff3d00;
+              display: flex;
+              align-items: center;
+            }
+            .number {
+              background-color: #f8f8f8;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+  .rightSpeak {
+    width: 15%;
+  }
+}

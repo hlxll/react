@@ -2,6 +2,7 @@ import { Component } from "react";
 import TrainForm from "./trainForm";
 import "./index.less";
 import { Image } from "antd";
+import TrainSpeak from "./common/trainSpeak";
 class TrainTickets extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +18,9 @@ class TrainTickets extends Component {
           >
             <TrainForm />
           </div>
+        </div>
+        <div className="trainTicketSpeak">
+          <Image src="./img/train/white.png" />
         </div>
       </div>
     );
