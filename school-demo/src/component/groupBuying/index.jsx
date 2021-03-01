@@ -4,7 +4,10 @@ class GroupBuying extends Component {
     super(props);
   }
   render() {
-    return <div>groupBuying</div>;
+    return;
+    <div className="groupBuying">
+      <div className="groupHead"></div>
+    </div>;
   }
 }
 export default GroupBuying;

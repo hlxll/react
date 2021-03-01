@@ -8,7 +8,6 @@ class Holiday extends Component {
     super(props);
     this.state = {
       toBottom: true,
-      productNum: 0,
       holidayList: [
         {
           title: "标题",
@@ -47,6 +46,7 @@ class Holiday extends Component {
   onFinishFailed() {}
   byDataSearch() {}
   render() {
+    const productNum = this.state.holidayList.length;
     return (
       <div className="holiday">
         <div className="holidayInput">
@@ -124,7 +124,7 @@ class Holiday extends Component {
           <div className="holidayData">
             <div className="head">
               <div className="headAllNum">
-                <span>{this.state.productNum}</span>个产品满足条件
+                <span>{productNum}</span>个产品满足条件
               </div>
               <div className="headInput">
                 <Search
