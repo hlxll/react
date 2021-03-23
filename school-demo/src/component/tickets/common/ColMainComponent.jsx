@@ -5,19 +5,17 @@ class ColMainComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "鼓浪屿",
-      moneyNum: 65,
-      detail: "详细介绍",
+      data: this.props.data,
     };
   }
   render() {
     return (
       <div className="colMain">
-        <Image src="" />
+        <Image src="" className="colImage" />
         <div className="colMainDetail">
-          <div>{this.state.name}</div>
-          <div className="detail">{this.state.detail}</div>
-          <div className="money">¥{this.state.moneyNum}起</div>
+          <div className="name">{this.state.data.name}</div>
+          <div className="detail">{this.state.data.text}</div>
+          <div className="money">¥{this.state.data.money}起</div>
         </div>
       </div>
     );

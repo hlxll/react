@@ -7,7 +7,7 @@ class Scienco extends Component {
     super(props);
     this.state = {
       name: this.props.name,
-      colData: [1, 2, 3, 4, 5],
+      colData: this.props.data,
     };
   }
   render() {
@@ -15,7 +15,7 @@ class Scienco extends Component {
     this.state.colData.forEach((item, index) => {
       ColMain.push(
         <Col span={6}>
-          <ColMainComponent />
+          <ColMainComponent data={item} />
         </Col>
       );
     });

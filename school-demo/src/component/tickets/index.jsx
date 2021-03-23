@@ -3,14 +3,20 @@ import { Image, Input } from "antd";
 import "./index.less";
 import CityList from "./common/CityList.jsx";
 import Scienco from "./common/scienco.jsx";
+import { DownOutlined } from "@ant-design/icons";
 const { Search } = Input;
 class Tickets extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isRotate: true, //控制按钮旋转
       city: "厦门",
       openCity: false,
       hotCity: ["鼓浪屿", "南昌"],
+      colData: [
+        { name: "鼓浪屿", text: "详细介绍", money: "66" },
+        { name: "鼓浪屿", text: "详细介绍", money: "66" },
+      ],
     };
     this.openCityDiv = this.openCityDiv.bind(this);
   }
@@ -18,6 +24,7 @@ class Tickets extends Component {
     this.setState((state, props) => {
       return {
         openCity: !state.openCity,
+        isRotate: !state.isRotate,
       };
     });
   }
@@ -34,9 +41,10 @@ class Tickets extends Component {
             <span>{this.state.city}</span>
             <div className="rotateDiv">
               切换目的地
-              <i className="rotateIcon" onClick={this.openCityDiv}>
-                ^
-              </i>
+              <DownOutlined
+                className={this.state.isRotate ? "rotateIcon" : "iconRotate"}
+                onClick={this.openCityDiv}
+              />
             </div>
             {this.state.openCity ? (
               <div className="searchCityList">
@@ -71,7 +79,8 @@ class Tickets extends Component {
           </div>
         </div>
         <div className="ticketMain">
-          <Scienco name={"厦门"} />
+          <Scienco name={"厦门"} data={this.state.colData} />
+          <Scienco name={"热门"} data={this.state.colData} />
         </div>
       </div>
     );
