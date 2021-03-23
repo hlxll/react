@@ -9,16 +9,39 @@ import {
   QuestionCircleOutlined,
   UpCircleOutlined,
 } from "@ant-design/icons";
+import { groupList } from "../../api/groupBuy";
 const { Search } = Input;
 class GroupBuy extends Component {
   constructor(props) {
     super(props);
     this.state = {
       moneyTopOrBottom: true,
+      groupDataList: [], //景点展示数据列表
+      form: {
+        chinaCity: "",
+        wordCity: "",
+        travelStart: "",
+        travelDate: "",
+        travelType: "",
+        travelDays: "",
+      },
     };
     this.groupCitySearch = this.groupCitySearch.bind(this);
     this.formFinish = this.formFinish.bind(this);
     this.clickMoney = this.clickMoney.bind(this);
+    this.getDataList = this.getDataList.bind(this);
+    this.clickNumber = this.clickNumber.bind(this);
+    this.chinaCityChange = this.chinaCityChange.bind(this);
+  }
+  componentDidMount() {
+    this.getDataList();
+  }
+  clickNumber() {
+    console.log(this.state.form);
+  }
+  //查询数据的接口函数
+  async getDataList() {
+    let resData = await groupList({});
   }
   groupCitySearch() {}
   formFinish() {}
@@ -27,6 +50,14 @@ class GroupBuy extends Component {
       return {
         moneyTopOrBottom: !state.moneyTopOrBottom,
       };
+    });
+  }
+  //国内出发地change函数
+  chinaCityChange(val) {
+    let state = { ...this.state };
+    state.form.chinaCity = val.target.value;
+    this.setState({
+      ...state,
     });
   }
   render() {
@@ -66,13 +97,20 @@ class GroupBuy extends Component {
               <div>目的地</div>
               <div className="selectCity">
                 <Form.Item name="chinaCity" label="国内">
-                  <Radio.Group className="radioButton">
+                  <Radio.Group
+                    className="radioButton"
+                    value={this.state.form.chinaCity}
+                    onChange={this.chinaCityChange}
+                  >
                     <Radio.Button value="1">丽江</Radio.Button>
                     <Radio.Button value="2">三亚</Radio.Button>
                   </Radio.Group>
                 </Form.Item>
                 <Form.Item name="wordCity" label="国外">
-                  <Radio.Group className="radioButton">
+                  <Radio.Group
+                    className="radioButton"
+                    value={this.state.form.wordCity}
+                  >
                     <Radio.Button value="1">泰国</Radio.Button>
                     <Radio.Button value="2">日本</Radio.Button>
                   </Radio.Group>
@@ -80,19 +118,28 @@ class GroupBuy extends Component {
               </div>
             </div>
             <Form.Item name="travelDate" label="出行日期">
-              <Radio.Group className="radioButton">
+              <Radio.Group
+                className="radioButton"
+                value={this.state.form.travelDate}
+              >
                 <Radio.Button value="3">3月</Radio.Button>
                 <Radio.Button value="4">4月</Radio.Button>
               </Radio.Group>
             </Form.Item>
             <Form.Item name="travelType" label="出行方式">
-              <Radio.Group className="radioButton">
+              <Radio.Group
+                className="radioButton"
+                value={this.state.form.travelType}
+              >
                 <Radio.Button value="1">自由行</Radio.Button>
                 <Radio.Button value="2">跟团游</Radio.Button>
               </Radio.Group>
             </Form.Item>
             <Form.Item name="travelDays" label="出行天数">
-              <Radio.Group className="radioButton">
+              <Radio.Group
+                className="radioButton"
+                value={this.state.form.travelDays}
+              >
                 <Radio.Button value="1">1天</Radio.Button>
                 <Radio.Button value="2">2天</Radio.Button>
                 <Radio.Button value="1">3天</Radio.Button>
@@ -105,7 +152,10 @@ class GroupBuy extends Component {
               </Radio.Group>
             </Form.Item>
             <Form.Item name="travelStart" label="出发地">
-              <Radio.Group className="radioButton">
+              <Radio.Group
+                className="radioButton"
+                value={this.state.form.travelStart}
+              >
                 <Radio.Button value="1">杭州</Radio.Button>
               </Radio.Group>
             </Form.Item>
@@ -114,7 +164,7 @@ class GroupBuy extends Component {
         <div className="dataQuery">
           <Button>
             推荐
-            <VerticalAlignBottomOutlined />
+            <VerticalAlignBottomOutlined onClick={this.clickNumber} />
           </Button>
           <Button onClick={this.clickMoney}>
             价格
