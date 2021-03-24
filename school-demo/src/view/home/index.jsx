@@ -29,7 +29,7 @@ class Home extends Component {
     };
     this.onSearch = this.onSearch.bind(this);
   }
-  componentDidMount() {
+  componentDidMount () {
     console.log(this.props.location.pathname);
     let pathName = this.props.location.pathname;
     let index = "0";
@@ -61,8 +61,8 @@ class Home extends Component {
       componentNum: index,
     });
   }
-  onSearch() {}
-  toHomeChildRouter(index) {
+  onSearch () { }
+  toHomeChildRouter (index) {
     this.setState({
       componentNum: index,
     });
@@ -91,7 +91,7 @@ class Home extends Component {
       this.props.history.replace("/local");
     }
   }
-  render() {
+  render () {
     return (
       <div className="home">
         <Head />
@@ -141,7 +141,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 1 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 1 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "1")}
           >
             机票
@@ -149,7 +149,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 2 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 2 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "2")}
           >
             酒店
@@ -210,6 +210,12 @@ class Home extends Component {
         </Router>
         <div className="fixedFixed">
           <LeftFixed />
+        </div>
+        <div className="allFooter">
+          <p>关于Qunar.com|业务合作|加入我们|"严重违规失信"专项整治举报|安全中心|星骆驼公益|About Us</p>
+          <p>Copyright ©2021 Qunar.com京公网安备11010802030542京ICP备05021087号京ICP证060856号营业执照信息(京)-非经营性-2016-0110去哪儿网客服电话95117</p>
+          <p>违法和不良信息举报电话：010-59606977违法和不良信息举报邮箱：tousu@qunar.com</p>
+          <Image src="./img/footer_v10.png" />
         </div>
       </div>
     );
