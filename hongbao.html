@@ -143,8 +143,9 @@
         </div>
       </div>
     </div>
+    <div id="move" style="position: absolute;width: 100px;height: 100px;background-color: red;"></div>
   </div>
-  <script>
+  <!-- <script>
     function fahongbao() {
       let hongbaoBack = document.getElementById('hongbaoBack')
       hongbaoBack.style.display = 'block'
@@ -189,11 +190,11 @@
 
       }, 3000)
     }
-  </script>
+  </script> -->
   <!-- // 有三只球队，每只球队编号分别为球队1，球队2，球队3，这三只球队一共需要进行 n 场比赛。 -->
-    <!-- // 现在已经踢完了k场比赛，每场比赛不能打平，踢赢一场比赛得一分，输了不得分不减分。已知球队1和球队2的比分相差d1分， -->
-    <!-- // 球队2和球队3的比分相差d2分，每场比赛可以任意选择两只队伍进行。求如果打完最后的 (n-k) 场比赛，有没有可能三只球队的分数打平。 -->
-  <script>
+  <!-- // 现在已经踢完了k场比赛，每场比赛不能打平，踢赢一场比赛得一分，输了不得分不减分。已知球队1和球队2的比分相差d1分， -->
+  <!-- // 球队2和球队3的比分相差d2分，每场比赛可以任意选择两只队伍进行。求如果打完最后的 (n-k) 场比赛，有没有可能三只球队的分数打平。 -->
+  <!-- <script>
     let t = parseInt(readline());
     for (let i = 0; i < t; i++) {
       let result = 'no';
@@ -223,10 +224,10 @@
       }
       console.log(result);
     }
-  </script>
+  </script> -->
   <!-- 有一个仅包含’a’和’b’两种字符的字符串s，长度为n，每次操作可以把一个字符做一次转换（把一个’a’设置为’b’，或者把一个’b’置成’a’)； -->
-    <!-- // 但是操作的次数有上限m，问在有限的操作数范围内，能够得到最大连续的相同字符的子串的长度是多少。 -->
-  <script>
+  <!-- // 但是操作的次数有上限m，问在有限的操作数范围内，能够得到最大连续的相同字符的子串的长度是多少。 -->
+  <!-- <script>
     let [n, m] = readline().split(' ').map(i => parseInt(i));
     let str = readline();
     let aPositions = [];//所有a出现的位置，下面类似
@@ -253,11 +254,11 @@
       result = result > toEnd ? result : toEnd;
     }
     console.log(result);
-  </script>
-   <!-- 以下函数用于将一颗二叉搜索树转换成一个有序的双向链表。要求不能创建任何新的节点，只能调整树种节点指针的指向。 -->
-    <!-- 如输入下图中左边的二叉搜索树，则输出转换后的排序双向链表： -->
-  <script>
-    
+  </script> -->
+  <!-- 以下函数用于将一颗二叉搜索树转换成一个有序的双向链表。要求不能创建任何新的节点，只能调整树种节点指针的指向。 -->
+  <!-- 如输入下图中左边的二叉搜索树，则输出转换后的排序双向链表： -->
+  <!-- <script>
+
     TreeNode * Convert(TreeNode * root)
     {
       if (root == NULL)
@@ -285,7 +286,72 @@
         listHead = listHead -> left;
       return listHead;
     }
+  </script> -->
+  <script>
+    function clickMove(id) {
+      var ele = document.getElementById(id)
+      ele.onmousedown = (e) => {
+        var e = e || window.event
+        var x = e.offsetX;
+        var y = e.offsetY
+        document.onmousemove = (e) => {
+          var l = e.clientX - x
+          var t = e.clientY - y
+          ele.style.left = l + 'px'
+          ele.style.top = t + 'px'
+        }
+        document.onmouseup = function (e) {
+          document.onmousedown = null
+          document.onmousemove = null
+        }
+      }
+    }
+    clickMove('move')
+    function all(arr) {
+      return new Promise(function (resolve, reject) {
+        if (!isArray(arr)) {
+          return reject(new TypeError('错误'))
+        }
+        let len = arr.length
+        var returnResolve = []
+        var resolveNum = 0
+        arr.forEach(item => {
+          (() => {
+            Promise.resolve(arr[i]).then(function (val) {
+              resolveNum++
+              returnResolve.push(val)
+              if (resolveNum == returnResolve.length) {
+                return resolve(returnResolve)
+              }
+            }, function (val) {
+              return reject(val)
+            })
+          })()
+
+        })
+      })
+    }
+    let obj = {
+      func1: function () {
+        console.log(this);
+      },
+      func2: () => {
+        console.log(this);
+      }
+    }
+    var list = [obj.func1, obj.func2];
+    var a1 = obj.func1;
+    var a2 = obj.func2;
+
+    obj.func1();
+    obj.func2();
+    a1();
+    a2();
+    list[0]();
+    list[1]();
+    // object, window, window, window, Array(2)(输出list数组，此时this指向list[0])，window
   </script>
+
 </body>
 
 </html>
