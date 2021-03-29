@@ -1,150 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    .hongbao {
-      width: 300px;
-    }
-
-    .hongbao button {
-      width: 40%;
-      margin-left: 30%;
-      margin-top: 10px;
-    }
-
-    .number {
-      text-align: center;
-      display: flex;
-      justify-content: center;
-    }
-
-    .number p,
-    .money p {
-      width: 100px;
-      text-align: right;
-      margin: 0;
-    }
-
-    .money {
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    #hongbaoBack {
-      background-color: rgba(0, 0, 0, 0.2);
-      width: 300px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      position: fixed;
-      left: 0;
-      top: 0;
-    }
-
-    .redBack {
-      background-color: red;
-      width: 80%;
-      margin: auto;
-      border-radius: 4px;
-    }
-
-    .close {
-      width: 20px;
-      margin-right: 10px;
-      margin-left: auto;
-      margin-top: 10px;
-      transform: rotate(45deg);
-      cursor: pointer;
-    }
-
-    .img {
-      width: 100%;
-      text-align: center;
-    }
-
-    .img img {
-      border-radius: 50%;
-    }
-
-    .redBack p {
-      width: 100%;
-      margin: 0;
-      text-align: center;
-    }
-
-    #chaiHongbao {
-      width: 100px;
-      height: 100px;
-      background-color: coral;
-      color: #fff;
-      border-radius: 50%;
-      line-height: 100px;
-      margin: auto;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .xuanz {
-      animation: myfirst 5s;
-    }
-
-    @keyframes myfirst {
-      0% {
-        transform: rotateY(0);
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .hongbao {
+        width: 300px;
       }
 
-      50% {
-        transform: rotateY(180deg);
+      .hongbao button {
+        width: 40%;
+        margin-left: 30%;
+        margin-top: 10px;
       }
 
-      100% {
-        transform: rotateY(360deg);
+      .number {
+        text-align: center;
+        display: flex;
+        justify-content: center;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <div>
-    <div class="hongbao">
-      <p style="text-align: center;">红包模拟器</p>
-      <div class="number">
-        <p>红包个数:</p><input id="number" />个
-      </div>
-      <div class="money">
-        <p>总金额:</p><input id="money" />元
-      </div>
-      <button onclick="fahongbao()">发红包</button>
-    </div>
-    <div id="hongbaoBack" style="display: none;">
-      <div class="redBack">
-        <div class="close" onclick="closeRed()">+</div>
-        <div class="img">
-          <img src="http://s3a.pstatp.com/cg_growth/resource/boilerplate/images/redpacket/avatar.png" />
+      .number p,
+      .money p {
+        width: 100px;
+        text-align: right;
+        margin: 0;
+      }
+
+      .money {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      #hongbaoBack {
+        background-color: rgba(0, 0, 0, 0.2);
+        width: 300px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        position: fixed;
+        left: 0;
+        top: 0;
+      }
+
+      .redBack {
+        background-color: red;
+        width: 80%;
+        margin: auto;
+        border-radius: 4px;
+      }
+
+      .close {
+        width: 20px;
+        margin-right: 10px;
+        margin-left: auto;
+        margin-top: 10px;
+        transform: rotate(45deg);
+        cursor: pointer;
+      }
+
+      .img {
+        width: 100%;
+        text-align: center;
+      }
+
+      .img img {
+        border-radius: 50%;
+      }
+
+      .redBack p {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+      }
+
+      #chaiHongbao {
+        width: 100px;
+        height: 100px;
+        background-color: coral;
+        color: #fff;
+        border-radius: 50%;
+        line-height: 100px;
+        margin: auto;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .xuanz {
+        animation: myfirst 5s;
+      }
+
+      @keyframes myfirst {
+        0% {
+          transform: rotateY(0);
+        }
+
+        50% {
+          transform: rotateY(180deg);
+        }
+
+        100% {
+          transform: rotateY(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <div class="hongbao">
+        <p style="text-align: center">红包模拟器</p>
+        <div class="number">
+          <p>红包个数:</p>
+          <input id="number" />个
         </div>
-        <div id="chaiBtn">
-          <p style="color: #fff;">JScoder</p>
-          <p style="color: rgba(0,0,0,0.5);">给你发了一个红包</p>
-          <p style="color: #fff;">恭喜发财 大吉大利</p>
-          <div id="chaiHongbao" onclick="chaihongbao()">拆红包</div>
+        <div class="money">
+          <p>总金额:</p>
+          <input id="money" />元
         </div>
-        <div class="haobaoMoney" style="display: none;">
-          <p id="allMoney"></p>
-          <p>红包领取榜</p>
-          <div class="bangdang">
-
+        <button onclick="fahongbao()">发红包</button>
+      </div>
+      <div id="hongbaoBack" style="display: none">
+        <div class="redBack">
+          <div class="close" onclick="closeRed()">+</div>
+          <div class="img">
+            <img
+              src="http://s3a.pstatp.com/cg_growth/resource/boilerplate/images/redpacket/avatar.png"
+            />
+          </div>
+          <div id="chaiBtn">
+            <p style="color: #fff">JScoder</p>
+            <p style="color: rgba(0, 0, 0, 0.5)">给你发了一个红包</p>
+            <p style="color: #fff">恭喜发财 大吉大利</p>
+            <div id="chaiHongbao" onclick="chaihongbao()">拆红包</div>
+          </div>
+          <div class="haobaoMoney" style="display: none">
+            <p id="allMoney"></p>
+            <p>红包领取榜</p>
+            <div class="bangdang"></div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <script>
+    <!-- <script>
     function fahongbao() {
       let hongbaoBack = document.getElementById('hongbaoBack')
       hongbaoBack.style.display = 'block'
@@ -189,11 +190,11 @@
 
       }, 3000)
     }
-  </script>
-  <!-- // 有三只球队，每只球队编号分别为球队1，球队2，球队3，这三只球队一共需要进行 n 场比赛。 -->
+  </script> -->
+    <!-- // 有三只球队，每只球队编号分别为球队1，球队2，球队3，这三只球队一共需要进行 n 场比赛。 -->
     <!-- // 现在已经踢完了k场比赛，每场比赛不能打平，踢赢一场比赛得一分，输了不得分不减分。已知球队1和球队2的比分相差d1分， -->
     <!-- // 球队2和球队3的比分相差d2分，每场比赛可以任意选择两只队伍进行。求如果打完最后的 (n-k) 场比赛，有没有可能三只球队的分数打平。 -->
-  <script>
+    <!-- <script>
     let t = parseInt(readline());
     for (let i = 0; i < t; i++) {
       let result = 'no';
@@ -223,10 +224,10 @@
       }
       console.log(result);
     }
-  </script>
-  <!-- 有一个仅包含’a’和’b’两种字符的字符串s，长度为n，每次操作可以把一个字符做一次转换（把一个’a’设置为’b’，或者把一个’b’置成’a’)； -->
+  </script> -->
+    <!-- 有一个仅包含’a’和’b’两种字符的字符串s，长度为n，每次操作可以把一个字符做一次转换（把一个’a’设置为’b’，或者把一个’b’置成’a’)； -->
     <!-- // 但是操作的次数有上限m，问在有限的操作数范围内，能够得到最大连续的相同字符的子串的长度是多少。 -->
-  <script>
+    <!-- <script>
     let [n, m] = readline().split(' ').map(i => parseInt(i));
     let str = readline();
     let aPositions = [];//所有a出现的位置，下面类似
@@ -253,10 +254,10 @@
       result = result > toEnd ? result : toEnd;
     }
     console.log(result);
-  </script>
-   <!-- 以下函数用于将一颗二叉搜索树转换成一个有序的双向链表。要求不能创建任何新的节点，只能调整树种节点指针的指向。 -->
+  </script> -->
+    <!-- 以下函数用于将一颗二叉搜索树转换成一个有序的双向链表。要求不能创建任何新的节点，只能调整树种节点指针的指向。 -->
     <!-- 如输入下图中左边的二叉搜索树，则输出转换后的排序双向链表： -->
-  <script>
+    <!-- <script>
     
     TreeNode * Convert(TreeNode * root)
     {
@@ -285,7 +286,41 @@
         listHead = listHead -> left;
       return listHead;
     }
-  </script>
-</body>
-
+  </script> -->
+    <script>
+      var var1 = 1;
+      function b() {
+        var var1 = 1;
+        var var2 = 2;
+        function a() {
+          console.log(var1);
+          console.log(var2);
+        }
+        a();
+      }
+      // b();
+      // console.log(var1);
+      //遍历二叉树
+      function levelOrder(root) {
+        if (!root) return [];
+        let queue = [root];
+        let res = [];
+        while (queue.length) {
+          // 取当前层级节点数
+          let len = queue.length;
+          let tempRes = [];
+          // 取当前层所有节点
+          while (len--) {
+            let node = queue.shift();
+            tempRes.push(node.val);
+            // 下一层入队列
+            node.left && queue.push(node.left);
+            node.right && queue.push(node.right);
+          }
+          res.push(tempRes);
+        }
+        return res;
+      }
+    </script>
+  </body>
 </html>
