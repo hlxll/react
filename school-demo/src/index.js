@@ -7,15 +7,12 @@ import Login from './view/login'
 import Home from './view/home'
 ReactDOM.render(
   <React.StrictMode>
-    
-      <Router>
-        <Switch>
-          <Route path="/login" exact component={Login} />
-          <Route path="/" component={Home} />
-        </Switch>
-      </Router>
-    
-    
+    <Router>
+      <Switch>
+        <Route path="/login" exact component={Login} />
+        <Route path="/" component={Home} />
+      </Switch>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );
