@@ -172,7 +172,7 @@
         let all = money.value
         let moneyArr = []
         for (let i = 0; i < number.value; i++) {
-          if (i == number.value - 1) {
+          if (i === number.value - 1) {
             moneyArr.push(all.toFixed(2))
           } else {
             // 0到9的整数除以10
@@ -263,7 +263,7 @@
 
     TreeNode * Convert(TreeNode * root)
     {
-      if (root == NULL)
+      if (root === NULL)
         return NULL;
       TreeNode * listHead = NULL;
       TreeNode * listLastNode = NULL;
@@ -276,7 +276,7 @@
         root = s.top();
         s.pop();
         root -> left=listLastNode;
-        if (listHead == NULL) {
+        if (listHead === NULL) {
           listHead = root;
         } else {
           listLastNode -> right = root;
@@ -322,7 +322,7 @@
             Promise.resolve(arr[i]).then(function (val) {
               resolveNum++
               returnResolve.push(val)
-              if (resolveNum == returnResolve.length) {
+              if (resolveNum === returnResolve.length) {
                 return resolve(returnResolve)
               }
             }, function (val) {

@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import { Input, Image, Button } from "antd";
-// import { BrowserRouter as Router, NavLink as Link , Route, Switch } from 'react-router-dom'
-import {
-  HashRouter as Router,
-  NavLink as Link,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { withRouter } from "react-router";
 import "./index.less";
 import Head from "../../component/head";
@@ -29,40 +22,40 @@ class Home extends Component {
     };
     this.onSearch = this.onSearch.bind(this);
   }
-  componentDidMount () {
+  componentDidMount() {
     console.log(this.props.location.pathname);
     let pathName = this.props.location.pathname;
     let index = "0";
-    if (pathName == "/main") {
+    if (pathName === "/main") {
       index = "0";
     }
-    if (pathName == "/planeTicket") {
+    if (pathName === "/planeTicket") {
       index = "1";
     }
-    if (pathName == "/hotel") {
+    if (pathName === "/hotel") {
       index = "2";
     }
-    if (pathName == "/trainTickets") {
+    if (pathName === "/trainTickets") {
       index = "3";
     }
-    if (pathName == "/holiday") {
+    if (pathName === "/holiday") {
       index = "4";
     }
-    if (pathName == "/groupBuying") {
+    if (pathName === "/groupBuying") {
       index = "5";
     }
-    if (pathName == "/tickets") {
+    if (pathName === "/tickets") {
       index = "6";
     }
-    if (pathName == "/local") {
+    if (pathName === "/local") {
       index = "7";
     }
     this.setState({
       componentNum: index,
     });
   }
-  onSearch () { }
-  toHomeChildRouter (index) {
+  onSearch() {}
+  toHomeChildRouter(index) {
     this.setState({
       componentNum: index,
     });
@@ -91,11 +84,11 @@ class Home extends Component {
       this.props.history.replace("/local");
     }
   }
-  render () {
+  render() {
     return (
       <div className="home">
         <Head />
-        {this.state.componentNum == 0 ? (
+        {this.state.componentNum === 0 ? (
           <div className="goWhereInput">
             <div className="leftImg">
               <Image
@@ -133,7 +126,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 0 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 0 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "0")}
           >
             首页
@@ -157,7 +150,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 3 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 3 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "3")}
           >
             火车票
@@ -165,7 +158,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 4 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 4 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "4")}
           >
             度假
@@ -173,7 +166,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 5 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 5 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "5")}
           >
             团购
@@ -181,7 +174,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 6 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 6 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "6")}
           >
             门票
@@ -189,7 +182,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 7 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 7 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "7")}
           >
             当地人
@@ -212,9 +205,17 @@ class Home extends Component {
           <LeftFixed />
         </div>
         <div className="allFooter">
-          <p>关于Qunar.com|业务合作|加入我们|"严重违规失信"专项整治举报|安全中心|星骆驼公益|About Us</p>
-          <p>Copyright ©2021 Qunar.com京公网安备11010802030542京ICP备05021087号京ICP证060856号营业执照信息(京)-非经营性-2016-0110去哪儿网客服电话95117</p>
-          <p>违法和不良信息举报电话：010-59606977违法和不良信息举报邮箱：tousu@qunar.com</p>
+          <p>
+            关于Qunar.com|业务合作|加入我们|"严重违规失信"专项整治举报|安全中心|星骆驼公益|About
+            Us
+          </p>
+          <p>
+            Copyright ©2021
+            Qunar.com京公网安备11010802030542京ICP备05021087号京ICP证060856号营业执照信息(京)-非经营性-2016-0110去哪儿网客服电话95117
+          </p>
+          <p>
+            违法和不良信息举报电话：010-59606977违法和不良信息举报邮箱：tousu@qunar.com
+          </p>
           <Image src="./img/footer_v10.png" />
         </div>
       </div>

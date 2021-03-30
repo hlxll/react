@@ -11,7 +11,7 @@
 //   }
 //   if (arrayData.length > 1) {
 //     for (let i = arrayData.length - 2; i >= 0; i--) {
-//       if (arrayData[i + 1] == arrayData[i]) {
+//       if (arrayData[i + 1] === arrayData[i]) {
 //         arrayData.splice(i + 1, 1);
 //       }
 //     }
@@ -30,21 +30,21 @@ function climbStairs(n) {
   // write code here
   let type = 0;
   function climb(n, x) {
-    if (n == 0) {
+    if (n === 0) {
       return;
     }
-    if (n >= 1 && x == 1) {
+    if (n >= 1 && x === 1) {
       n = n - 1;
-      if (n == 0) {
+      if (n === 0) {
         type++;
       }
 
       climb(n, 1);
       climb(n, 2);
     }
-    if (n >= 2 && x == 2) {
+    if (n >= 2 && x === 2) {
       n = n - 2;
-      if (n == 0) {
+      if (n === 0) {
         type++;
       }
       climb(n, 1);

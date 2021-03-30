@@ -48,7 +48,7 @@ class HolidayForm extends Component {
     //   jsonp(`https://suggest.taobao.com/sug?${str}`)
     //     .then(response => response.json())
     //     .then(d => {
-    //       if (currentValue === value) {
+    //       if (currentValue == value) {
     //         const { result } = d;
     //         const data = [];
     //         result.forEach(r => {

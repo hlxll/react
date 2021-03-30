@@ -10,7 +10,7 @@ class Home extends Component {
     super(props);
     this.verfication = React.createRef();
     this.state = {
-      loginOrRegister: true,
+      loginOrRegister: this.props.location.query,
     };
     this.checkLoginRegister = this.checkLoginRegister.bind(this);
     this.onFinish = this.onFinish.bind(this);
@@ -18,13 +18,14 @@ class Home extends Component {
   }
   checkLoginRegister(data) {
     this.setState({
-      loginOrRegister: data,
+      loginOrRegister: data ? "login" : "register",
     });
   }
   onFinish(e) {
     console.log(this.verfication.current.state);
     console.log(e);
   }
+  componentDidMount() {}
   onFinishFailed() {}
   render() {
     return (
@@ -38,13 +39,13 @@ class Home extends Component {
               style={{ width: 150, height: 50 }}
               src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
             />
-            {this.state.loginOrRegister ? (
+            {(this.state.loginOrRegister == "login" ? true : false) ? (
               <span>账号登录</span>
             ) : (
               <span>账号注册</span>
             )}
           </div>
-          {this.state.loginOrRegister ? (
+          {(this.state.loginOrRegister == "login" ? true : false) ? (
             <div className="CenterMain">
               <div className="MainLeft">
                 <Image
