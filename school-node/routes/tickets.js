@@ -1,5 +1,7 @@
 var expiress = require('express')
 var router = expiress.Router()
+
+//门票列表
 router.get('/searchTicket', function (req, res) {
   var data = req.query;
   var MongoClient = require("mongodb").MongoClient;
