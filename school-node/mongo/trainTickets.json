@@ -1,0 +1,20 @@
+[
+  {
+    "name": "K2288",
+    "allTime": "36.49",
+    "startCity": "南昌",
+    "arriveCity": "杭州",
+    "startTime": "8:57",
+    "arriveTime": "21:46",
+    "money": [
+      254,
+      434,
+      687
+    ],
+    "num": [
+      2,
+      3,
+      1
+    ]
+  }
+]
