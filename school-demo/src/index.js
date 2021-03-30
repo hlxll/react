@@ -10,8 +10,12 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
+<<<<<<< HEAD
         <Route path="/login" component={Login} />
         <Route path="/order" exact component={Order} />
+=======
+        <Route path="/login" exact component={Login} />
+>>>>>>> f75d7425a972c9b6605d93ea475998edd9344307
         <Route path="/" component={Home} />
       </Switch>
     </Router>
