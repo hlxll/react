@@ -32,7 +32,7 @@ class Main extends Component {
           <div className="formContent">
             <Menu
               className="leftMenu"
-              style={{ width: 100, height: 280 }}
+              style={{ width: 100, height: 336 }}
               defaultSelectedKeys={["1"]}
               onSelect={this.selectForm}
             >

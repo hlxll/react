@@ -2,30 +2,30 @@ import { Component } from "react";
 import { Menu, Image, Row, Col, Pagination } from "antd";
 import { MailOutlined, CalendarOutlined } from "@ant-design/icons";
 import LocalForm from "./common/LocalForm.jsx";
-import LocalData from "./common/LocalData.jsx"
+import LocalData from "./common/LocalData.jsx";
 import "./index.less";
 class Local extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: '',
+      title: "杭州",
       localData: {
         money: 27,
-        name: '东南亚7国随声Wi-Fi4G香港机场领取不限流量不限时长',
-        city: '越南',
+        name: "东南亚7国随声Wi-Fi4G香港机场领取不限流量不限时长",
+        city: "越南",
         number: 1,
-        type: 2
-      }
-    }
-    this.onShowSizeChange = this.onShowSizeChange.bind(this)
+        type: 2,
+      },
+    };
+    this.onShowSizeChange = this.onShowSizeChange.bind(this);
   }
-  selectForm () { }
-  selectDataType () { }
-  onShowSizeChange(size, page){
-    console.log(size)
-    console.log(page)
+  selectForm() {}
+  selectDataType() {}
+  onShowSizeChange(size, page) {
+    console.log(size);
+    console.log(page);
   }
-  render () {
+  render() {
     return (
       <div className="local">
         <div className="localform">
@@ -42,47 +42,31 @@ class Local extends Component {
               <Menu.Item key="2" icon={<CalendarOutlined />}>
                 WIFI租赁
               </Menu.Item>
-              <Menu.Item key="3" icon={<CalendarOutlined />}>
-                包车游览
-              </Menu.Item>
-              <Menu.Item key="4" icon={<CalendarOutlined />}>
-                接送机
-              </Menu.Item>
-              <Menu.Item key="5" icon={<CalendarOutlined />}>
-                当地顾问
-              </Menu.Item>
             </Menu>
             <div className="dataForm">
               <LocalForm />
             </div>
           </div>
           <div className="img">
-            <Image src="./img/formRight.png" />
+            <Image src="./img/formRight.png" className="imgWH" />
           </div>
         </div>
         <div className="localDataTitle">{this.state.title}的搜索结果页</div>
         <div className="typeMenu">
-          <Menu
-            onSelect={this.selectDataType} mode="horizontal"
-          >
-            <Menu.Item key="1">
-              全部
-            </Menu.Item>
-            <Menu.Item key="2">
-              当地游玩
-            </Menu.Item>
-            <Menu.Item key="3">
-              WIFI租赁
-            </Menu.Item>
+          <Menu onSelect={this.selectDataType} mode="horizontal">
+            <Menu.Item key="1">全部</Menu.Item>
+            <Menu.Item key="2">当地游玩</Menu.Item>
+            <Menu.Item key="3">WIFI租赁</Menu.Item>
           </Menu>
         </div>
-        <div>
+        <div className="pageHead">
           <Pagination
             showSizeChanger
             defaultCurrent={3}
             onChange={this.onShowSizeChange}
             total={500}
-          /></div>
+          />
+        </div>
         <div className="contentData">
           <Row>
             <Col span={6}>

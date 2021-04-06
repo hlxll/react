@@ -1,47 +1,52 @@
-.main{
-    width: 90%;
+.main {
+  width: 90%;
+  height: auto;
+  margin: auto;
+  margin-top: 50px;
+  .mainform {
+    width: 100%;
     height: auto;
-    margin: auto;
-    margin-top: 50px;
-    .mainform{
-        width: 100%;
-        height: auto;
-        display: flex;
-        .formContent{
-            width: 720px;
-            height: 288px;
-            border: 4px solid #00d0d4;
-            display: flex;
-            .leftMenu{
-                height: 100%;
-                width: 280px;
-                li{
-                    height: 40px;
-                    line-height: 40px;
-                }
-            }
-            .dataForm{
-                height: 100%;
-                width: calc(100% - 100px);
-            }
+    display: flex;
+    .formContent {
+      width: 720px;
+      height: 344px;
+      border: 4px solid #00d0d4;
+      display: flex;
+      .leftMenu {
+        height: 100%;
+        width: 280px;
+        li {
+          height: 40px;
+          line-height: 40px;
         }
-        .img{
-            width: calc(100% - 728px);
-        }
+      }
+      .dataForm {
+        height: 100%;
+        width: calc(100% - 100px);
+      }
     }
-    .mainPlaneTicket{
-        width: 100%;
+    .img {
+      width: 568px;
+      height: 344px;
+      img {
+        width: 568px;
+        height: 344px;
+      }
     }
-    .intervalImg{
-        height: 300px;
-    }
-    .footBack{
-        width: 100%;
-        height: 200px;
-        margin-bottom: 20px;
-        background: linear-gradient(90deg,#00d0d4 19%,#00c5c3 58%,#9effa4 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+  }
+  .mainPlaneTicket {
+    width: 100%;
+  }
+  .intervalImg {
+    height: 300px;
+  }
+  .footBack {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, #00d0d4 19%, #00c5c3 58%, #9effa4 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

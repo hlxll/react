@@ -25,30 +25,30 @@ class Home extends Component {
   componentDidMount() {
     console.log(this.props.location.pathname);
     let pathName = this.props.location.pathname;
-    let index = "0";
-    if (pathName === "/main") {
-      index = "0";
+    let index = 0;
+    if (pathName == "/main") {
+      index = 0;
     }
-    if (pathName === "/planeTicket") {
-      index = "1";
+    if (pathName == "/planeTicket") {
+      index = 1;
     }
-    if (pathName === "/hotel") {
-      index = "2";
+    if (pathName == "/hotel") {
+      index = 2;
     }
-    if (pathName === "/trainTickets") {
-      index = "3";
+    if (pathName == "/trainTickets") {
+      index = 3;
     }
-    if (pathName === "/holiday") {
-      index = "4";
+    if (pathName == "/holiday") {
+      index = 4;
     }
-    if (pathName === "/groupBuying") {
-      index = "5";
+    if (pathName == "/groupBuying") {
+      index = 5;
     }
-    if (pathName === "/tickets") {
-      index = "6";
+    if (pathName == "/tickets") {
+      index = 6;
     }
-    if (pathName === "/local") {
-      index = "7";
+    if (pathName == "/local") {
+      index = 7;
     }
     this.setState({
       componentNum: index,
@@ -126,7 +126,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 0 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 0 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "0")}
           >
             首页
@@ -134,7 +134,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 1 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 1 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "1")}
           >
             机票
@@ -142,7 +142,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 2 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 2 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "2")}
           >
             酒店
@@ -150,7 +150,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 3 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 3 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "3")}
           >
             火车票
@@ -158,7 +158,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 4 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 4 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "4")}
           >
             度假
@@ -166,7 +166,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 5 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 5 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "5")}
           >
             团购
@@ -174,7 +174,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 6 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 6 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "6")}
           >
             门票
@@ -182,7 +182,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 7 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 7 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "7")}
           >
             当地人
