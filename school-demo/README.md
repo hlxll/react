@@ -47,3 +47,11 @@
   服务启动，一定要正确关闭服务，在bin目录下，./mongo之后使用use admin，db.shutdownServer()关闭服务
   ## mongodb数据
   在mongodb可视化工具中，表中数据展示界面的按钮 ADD DATA可以加载json文件，school-node中的mongo文件夹有 数据json文件
+  # 代码分割
+  使用import，配合webpack，实现代码分割
+  使用lazy，优化页面，使用lazy引入组件或者路由进行默认导出，在Suspense中间使用，实现懒加载，（login中使用过）
+  # context
+  组件间传递数据，无需定义props，就可以传递给多层子组件(home中使用，传递给leftFixed)
+  context可以逐层传递，如果不是逐层使用，可以考虑组件组合
+  ## 组件组合
+  将组件自身，使用props方法传递下去，中间组件无需知道props具体内容，如果后面加props也简单

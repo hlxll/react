@@ -12,6 +12,7 @@ var localRouter = require('./routes/local');
 var hotelRouter = require('./routes/hotel');
 var holidayRouter = require('./routes/holiday');
 var groupBuyingRouter = require('./routes/groupBuying');
+var nodeRouter = require('./node');
 
 var app = express();
 
@@ -33,6 +34,7 @@ app.use('/local', localRouter);
 app.use('/hotel', hotelRouter);
 app.use('/holiday', holidayRouter);
 app.use('/groupBuying', groupBuyingRouter);
+app.use('/node', nodeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

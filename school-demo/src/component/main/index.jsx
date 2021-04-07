@@ -40,7 +40,7 @@ class Main extends Component {
                             onSelect={this.selectForm}
                         >
                             <Menu.Item key="1" icon={<MailOutlined />}>
-                            机票
+                            机票{this.contextType}
                             </Menu.Item>
                             <Menu.Item key="2" icon={<CalendarOutlined />}>
                             酒店

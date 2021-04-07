@@ -10,6 +10,7 @@ import {
 } from '@ant-design/icons';
 import { Tooltip } from 'antd'
 import SmallLogin from '../login'
+import { LoginContext } from '../../view/home/index'
 class LeftFixed extends Component {
     constructor() {
         super()
@@ -29,6 +30,7 @@ class LeftFixed extends Component {
         this.setState({
             SureClose: false
         })
+        console.log(LoginContext.Consumer)
     }
     openLeft () {
         this.setState({
@@ -77,6 +79,11 @@ class LeftFixed extends Component {
                                 <UserOutlined style={{ fontSize: '24px' }} />
                                 <MailOutlined style={{ fontSize: '24px', marginLeft: '9px', marginRight: '9px' }} />
                                 <span>加入会员，立即开始精彩旅程</span>
+                                {/* <LoginContext.Consumer>
+                                    {
+                                        (name) => <p>{name}</p>
+                                    }
+                                </LoginContext.Consumer> */}
                             </Tooltip>
                         </div>
                     </div>

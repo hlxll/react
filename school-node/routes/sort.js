@@ -10,4 +10,4 @@ function sort (result) {
   }
   return result
 }
-export { sort }
+// export default { sort }

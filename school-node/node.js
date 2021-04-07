@@ -96,7 +96,6 @@ app.get('/api', function (req, res) {
   })
 });
 
-app.get()
 //添加数据/register?name=xxx&work=xxx
 app.get('/register', function (req, res) {
   var data = req.query;
@@ -447,7 +446,7 @@ app.get('/serverDom', function (req, res) {
       age: 13
     }
   ];
-  fs.readFile('./node.html', 'utf-8', function (err, data) {
+  fs.readFile('../../hongbao.html', 'utf-8', function (err, data) {
     if (err) {
       res.send('文件读取失败');
     } else {
