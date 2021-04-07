@@ -23,7 +23,6 @@ class Home extends Component {
     this.onSearch = this.onSearch.bind(this);
   }
   componentDidMount() {
-    console.log(this.props.location.pathname);
     let pathName = this.props.location.pathname;
     let index = 0;
     if (pathName == "/main") {
