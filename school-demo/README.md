@@ -63,3 +63,17 @@ mongod --dbpath /usr/local/var/mongodb -logpath /usr/local/var/log/mongodb/mongo
 # 高阶组件
 
 是 react 中用于复用组件逻辑的一种高级技巧，基于 react 组合特性的设计模式
+
+# 代码分割
+
+使用 import，配合 webpack，实现代码分割
+使用 lazy，优化页面，使用 lazy 引入组件或者路由进行默认导出，在 Suspense 中间使用，实现懒加载，（login 中使用过）
+
+# context
+
+组件间传递数据，无需定义 props，就可以传递给多层子组件(home 中使用，传递给 leftFixed)
+context 可以逐层传递，如果不是逐层使用，可以考虑组件组合
+
+## 组件组合
+
+将组件自身，使用 props 方法传递下去，中间组件无需知道 props 具体内容，如果后面加 props 也简单

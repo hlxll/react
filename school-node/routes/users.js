@@ -49,7 +49,7 @@ router.get("/login", function (req, res, next) {
   );
 });
 //注册
-app.get('/register', function (req, res) {
+router.get('/register', function (req, res) {
   var data = req.query;
   console.log(data)
   var MongoClient = require('mongodb').MongoClient;
@@ -68,7 +68,7 @@ app.get('/register', function (req, res) {
   res.send('成功注册');
 })
 //查看订单
-app.get('/queryOrder', function (req, res) {
+router.get('/queryOrder', function (req, res) {
   var data = req.query;
   var MongoClient = require('mongodb').MongoClient;
   var url = 'mongodb://localhost:27017';
@@ -86,7 +86,7 @@ app.get('/queryOrder', function (req, res) {
   })
 })
 //添加订单
-app.get('/addOrder', function (req, res) {
+router.get('/addOrder', function (req, res) {
   var data = req.query;
   var MongoClient = require('mongodb').MongoClient;
   var url = "mongodb://localhost:27017/";

@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React, { Component, Suspense } from "react";
 import SmallLogin from "../../component/login";
 import LoginHead from "../../component/login/loginHead";
 import "./index.less";
 import { Image, Select, Form, Button, Input } from "antd";
-import VerficationCode from "../../component/login/verificationCode";
+// import VerficationCode from "../../component/login/verificationCode";
+//lazy懒加载，也可以在路由中使用，方式相同
+const VerficationCode = React.lazy(() => import('../../component/login/verificationCode'));
 const { Option } = Select;
 class Home extends Component {
   constructor(props) {
@@ -16,18 +18,18 @@ class Home extends Component {
     this.onFinish = this.onFinish.bind(this);
     this.onFinishFailed = this.onFinishFailed.bind(this);
   }
-  checkLoginRegister(data) {
+  checkLoginRegister (data) {
     this.setState({
-      loginOrRegister: data ? "login" : "register",
+      loginOrRegister: data ? "login" : "register"
     });
   }
-  onFinish(e) {
+  onFinish (e) {
     console.log(this.verfication.current.state);
     console.log(e);
   }
-  componentDidMount() {}
-  onFinishFailed() {}
-  render() {
+  componentDidMount () { }
+  onFinishFailed () { }
+  render () {
     return (
       <div className="loginMain">
         <div className="head">
@@ -123,7 +125,10 @@ class Home extends Component {
                   <Input.Password />
                 </Form.Item>
                 <Form.Item name="Code" label="验证码" style={{ width: 500 }}>
-                  <VerficationCode ref={this.verfication} />
+                  {/* <VerficationCode ref={this.verfication} /> */}
+                  <Suspense fallback={<div>Loading...</div>}>
+                    <VerficationCode ref={this.verfication} />
+                  </Suspense>
                 </Form.Item>
                 <Form.Item style={{}}>
                   <Button type="primary" htmlType="submit">
