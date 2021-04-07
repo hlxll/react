@@ -27,7 +27,7 @@
       // console.log(strArr.join(" "));
       // let strArr = "abd".split("");
       // for (let i = strArr.length - 1; i > 0; i--) {
-      //   if (strArr[i] == strArr[i - 1]) {
+      //   if (strArr[i] === strArr[i - 1]) {
       //     strArr.splice(i, 1);
       //   }
       // }
@@ -53,7 +53,7 @@
       //           resNum = All;
       //         }
       //       }
-      //       if (j + len == numArr.length) {
+      //       if (j + len === numArr.length) {
       //         let newArr = numArr.slice(j);
       //         let All = AllNum(newArr);
       //         if (All > resNum) {
@@ -96,8 +96,8 @@
       //   let allR = P;
       //   let allT = P;
       //   //向左走
-      //   if (x - 1 >= 0 && arr[x - 1][y] == 1) {
-      //     if (x - 1 == 0 && y == m - 1) {
+      //   if (x - 1 >= 0 && arr[x - 1][y] === 1) {
+      //     if (x - 1 === 0 && y === m - 1) {
       //       arriveArr.push([0, m - 1]);
       //       return arriveArr;
       //     } else {
@@ -111,8 +111,8 @@
       //     }
       //   }
       //   //向右走
-      //   if (x + 1 < m && arr[x + 1][y] == 1) {
-      //     if (x + 1 == 0 && y == m - 1) {
+      //   if (x + 1 < m && arr[x + 1][y] === 1) {
+      //     if (x + 1 === 0 && y === m - 1) {
       //       arriveArr.push([0, m - 1]);
       //       return arriveArr;
       //     } else {
@@ -126,8 +126,8 @@
       //     }
       //   }
       //   //向上走
-      //   if (y + 1 < n && arr[x][y + 1] == 1) {
-      //     if (x == 0 && y + 1 == m - 1) {
+      //   if (y + 1 < n && arr[x][y + 1] === 1) {
+      //     if (x === 0 && y + 1 === m - 1) {
       //       arriveArr.push([0, m - 1]);
       //       return arriveArr;
       //     } else {
@@ -152,7 +152,7 @@
       // console.log(allNum);
       // let len = 0;
       // for (let i = arrNum.length - 1; i >= 0; i--) {
-      //   if (arrNum[i] == 0) {
+      //   if (arrNum[i] === 0) {
       //     len++;
       //   }
       //   if (arrNum[i] != 0) {
@@ -177,7 +177,7 @@
           if (a < b) {
             resData.push(a);
           }
-          if (a == b) {
+          if (a === b) {
             resData.push(0);
             resData.push(1);
           }

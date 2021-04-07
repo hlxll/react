@@ -1,144 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    .hongbao {
-      width: 300px;
-    }
-
-    .hongbao button {
-      width: 40%;
-      margin-left: 30%;
-      margin-top: 10px;
-    }
-
-    .number {
-      text-align: center;
-      display: flex;
-      justify-content: center;
-    }
-
-    .number p,
-    .money p {
-      width: 100px;
-      text-align: right;
-      margin: 0;
-    }
-
-    .money {
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    #hongbaoBack {
-      background-color: rgba(0, 0, 0, 0.2);
-      width: 300px;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      position: fixed;
-      left: 0;
-      top: 0;
-    }
-
-    .redBack {
-      background-color: red;
-      width: 80%;
-      margin: auto;
-      border-radius: 4px;
-    }
-
-    .close {
-      width: 20px;
-      margin-right: 10px;
-      margin-left: auto;
-      margin-top: 10px;
-      transform: rotate(45deg);
-      cursor: pointer;
-    }
-
-    .img {
-      width: 100%;
-      text-align: center;
-    }
-
-    .img img {
-      border-radius: 50%;
-    }
-
-    .redBack p {
-      width: 100%;
-      margin: 0;
-      text-align: center;
-    }
-
-    #chaiHongbao {
-      width: 100px;
-      height: 100px;
-      background-color: coral;
-      color: #fff;
-      border-radius: 50%;
-      line-height: 100px;
-      margin: auto;
-      text-align: center;
-      cursor: pointer;
-    }
-
-    .xuanz {
-      animation: myfirst 5s;
-    }
-
-    @keyframes myfirst {
-      0% {
-        transform: rotateY(0);
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .hongbao {
+        width: 300px;
       }
 
-      50% {
-        transform: rotateY(180deg);
+      .hongbao button {
+        width: 40%;
+        margin-left: 30%;
+        margin-top: 10px;
       }
 
-      100% {
-        transform: rotateY(360deg);
+      .number {
+        text-align: center;
+        display: flex;
+        justify-content: center;
       }
-    }
-  </style>
-</head>
 
-<body>
-  <div>
-    <div class="hongbao">
-      <p style="text-align: center;">红包模拟器</p>
-      <div class="number">
-        <p>红包个数:</p><input id="number" />个
-      </div>
-      <div class="money">
-        <p>总金额:</p><input id="money" />元
-      </div>
-      <button onclick="fahongbao()">发红包</button>
-    </div>
-    <div id="hongbaoBack" style="display: none;">
-      <div class="redBack">
-        <div class="close" onclick="closeRed()">+</div>
-        <div class="img">
-          <img src="http://s3a.pstatp.com/cg_growth/resource/boilerplate/images/redpacket/avatar.png" />
+      .number p,
+      .money p {
+        width: 100px;
+        text-align: right;
+        margin: 0;
+      }
+
+      .money {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+      }
+
+      #hongbaoBack {
+        background-color: rgba(0, 0, 0, 0.2);
+        width: 300px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        position: fixed;
+        left: 0;
+        top: 0;
+      }
+
+      .redBack {
+        background-color: red;
+        width: 80%;
+        margin: auto;
+        border-radius: 4px;
+      }
+
+      .close {
+        width: 20px;
+        margin-right: 10px;
+        margin-left: auto;
+        margin-top: 10px;
+        transform: rotate(45deg);
+        cursor: pointer;
+      }
+
+      .img {
+        width: 100%;
+        text-align: center;
+      }
+
+      .img img {
+        border-radius: 50%;
+      }
+
+      .redBack p {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+      }
+
+      #chaiHongbao {
+        width: 100px;
+        height: 100px;
+        background-color: coral;
+        color: #fff;
+        border-radius: 50%;
+        line-height: 100px;
+        margin: auto;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .xuanz {
+        animation: myfirst 5s;
+      }
+
+      @keyframes myfirst {
+        0% {
+          transform: rotateY(0);
+        }
+
+        50% {
+          transform: rotateY(180deg);
+        }
+
+        100% {
+          transform: rotateY(360deg);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <div class="hongbao">
+        <p style="text-align: center">红包模拟器</p>
+        <div class="number">
+          <p>红包个数:</p>
+          <input id="number" />个
         </div>
-        <div id="chaiBtn">
-          <p style="color: #fff;">JScoder</p>
-          <p style="color: rgba(0,0,0,0.5);">给你发了一个红包</p>
-          <p style="color: #fff;">恭喜发财 大吉大利</p>
-          <div id="chaiHongbao" onclick="chaihongbao()">拆红包</div>
+        <div class="money">
+          <p>总金额:</p>
+          <input id="money" />元
         </div>
-        <div class="haobaoMoney" style="display: none;">
-          <p id="allMoney"></p>
-          <p>红包领取榜</p>
-          <div class="bangdang">
-
+        <button onclick="fahongbao()">发红包</button>
+      </div>
+      <div id="hongbaoBack" style="display: none">
+        <div class="redBack">
+          <div class="close" onclick="closeRed()">+</div>
+          <div class="img">
+            <img
+              src="http://s3a.pstatp.com/cg_growth/resource/boilerplate/images/redpacket/avatar.png"
+            />
+          </div>
+          <div id="chaiBtn">
+            <p style="color: #fff">JScoder</p>
+            <p style="color: rgba(0, 0, 0, 0.5)">给你发了一个红包</p>
+            <p style="color: #fff">恭喜发财 大吉大利</p>
+            <div id="chaiHongbao" onclick="chaihongbao()">拆红包</div>
+          </div>
+          <div class="haobaoMoney" style="display: none">
+            <p id="allMoney"></p>
+            <p>红包领取榜</p>
+            <div class="bangdang"></div>
           </div>
         </div>
       </div>
@@ -170,7 +172,7 @@
         let all = money.value
         let moneyArr = []
         for (let i = 0; i < number.value; i++) {
-          if (i == number.value - 1) {
+          if (i === number.value - 1) {
             moneyArr.push(all.toFixed(2))
           } else {
             // 0到9的整数除以10
@@ -261,7 +263,7 @@
 
     TreeNode * Convert(TreeNode * root)
     {
-      if (root == NULL)
+      if (root === NULL)
         return NULL;
       TreeNode * listHead = NULL;
       TreeNode * listLastNode = NULL;
@@ -274,7 +276,7 @@
         root = s.top();
         s.pop();
         root -> left=listLastNode;
-        if (listHead == NULL) {
+        if (listHead === NULL) {
           listHead = root;
         } else {
           listLastNode -> right = root;
@@ -320,7 +322,7 @@
             Promise.resolve(arr[i]).then(function (val) {
               resolveNum++
               returnResolve.push(val)
-              if (resolveNum == returnResolve.length) {
+              if (resolveNum === returnResolve.length) {
                 return resolve(returnResolve)
               }
             }, function (val) {

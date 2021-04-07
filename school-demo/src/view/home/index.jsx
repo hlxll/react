@@ -26,37 +26,39 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      componentNum: "",
+      componentNum: 0,
     };
     this.onSearch = this.onSearch.bind(this);
   }
   componentDidMount () {
-    console.log(this.props.location.pathname);
-    let pathName = this.props.location.pathname;
-    let index = "0";
-    if (pathName === "/main") {
-      index = "0";
+
+    let pathName = this.props.location.pathname.split('').splice(1).join('');
+    console.log(typeof pathName)
+    console.log(pathName);
+    let index = 0;
+    if (pathName === 'main') {
+      index = 0;
     }
-    if (pathName === "/planeTicket") {
-      index = "1";
+    if (pathName === "planeTicket") {
+      index = 1;
     }
-    if (pathName === "/hotel") {
-      index = "2";
+    if (pathName === "hotel") {
+      index = 2;
     }
-    if (pathName === "/trainTickets") {
-      index = "3";
+    if (pathName === "trainTickets") {
+      index = 3;
     }
-    if (pathName === "/holiday") {
-      index = "4";
+    if (pathName === "holiday") {
+      index = 4;
     }
-    if (pathName === "/groupBuying") {
-      index = "5";
+    if (pathName === "groupBuying") {
+      index = 5;
     }
-    if (pathName === "/tickets") {
-      index = "6";
+    if (pathName === "tickets") {
+      index = 6;
     }
-    if (pathName === "/local") {
-      index = "7";
+    if (pathName === "local") {
+      index = 7;
     }
     this.setState({
       componentNum: index,
@@ -67,6 +69,7 @@ class Home extends Component {
     this.setState({
       componentNum: index,
     });
+    index = +index
     if (index === 0) {
       this.props.history.replace("/main");
     }
@@ -142,7 +145,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 1 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 1 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "1")}
           >
             机票
@@ -150,7 +153,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 2 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum == 2 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "2")}
           >
             酒店
@@ -218,9 +221,17 @@ class Home extends Component {
           </LoginContext.Provider>
         </div>
         <div className="allFooter">
-          <p>关于Qunar.com|业务合作|加入我们|"严重违规失信"专项整治举报|安全中心|星骆驼公益|About Us</p>
-          <p>Copyright ©2021 Qunar.com京公网安备11010802030542京ICP备05021087号京ICP证060856号营业执照信息(京)-非经营性-2016-0110去哪儿网客服电话95117</p>
-          <p>违法和不良信息举报电话：010-59606977违法和不良信息举报邮箱：tousu@qunar.com</p>
+          <p>
+            关于Qunar.com|业务合作|加入我们|"严重违规失信"专项整治举报|安全中心|星骆驼公益|About
+            Us
+          </p>
+          <p>
+            Copyright ©2021
+            Qunar.com京公网安备11010802030542京ICP备05021087号京ICP证060856号营业执照信息(京)-非经营性-2016-0110去哪儿网客服电话95117
+          </p>
+          <p>
+            违法和不良信息举报电话：010-59606977违法和不良信息举报邮箱：tousu@qunar.com
+          </p>
           <Image src="./img/footer_v10.png" />
         </div>
       </div>
