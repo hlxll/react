@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import { Component } from "react";
 import Head from "../../component/head";
 import OwnOrder from "./common/ownOrder";
@@ -9,6 +10,7 @@ export default class Order extends Component {
     this.state = {
       orderType: 2,
     };
+    this.changeTad = this.changeTad.bind(this)
   }
   changeTad(id) {
     this.setState({
@@ -21,35 +23,35 @@ export default class Order extends Component {
         <Head />
         <div className="orderType">
           <div
-            className={this.state.orderType == 1 ? "typeBtnClick" : "typeBtn"}
+            className={this.state.orderType === 1 ? "typeBtnClick" : "typeBtn"}
             onClick={this.changeTad.bind(this, 1)}
           >
             个人信息
           </div>
           <div
-            className={this.state.orderType == 2 ? "typeBtnClick" : "typeBtn"}
+            className={this.state.orderType === 2 ? "typeBtnClick" : "typeBtn"}
             onClick={this.changeTad.bind(this, 2)}
           >
             账号设置
           </div>
           <div
-            className={this.state.orderType == 3 ? "typeBtnClick" : "typeBtn"}
+            className={this.state.orderType === 3 ? "typeBtnClick" : "typeBtn"}
             onClick={this.changeTad.bind(this, 3)}
           >
             我的账户
           </div>
           <div
-            className={this.state.orderType == 4 ? "typeBtnClick" : "typeBtn"}
+            className={this.state.orderType === 4 ? "typeBtnClick" : "typeBtn"}
             onClick={this.changeTad.bind(this, 4)}
           >
             消息
           </div>
         </div>
         <div className="ownOrder">
-          {this.state.orderType == 1 ? <OwnOrder /> : ""}
-          {this.state.orderType == 2 ? <UserData /> : ""}
-          {this.state.orderType == 3 ? <OwnOrder /> : ""}
-          {this.state.orderType == 4 ? <OwnOrder /> : ""}
+          {this.state.orderType === 1 ? <OwnOrder /> : ""}
+          {this.state.orderType === 2 ? <UserData /> : ""}
+          {this.state.orderType === 3 ? <OwnOrder /> : ""}
+          {this.state.orderType === 4 ? <OwnOrder /> : ""}
         </div>
       </div>
     );

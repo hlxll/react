@@ -6,6 +6,18 @@
     margin: auto;
     padding: 10px;
     height: 224px;
+    position: relative;
+    .updateFace{
+      position: absolute;
+      width: 200px;
+      text-align: center;
+      bottom: 16px;
+      z-index: 9;
+      background-color: #000;
+      opacity: 0.5;
+      color: #fff;
+      cursor: pointer;
+    }
     .ant-image {
       width: 150px;
       height: 200px;
@@ -14,8 +26,8 @@
       .content {
         height: 200px;
         .lineContent {
-          height: 37px;
-          line-height: 37px;
+          height: 50px;
+          line-height: 50px;
           display: flex;
           .title {
             width: 100px;
@@ -24,13 +36,57 @@
           .uData {
             width: auto;
             text-align: left;
+            margin-left: 20px;
+            color: #000;
           }
         }
+      }
+      .form{
+        height: 200px;
+        margin-left: 52px;
       }
     }
     .updateData {
       margin-left: auto;
       cursor: pointer;
+    }
+  }
+  .securitySet{
+    border: solid 2px #b0d9ff;
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+    margin-top: 10px;
+    .title{
+      border-left: solid 3px #0088a4;
+      padding-left: 5px;
+    }
+    .content{
+      display: flex;
+      align-items: center;
+      .name{
+        margin-left: 20px;
+        margin-right: 40px;
+      }
+    }
+  }
+  .historyLog{
+    border: solid 2px #b0d9ff;
+    width: 80%;
+    margin: auto;
+    padding: 10px;
+    margin-top: 10px;
+    .title{
+      border-left: solid 3px #0088a4;
+      padding-left: 5px;
+    }
+    .content{
+      display: flex;
+      align-items: center;
+      .name{
+        margin-left: 20px;
+        margin-right: 40px;
+      }
     }
   }
 }
