@@ -2,11 +2,7 @@
 import React, { Component } from "react";
 import { Input, Image, Button } from "antd";
 // import { BrowserRouter as Router, NavLink as Link , Route, Switch } from 'react-router-dom'
-import {
-  HashRouter as Router,
-  Route,
-  Switch
-} from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { withRouter } from "react-router";
 import "./index.less";
 import Head from "../../component/head";
@@ -21,7 +17,7 @@ import Tickets from "../../component/tickets";
 import Local from "../../component/local";
 const { Search } = Input;
 //创建一个context，传入默认值
-export const LoginContext = React.createContext('unLogin')
+export const LoginContext = React.createContext("unLogin");
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -30,13 +26,12 @@ class Home extends Component {
     };
     this.onSearch = this.onSearch.bind(this);
   }
-  componentDidMount () {
-
-    let pathName = this.props.location.pathname.split('').splice(1).join('');
-    console.log(typeof pathName)
+  componentDidMount() {
+    let pathName = this.props.location.pathname.split("").splice(1).join("");
+    console.log(typeof pathName);
     console.log(pathName);
     let index = 0;
-    if (pathName === 'main') {
+    if (pathName === "main") {
       index = 0;
     }
     if (pathName === "planeTicket") {
@@ -64,12 +59,12 @@ class Home extends Component {
       componentNum: index,
     });
   }
-  onSearch () { }
-  toHomeChildRouter (index) {
+  onSearch() {}
+  toHomeChildRouter(index) {
     this.setState({
       componentNum: index,
     });
-    index = +index
+    index = +index;
     if (index === 0) {
       this.props.history.replace("/main");
     }
@@ -95,7 +90,7 @@ class Home extends Component {
       this.props.history.replace("/local");
     }
   }
-  render () {
+  render() {
     return (
       <div className="home">
         <Head />
@@ -213,7 +208,6 @@ class Home extends Component {
             <Route path="/" exact component={Main} />
           </Switch>
         </Router>
-
 
         <div className="fixedFixed">
           <LoginContext.Provider value="unLogin">
