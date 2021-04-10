@@ -3,6 +3,7 @@ import { Component } from "react";
 import Head from "../../component/head";
 import OwnOrder from "./common/ownOrder";
 import UserData from "./common/UserData";
+import { Button } from 'antd'
 import "./index.less";
 export default class Order extends Component {
   constructor(props) {
@@ -12,14 +13,20 @@ export default class Order extends Component {
     };
     this.changeTad = this.changeTad.bind(this)
   }
-  changeTad(id) {
+  changeTad (id) {
     this.setState({
       orderType: id,
     });
   }
-  render() {
+  render () {
     return (
       <div className="orderMain">
+        <div className="leftRouter">
+          <div className="shouye">首页</div>
+          <div className="route">网站导航
+            <div className="allRouter"></div>
+          </div>
+        </div>
         <Head />
         <div className="orderType">
           <div
@@ -34,24 +41,10 @@ export default class Order extends Component {
           >
             账号设置
           </div>
-          <div
-            className={this.state.orderType === 3 ? "typeBtnClick" : "typeBtn"}
-            onClick={this.changeTad.bind(this, 3)}
-          >
-            我的账户
-          </div>
-          <div
-            className={this.state.orderType === 4 ? "typeBtnClick" : "typeBtn"}
-            onClick={this.changeTad.bind(this, 4)}
-          >
-            消息
-          </div>
         </div>
         <div className="ownOrder">
           {this.state.orderType === 1 ? <OwnOrder /> : ""}
           {this.state.orderType === 2 ? <UserData /> : ""}
-          {this.state.orderType === 3 ? <OwnOrder /> : ""}
-          {this.state.orderType === 4 ? <OwnOrder /> : ""}
         </div>
       </div>
     );
