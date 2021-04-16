@@ -1,6 +1,6 @@
 import { Component } from "react";
-import { Image, Form, Button, Input, Radio, DatePicker, Table } from "antd";
-import { CheckOutlined, AlertOutlined } from '@ant-design/icons';
+import { Image, Form, Button, Input, Radio, DatePicker, Table, Upload } from "antd";
+import { CheckOutlined, AlertOutlined, UploadOutlined } from '@ant-design/icons';
 import "./userData.less";
 export default class UserData extends Component {
   constructor(props) {
@@ -44,12 +44,15 @@ export default class UserData extends Component {
           dataIndex: 'equipment',
           key: 'equipment',
         }
-      ]
+      ],
+      fileList: []
     };
     this.changeUpdate = this.changeUpdate.bind(this);
     this.closeFormUpdate = this.closeFormUpdate.bind(this);
     this.OnFinish = this.OnFinish.bind(this);
     this.changeTelephone = this.changeTelephone.bind(this);
+    this.headSrcPreview = this.headSrcPreview.bind(this);
+    this.headSrcChange = this.headSrcChange.bind(this);
   }
   componentDidMount () {
     this.setState({
@@ -78,12 +81,27 @@ export default class UserData extends Component {
     num.splice(3, 4, '****')
     return '86-' + num.join('')
   }
+  //上传图片的回调接口
+  headSrcPreview (val) {
+    console.log('1')
+    console.log(val)
+  }
+  headSrcChange (val) {
+    console.log('2')
+    console.log(val)
+  }
   render () {
     return (
       <div className="userData">
         <div className="userMain">
           <Image width={200} height={200} src="http://img1.qunarzz.com/ucenter/headshot/201308/12/2de63896cb313a2d7c43c4d7.jpg_r_150x150_e4e6796c.jpg" />
-          <div className="updateFace">修改头像</div>
+          <div className="updateFace">
+            <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+              listType="picture-card"
+              fileList={this.state.fileList}
+              onPreview={this.headSrcPreview}
+              onChange={this.headSrcChange}
+            ><Button icon={<UploadOutlined />}>修改头像</Button></Upload></div>
           <div className="detail">
             {this.state.update ? (
               <div className="content">
