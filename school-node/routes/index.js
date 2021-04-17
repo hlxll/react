@@ -6,7 +6,7 @@ var router = express.Router();
 // var MongoDB = require('mongodb').MongoClient;
 // var url = 'mongodb://localhost:27017'
 router.get("/", function (req, res, next) {
-  res.send({ login: true });
+  res.send("asd");
 });
 
 module.exports = router;

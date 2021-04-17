@@ -505,11 +505,7 @@ app.get("/serverDom", function (req, res) {
       age: 13,
     },
   ];
-<<<<<<< HEAD:school-node/node.js
-  fs.readFile('../../hongbao.html', 'utf-8', function (err, data) {
-=======
   fs.readFile("./node.html", "utf-8", function (err, data) {
->>>>>>> 639b1bf945922b4a819540e336ac8a6c20dad505:school-node/routes/node.js
     if (err) {
       res.send("文件读取失败");
     } else {

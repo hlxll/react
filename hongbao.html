@@ -352,6 +352,28 @@
     list[0]();
     list[1]();
     // object, window, window, window, Array(2)(输出list数组，此时this指向list[0])，window
+
+    function changeNum(num, len){
+    let newArr = []
+    let show = false
+    for(let i=0;i<num.length-1;i++){
+        if(num[i]=='a'&&num[i+1]=='b'){
+            newArr.push('b')
+            newArr.push('b')
+            newArr.push('a')
+            len++
+            i++
+            show = true
+        }else{
+            newArr.push(num[i])
+        }
+    }
+    if(show){
+        return changeNum(newArr, len)
+    }else{
+        return len
+    }
+}
   </script>
 
 </body>
