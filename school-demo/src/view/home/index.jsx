@@ -172,7 +172,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 5 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 5 ? "clickEd" : "Noclick"} Javascript设计模式
             onClick={this.toHomeChildRouter.bind(this, "5")}
           >
             团购

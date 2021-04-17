@@ -6,7 +6,7 @@ export default class Order extends Component {
   constructor(props) {
     super(props);
   }
-  render() {
+  render () {
     return (
       <div className="ownOrderComponent">
         <div className="ownOrderType">
