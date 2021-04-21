@@ -1,4 +1,5 @@
 import { Component } from "react";
+import ReactFileReader from "react-file-reader";
 import { Image, Form, Button, Input, Radio, DatePicker, Table, Upload } from "antd";
 import { CheckOutlined, AlertOutlined, UploadOutlined } from '@ant-design/icons';
 import "./userData.less";
@@ -45,13 +46,12 @@ export default class UserData extends Component {
           key: 'equipment',
         }
       ],
-      fileList: []
+      headImgSrc: ''
     };
     this.changeUpdate = this.changeUpdate.bind(this);
     this.closeFormUpdate = this.closeFormUpdate.bind(this);
     this.OnFinish = this.OnFinish.bind(this);
     this.changeTelephone = this.changeTelephone.bind(this);
-    this.headSrcPreview = this.headSrcPreview.bind(this);
     this.headSrcChange = this.headSrcChange.bind(this);
   }
   componentDidMount () {
@@ -81,27 +81,38 @@ export default class UserData extends Component {
     num.splice(3, 4, '****')
     return '86-' + num.join('')
   }
-  //上传图片的回调接口
-  headSrcPreview (val) {
-    console.log('1')
-    console.log(val)
-  }
   headSrcChange (val) {
-    console.log('2')
     console.log(val)
+    this.setState({
+      headImgSrc: val.base64
+    })
   }
+  // getBase64Image (img) {
+  //   var canvas = document.createElement("canvas");
+  //   canvas.width = img.width;
+  //   canvas.height = img.height;
+  //   var ctx = canvas.getContext("2d");
+  //   ctx.drawImage(img, 0, 0, img.width, img.height);
+  //   var ext = img.src.substring(img.src.lastIndexOf(".") + 1).toLowerCase();
+  //   var dataURL = canvas.toDataURL("image/" + ext);
+  //   console.log(dataURL)
+  // }
   render () {
     return (
       <div className="userData">
         <div className="userMain">
-          <Image width={200} height={200} src="http://img1.qunarzz.com/ucenter/headshot/201308/12/2de63896cb313a2d7c43c4d7.jpg_r_150x150_e4e6796c.jpg" />
+          <Image width={200} height={200} src={this.state.headImgSrc} />
           <div className="updateFace">
-            <Upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              listType="picture-card"
-              fileList={this.state.fileList}
-              onPreview={this.headSrcPreview}
-              onChange={this.headSrcChange}
-            ><Button icon={<UploadOutlined />}>修改头像</Button></Upload></div>
+            <ReactFileReader
+              fileTypes={[".png", ".jpg", ".gif", "jpeg"]}
+              base64
+              multipleFiles={!1}
+              handleFiles={this.headSrcChange}
+            >
+              <Button>修改头像</Button>
+            </ReactFileReader>
+          </div>
+
           <div className="detail">
             {this.state.update ? (
               <div className="content">
