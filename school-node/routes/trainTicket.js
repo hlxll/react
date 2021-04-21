@@ -3,6 +3,7 @@ var router = express.Router();
 
 //火车票列表http://localhost:3000/trainTicket/searchTicket
 router.get("/searchTicket", function (req, res) {
+  var data = req.query;
   var MongoClient = require("mongodb").MongoClient;
   var url = "mongodb://localhost:27017";
   MongoClient.connect(
@@ -12,11 +13,18 @@ router.get("/searchTicket", function (req, res) {
       if (err) throw err;
       var dbo = db.db("admin");
       //find是查询条件，limit是返回条数
-      dbo.collection("trainTicket").toArray(function (err, result) {
-        if (err) throw err;
-        db.close();
-        res.send(result);
-      });
+      dbo
+        .collection("trainTicket")
+        .find(data)
+        .toArray(function (err, result) {
+          if (err) throw err;
+          db.close();
+          res.json({
+            status: 1,
+            data: result,
+            message: "查询成功",
+          });
+        });
     }
   );
 });
