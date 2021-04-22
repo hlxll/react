@@ -64,40 +64,40 @@ export default class UserData extends Component {
     this.changeTelephone = this.changeTelephone.bind(this);
     this.headSrcChange = this.headSrcChange.bind(this);
   }
-  componentDidMount() {
+  componentDidMount () {
     this.setState({
       telephone: this.changeTelephone("13407934178"),
     });
   }
-  changeUpdate() {
+  changeUpdate () {
     this.setState({
       update: false,
     });
   }
-  closeFormUpdate() {
+  closeFormUpdate () {
     this.setState({
       update: true,
     });
   }
-  OnFinish(val) {
+  OnFinish (val) {
     var year = val.birthday._d.getFullYear();
     var month = val.birthday._d.getMonth() + 1;
     var day = val.birthday._d.getDate();
     console.log(year + "/" + month + "/" + day);
   }
-  changeTelephone(num) {
+  changeTelephone (num) {
     num = num.split("");
     num.splice(3, 4, "****");
     return "86-" + num.join("");
   }
-  headSrcChange(val) {
+  headSrcChange (val) {
     console.log(val);
     this.setState({
       headImgSrc: val.base64,
     });
     upload(
       "huanglin",
-      "https://www.imooc.com/read/68?mc_marking=610b2318dc116ddeaac5fecfe6b23058&mc_channel=ywxqzl"
+      val.base64
     ).then((res) => {
       message.success(res.data.message);
     });
@@ -112,7 +112,7 @@ export default class UserData extends Component {
   //   var dataURL = canvas.toDataURL("image/" + ext);
   //   console.log(dataURL)
   // }
-  render() {
+  render () {
     return (
       <div className="userData">
         <div className="userMain">

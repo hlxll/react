@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-
 //登录http://localhost:3000/user/login?username=huanglin&password=123123
 router.get("/login", function (req, res, next) {
   var data = req.query;
@@ -111,8 +110,8 @@ router.get("/addOrder", function (req, res) {
   });
 });
 //上传图片http://localhost:3000/user/upload?username=huanglin&file=base64
-router.get("/upload", function (req, res) {
-  var data = req.query;
+router.post("/upload", function (req, res) {
+  var data = req.body;
   var MongoClient = require("mongodb").MongoClient;
   var url = "mongodb://localhost:27017";
   MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
