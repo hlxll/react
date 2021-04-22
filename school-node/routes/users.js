@@ -4,6 +4,7 @@ var router = express.Router();
 //登录http://localhost:3000/user/login?username=huanglin&password=123123
 router.get("/login", function (req, res, next) {
   var data = req.query;
+  console.log(data);
   var MongoClient = require("mongodb").MongoClient;
   var url = "mongodb://localhost:27017";
   MongoClient.connect(
@@ -12,42 +13,22 @@ router.get("/login", function (req, res, next) {
     function (err, db) {
       if (err) throw err;
       var dbo = db.db("admin");
-      var whereStr = data; // 查询条件
+      var whereStr = {
+        username: data.username,
+        password: +data.password,
+      }; // 查询条件
       //find是查询条件，limit是返回条数
       dbo
         .collection("user")
         .find(whereStr)
-        .limit(1)
         .toArray(function (err, result) {
           if (err) throw err;
           db.close();
-          if (result[0]) {
-            let rule = {
-              id: result[0]._id,
-              username: result[0].username,
-              password: result[0].password,
-            };
-            // jwt.sign(rule, "Bearer", { expiresIn: 3600 }, function (
-            //   err,
-            //   token
-            // ) {
-            //   if (err) throw err;
-            //   res.json({
-            //     status: 0,
-            //     token: token,
-            //     name: whereStr.telephone,
-            //   });
-            // });
-            res.json({
-              status: 2,
-              message: "登录成功",
-            });
-          } else {
-            res.json({
-              status: 1,
-              message: "账号名或密码错误",
-            });
-          }
+          console.log(result);
+          res.json({
+            data: result,
+            status: 200,
+          });
         });
     }
   );
@@ -127,6 +108,26 @@ router.get("/addOrder", function (req, res) {
   res.json({
     status: 200,
     message: "添加成功",
+  });
+});
+//上传图片http://localhost:3000/user/upload?username=huanglin&file=base64
+router.get("/upload", function (req, res) {
+  var data = req.query;
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+  MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("admin");
+    var whereStr = { username: data.username }; // 查询条件
+    var updateStr = { $set: { headImg: data.file } }; //修改数据
+    dbo.collection("user").updateOne(whereStr, updateStr, function (err, res) {
+      if (err) throw err;
+      db.close();
+    });
+  });
+  res.json({
+    status: 200,
+    message: "上传成功",
   });
 });
 module.exports = router;

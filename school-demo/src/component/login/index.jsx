@@ -48,10 +48,9 @@ class SmallLogin extends React.Component {
     }
   }
   async onUserPassFinish(value) {
-    console.log(value);
-    console.log(this.state.numCode);
-    let resData = await userApi.login();
-    if (resData.status == 200 && resData.data.login) {
+    let resData = await userApi.login(value.username, Number(value.password));
+    console.log(resData);
+    if (resData.data.status == 200 && resData.data.data.length > 0) {
       message.success("登录成功");
     } else {
       message.success("账号或密码错误");
