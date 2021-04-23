@@ -57,14 +57,18 @@ class SmallLogin extends React.Component {
     }
   }
   async onUserPassFinish (value) {
-    // const action = {
-    //   type: 'changeInput',
-    //   value: 'huanglin'
-    // }
-    // store.dispatch(action)
     let resData = await userApi.login(value.username, Number(value.password));
-    console.log(resData);
-    if (resData.data.status === 200 && resData.data.data.length > 0) {
+    if (resData.data.status === 200 && resData.data.data) {
+      const action = {
+        type: 'changeIsLogin',
+        value: resData.data.data.isLogin
+      }
+      store.dispatch(action)
+      const nameAction = {
+        type: 'changeUsername',
+        value: resData.data.data.username
+      }
+      store.dispatch(nameAction)
       message.success("登录成功");
     } else {
       message.success("账号或密码错误");

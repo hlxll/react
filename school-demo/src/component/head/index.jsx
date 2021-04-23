@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Button, Menu, Dropdown } from "antd";
 import { NavLink as Link } from "react-router-dom";
+import store from '../../store/index'
 import "./index.less";
 import {
   MailOutlined,
@@ -13,23 +14,57 @@ class Head extends Component {
     super(prop);
     this.state = {
       condition: true,
+      isLogin: false
     };
+    this.logout = this.logout.bind(this)
   }
-  render() {
+  componentDidMount () {
+    let data = store.getState()
+    this.setState({
+      isLogin: data.isLogin
+    })
+  }
+  logout () {
+    const action = {
+      type: 'changeIsLogin',
+      value: false
+    }
+    store.dispatch(action)
+    const nameAction = {
+      type: 'changeUsername',
+      value: ''
+    }
+    store.dispatch(nameAction)
+    let data = store.getState()
+    console.log(data);
+    this.setState({
+      isLogin: data.isLogin
+    })
+  }
+  render () {
     return (
       <div className="Head">
         <div className="loginTitle">
-          <div className="loginBtn">
-            请
+          {
+            this.state.isLogin ? <>
+              <Button type="text" onClick={this.logout}>退出登录</Button> |
+            </> :
+              <>
+                <div className="loginBtn">
+                  请
             <Link to={{ pathname: "/login", query: { type: "login" } }}>
-              登录
+                    登录
             </Link>
             或
             <Link to={{ pathname: "/login", query: { type: "register" } }}>
-              免费注册
+                    免费注册
             </Link>
-          </div>
-          |
+                </div> |
+            </>
+
+          }
+
+
           <div className="mail">
             <MailOutlined />
             <Button type="text">消息</Button>
