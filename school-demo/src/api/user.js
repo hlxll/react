@@ -1,12 +1,12 @@
 import axios from "axios";
 function login (name, pass) {
   return axios.get(
-    "http://localhost:3000/user/login?username=" + name + "&password=" + +pass
+    "/api/user/login?username=" + name + "&password=" + +pass
   );
 }
 function upload (name, file) {
   return axios.post(
-    "http://localhost:3000/user/upload", {
+    "api/user/upload", {
     username: name,
     file: file
   }

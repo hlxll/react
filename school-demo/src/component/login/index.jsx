@@ -2,6 +2,7 @@ import React from "react";
 import { CloseOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Tooltip, Radio, Form, Input, Button, message } from "antd";
 import "./index.less";
+import store from '../../store/index'
 import * as userApi from "../../api/user";
 class SmallLogin extends React.Component {
   constructor(props) {
@@ -32,12 +33,20 @@ class SmallLogin extends React.Component {
     this.randomColor = this.randomColor.bind(this);
     this.onTelePassFailed = this.onTelePassFailed.bind(this);
     this.onTelePassFinish = this.onTelePassFinish.bind(this);
+    this.storeChange = this.storeChange.bind(this)
+
+    // store.subscribe(this.storeChange())
+    //订阅store变化，但是新版本可以不要，如果input的change方法改变store，而且input也绑定这个store，就会出问题
   }
-  componentDidMount() {
+
+  componentDidMount () {
     this.CreateVerification();
     this.refresh();
   }
-  onChange(e) {
+  storeChange () {
+    this.setState(store.getState())
+  }
+  onChange (e) {
     this.setState({
       value: e.target.value,
     });
@@ -47,22 +56,31 @@ class SmallLogin extends React.Component {
       this.teleFormRef.current.resetFields();
     }
   }
-  async onUserPassFinish(value) {
+  async onUserPassFinish (value) {
     let resData = await userApi.login(value.username, Number(value.password));
-    console.log(resData);
-    if (resData.data.status == 200 && resData.data.data.length > 0) {
+    if (resData.data.status === 200 && resData.data.data) {
+      const action = {
+        type: 'changeIsLogin',
+        value: resData.data.data.isLogin
+      }
+      store.dispatch(action)
+      const nameAction = {
+        type: 'changeUsername',
+        value: resData.data.data.username
+      }
+      store.dispatch(nameAction)
       message.success("登录成功");
     } else {
       message.success("账号或密码错误");
     }
   }
-  onUserPassFailed() {}
-  onTelePassFinish(value) {
+  onUserPassFailed () { }
+  onTelePassFinish (value) {
     console.log(value);
   }
-  onTelePassFailed() {}
+  onTelePassFailed () { }
   // 创建验证码
-  CreateVerification() {
+  CreateVerification () {
     var con = document.getElementById(this.state.options.id);
     var canvas = document.createElement("canvas");
     this.setState({
@@ -80,17 +98,17 @@ class SmallLogin extends React.Component {
       parent.refresh();
     };
   }
-  randomNum(min, max) {
+  randomNum (min, max) {
     return Math.floor(Math.random() * (max - min) + min);
   }
   /**生成一个随机色**/
-  randomColor(min, max) {
+  randomColor (min, max) {
     let r = this.randomNum(min, max);
     let g = this.randomNum(min, max);
     let b = this.randomNum(min, max);
     return "rgb(" + r + "," + g + "," + b + ")";
   }
-  refresh() {
+  refresh () {
     this.setState({
       code: "",
     });
@@ -208,7 +226,7 @@ class SmallLogin extends React.Component {
       ctx.fill();
     }
   }
-  render() {
+  render () {
     return (
       <div className="login">
         <div className="loginType">

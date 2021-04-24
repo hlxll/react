@@ -10,6 +10,7 @@ const { Option } = Select;
 class Home extends Component {
   constructor(props) {
     super(props);
+    //getState获取store的state数据
     this.verfication = React.createRef();
     this.state = {
       loginOrRegister: this.props.location.query,
