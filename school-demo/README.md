@@ -78,4 +78,8 @@ context 可以逐层传递，如果不是逐层使用，可以考虑组件组合
 
 将组件自身，使用 props 方法传递下去，中间组件无需知道 props 具体内容，如果后面加 props 也简单
 
+# router
+
+使用 this.props.history.replace 得在路由组件中使用
+
 # redux

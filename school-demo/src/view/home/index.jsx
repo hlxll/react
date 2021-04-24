@@ -15,6 +15,7 @@ import Holiday from "../../component/holiday";
 import GroupBuying from "../../component/groupBuying";
 import Tickets from "../../component/tickets";
 import Local from "../../component/local";
+import HotelSearch from "../../component/hotel/search/search";
 const { Search } = Input;
 //创建一个context，传入默认值
 export const LoginContext = React.createContext("unLogin");
@@ -56,13 +57,13 @@ class Home extends Component {
       index = 7;
     }
     this.setState({
-      componentNum: index,
+      componentNum: +index,
     });
   }
   onSearch() {}
   toHomeChildRouter(index) {
     this.setState({
-      componentNum: index,
+      componentNum: +index,
     });
     index = +index;
     if (index === 0) {
@@ -94,7 +95,7 @@ class Home extends Component {
     return (
       <div className="home">
         <Head />
-        {this.state.componentNum === 0 ? (
+        {+this.state.componentNum === 0 ? (
           <div className="goWhereInput">
             <div className="leftImg">
               <Image
@@ -172,7 +173,8 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum === 5 ? "clickEd" : "Noclick"} Javascript设计模式
+            className={this.state.componentNum === 5 ? "clickEd" : "Noclick"}
+            Javascript设计模式
             onClick={this.toHomeChildRouter.bind(this, "5")}
           >
             团购
@@ -205,6 +207,7 @@ class Home extends Component {
             <Route path="/groupBuying" component={GroupBuying} />
             <Route path="/tickets" component={Tickets} />
             <Route path="/local" component={Local} />
+            <Route path="/hotelDetail" component={HotelSearch}></Route>
             <Route path="/" exact component={Main} />
           </Switch>
         </Router>
