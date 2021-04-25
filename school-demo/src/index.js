@@ -6,6 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import Login from "./view/login";
 import Home from "./view/home";
 import Order from "./view/order";
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>

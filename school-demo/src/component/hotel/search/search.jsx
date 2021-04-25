@@ -1,0 +1,149 @@
+import React, { Component } from "react";
+import { Form, Radio, Select, DatePicker, Button, Row, Col, Image } from "antd";
+import "./search.less";
+const Option = Select;
+const dateFormat = "YYYY/MM/DD";
+
+class HotelSearch extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chinaCity: "",
+      form: {
+        hotelMoney: "",
+        travelVersion: "",
+        trvalType: "",
+      },
+      hotelNum: 0,
+      hotelDetail: [
+        {
+          src: "",
+          name: "北京燕山大酒店",
+          number: 4.5,
+          type: 1,
+          money: 200,
+          location: "中关村/五道口·靠近中国人民大学东门",
+        },
+      ],
+      trvalType: ["不限", "浪漫情侣", "亲子精选", "民宿", "钟点房"],
+      travelVersion: ["不限", "二星", "三星", "四星", "五星"],
+    };
+    this.formFinish = this.formFinish.bind(this);
+  }
+  formFinish() {}
+
+  render() {
+    return (
+      <div id="hotelSearch">
+        <div className="formSearch">
+          <Form
+            name="form"
+            onFinish={this.formFinish}
+            className="hotelHeadForm"
+          >
+            <div className="searchHead">
+              <Row>
+                <Col span={4}>
+                  <Form.Item name="travelDate" label="目的地">
+                    <Select defaultValue="lucy" style={{ width: 120 }}>
+                      <Option value="jack">Jack</Option>
+                      <Option value="lucy">Lucy</Option>
+                      <Option value="Yiminghe">yiminghe</Option>
+                    </Select>
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Form.Item name="travelDate" label="入住">
+                    <DatePicker format={dateFormat} />
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Form.Item name="travelDate" label="离店">
+                    <DatePicker format={dateFormat} />
+                  </Form.Item>
+                </Col>
+                <Col span={4}>
+                  <Button type="primary">搜索</Button>
+                </Col>
+              </Row>
+            </div>
+            <Form.Item name="travelDate" label="价格">
+              <Radio.Group
+                className="radioButton"
+                value={this.state.form.hotelMoney}
+              >
+                <Radio.Button value="1">不限</Radio.Button>
+                <Radio.Button value="2">¥150以下</Radio.Button>
+                <Radio.Button value="4">¥300-450</Radio.Button>
+                <Radio.Button value="4">¥450-600</Radio.Button>
+                <Radio.Button value="4">¥600以上</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item name="travelType" label="星级">
+              <Radio.Group
+                className="radioButton"
+                value={this.state.form.travelVersion}
+              >
+                {this.state.travelVersion.map((item, index) => (
+                  <Radio.Button value={index}>{item}</Radio.Button>
+                ))}
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item name="travelDays" label="热门">
+              <Radio.Group
+                className="radioButton"
+                value={this.state.form.trvalType}
+              >
+                {this.state.trvalType.map((item, index) => (
+                  <Radio.Button value={index}>{item}</Radio.Button>
+                ))}
+              </Radio.Group>
+            </Form.Item>
+          </Form>
+        </div>
+        <div className="hotelNum">
+          <span>{this.state.hotelNum}</span>家酒店满足条件
+        </div>
+        <div className="sortHotel">
+          <Button>推荐排序</Button>
+          <Button>好评优先</Button>
+          <Button>价格</Button>
+        </div>
+        <div className="sortHotelDetail">
+          {this.state.hotelDetail.map((item, index) => (
+            <div className="sortHotelList">
+              <Image src={item.src} className="listLeftImage" />
+              <div className="sortHotelListRight">
+                <div className="listRightName">
+                  <div className="listRightBgLog">{index}</div>
+                  <div className="listRightNameText">{item.name}</div>
+                  <div>{this.state.travelVersion[index]}</div>
+                </div>
+                <div className="listRightNum">
+                  <span className="listRightNumber">{item.number}分</span>
+                  <span>"房间简洁"</span>
+                  <span>共2046条评论</span>
+                </div>
+                <div style={{ marginTop: 10 + "px" }}>{item.location}</div>
+                <div className="listRightType">
+                  {this.state.trvalType[item.type]}
+                </div>
+              </div>
+              <div className="listRightMoney">
+                <div className="listRightMon">
+                  ¥<span style={{ fontSize: 30 + "px" }}>{item.money}</span>起
+                </div>
+                <div className="searchDetail">
+                  <Button type="primary" shape="round">
+                    查看详情
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
+export default HotelSearch;

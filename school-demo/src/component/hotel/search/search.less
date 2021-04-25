@@ -1,0 +1,103 @@
+#hotelSearch {
+  width: 100%;
+  .formSearch {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    .hotelHeadForm {
+      border: 1px solid #ddd;
+      padding: 0 10px;
+      .ant-form-item {
+        margin-top: 10px;
+      }
+      .searchHead {
+        display: flex;
+        background-color: #ddd;
+        width: 100%;
+        .ant-row {
+          width: 100%;
+        }
+      }
+      .radioButton {
+        .ant-radio-button-wrapper {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+  .hotelNum {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+  }
+  .sortHotel {
+    width: 80%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .sortHotelDetail {
+    .sortHotelList {
+      height: 210px;
+      display: flex;
+      width: 60%;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 10px;
+      margin-left: 10%;
+      margin-right: 30px;
+      .listLeftImage {
+        width: 200px;
+        height: 200px;
+      }
+      .sortHotelListRight {
+        width: calc(100% - 300px);
+        margin-left: 10px;
+        .listRightName {
+          display: flex;
+          height: 30px;
+          margin-top: 10px;
+          line-height: 30px;
+          .listRightBgLog {
+            width: 23px;
+            height: 30px;
+            text-align: center;
+            background-image: url("../img/log.png");
+            background-repeat: no-repeat;
+          }
+          .listRightNameText {
+            font-size: 20px;
+            color: #00afc7;
+            margin: 0 5px;
+          }
+        }
+        .listRightNum {
+          .listRightNumber {
+            font-size: 20px;
+            color: #00afc7;
+          }
+        }
+        .listRightType {
+          color: rgb(255, 102, 0);
+          border: 1px solid rgb(255, 102, 0);
+          width: auto;
+          display: inline-block;
+          margin-top: 10px;
+        }
+      }
+      .listRightMoney {
+        width: 100px;
+        height: 100px;
+        margin-top: auto;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        .listRightMon {
+          color: #ff714a;
+          margin-top: auto;
+        }
+        .searchDetail {
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Menu, Button, Form, Input, Select, DatePicker } from "antd";
+import { NavLink as Link } from "react-router-dom";
 import { MailOutlined, AppstoreOutlined } from "@ant-design/icons";
 import "./hotelForm.less";
 const { Option } = Select;
@@ -20,6 +21,7 @@ class HotelForm extends Component {
   }
   hotelFinished(e) {
     console.log(e);
+    // this.props.history.replace("/hotelDetail");
   }
   hotelFinishFailed() {}
   render() {
@@ -99,7 +101,7 @@ class HotelForm extends Component {
             </Form.Item>
             <Form.Item className="submitHotelForm">
               <Button type="primary" htmlType="submit" className="hotelOneBtn">
-                立即搜索
+                <Link to={{ pathname: "/hotelDetail" }}>立即搜索</Link>
               </Button>
             </Form.Item>
           </Form>
