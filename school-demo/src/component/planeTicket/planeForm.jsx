@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Menu, Button, Form, Space, Select, Radio, DatePicker } from "antd";
-import { NavLink as Link } from "react-router-dom";
+import { NavLink as Link, withRouter } from "react-router-dom";
 import Multipass from "./multipass";
 import "./planeForm.less";
 import { MailOutlined, AppstoreOutlined } from "@ant-design/icons";
@@ -35,38 +35,39 @@ class PlaneForm extends Component {
     this.onArriverCityChange = this.onArriverCityChange.bind(this);
     this.onArriverCitySearch = this.onArriverCitySearch.bind(this);
   }
-  handleClick(e) {
+  handleClick (e) {
     this.setState({ current: e.key });
   }
-  OneOnFinish(e) {
+  OneOnFinish (e) {
     console.log(e);
-    console.log("成功");
+    this.props.history.push('/PlateTSearch')
   }
-  OneOnFinishFailed() {
+  OneOnFinishFailed () {
     console.log("不成功");
   }
-  TwoOnFinish(e) {
+  TwoOnFinish (e) {
     console.log(e);
+    this.props.history.push('/PlateTSearch')
   }
-  TwoOnFinishFailed() {
+  TwoOnFinishFailed () {
     console.log("不成功");
   }
-  oneRadioOnChange(e) {
+  oneRadioOnChange (e) {
     this.setState({
       oneRadio: e.target.value,
     });
   }
-  twoRadioOnChange(e) {
+  twoRadioOnChange (e) {
     this.setState({
       twoRadio: e.target.value,
     });
   }
   // 智能搜索的起始城市选择
-  onStartCityChange() {}
-  onStartCitySearch() {}
-  onArriverCityChange() {}
-  onArriverCitySearch() {}
-  render() {
+  onStartCityChange () { }
+  onStartCitySearch () { }
+  onArriverCityChange () { }
+  onArriverCitySearch () { }
+  render () {
     return (
       <div className="planeForm">
         <div className="head">
@@ -102,7 +103,7 @@ class PlaneForm extends Component {
           </div>
         </div>
         <div className="TwoForm">
-          {this.state.current == 1 ? (
+          {+this.state.current === 1 ? (
             <Form
               name="basic"
               className="InForm"
@@ -167,10 +168,10 @@ class PlaneForm extends Component {
                   this.state.oneRadio == "one"
                     ? []
                     : [
-                        {
-                          required: true,
-                        },
-                      ]
+                      {
+                        required: true,
+                      },
+                    ]
                 }
                 className="five"
               >
@@ -259,10 +260,10 @@ class PlaneForm extends Component {
                       this.state.twoRadio == "one"
                         ? []
                         : [
-                            {
-                              required: true,
-                            },
-                          ]
+                          {
+                            required: true,
+                          },
+                        ]
                     }
                     className="five"
                   >
@@ -337,4 +338,4 @@ class PlaneForm extends Component {
     );
   }
 }
-export default PlaneForm;
+export default withRouter(PlaneForm);

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { Form, Radio, Select, DatePicker, Button, Row, Col, Image } from "antd";
+import { Form, Radio, Select, DatePicker, Button, Row, Col, Image, Modal } from "antd";
+import { withRouter } from "react-router-dom";
+import HotelDetail from '../detail'
 import "./search.less";
 const Option = Select;
 const dateFormat = "YYYY/MM/DD";
@@ -27,12 +29,24 @@ class HotelSearch extends Component {
       ],
       trvalType: ["不限", "浪漫情侣", "亲子精选", "民宿", "钟点房"],
       travelVersion: ["不限", "二星", "三星", "四星", "五星"],
+      visible: true
     };
     this.formFinish = this.formFinish.bind(this);
+    this.toDetail = this.toDetail.bind(this);
+    this.closeDetail = this.closeDetail.bind(this);
   }
-  formFinish() {}
-
-  render() {
+  formFinish () { }
+  toDetail () {
+    this.setState({
+      visible: true
+    })
+  }
+  closeDetail () {
+    this.setState({
+      visible: false
+    })
+  }
+  render () {
     return (
       <div id="hotelSearch">
         <div className="formSearch">
@@ -134,7 +148,7 @@ class HotelSearch extends Component {
                   ¥<span style={{ fontSize: 30 + "px" }}>{item.money}</span>起
                 </div>
                 <div className="searchDetail">
-                  <Button type="primary" shape="round">
+                  <Button type="primary" shape="round" onClick={this.toDetail}>
                     查看详情
                   </Button>
                 </div>
@@ -142,8 +156,19 @@ class HotelSearch extends Component {
             </div>
           ))}
         </div>
-      </div>
+        <Modal
+          className="hotelModalDetail"
+          style={{ width: '600px' }}
+          title="酒店详情"
+          visible={this.state.visible}
+          closable
+          onCancel={this.closeDetail}
+          footer={null}
+        >
+          <HotelDetail data={this.state.hotelDetail} />
+        </Modal>
+      </div >
     );
   }
 }
-export default HotelSearch;
+export default withRouter(HotelSearch);

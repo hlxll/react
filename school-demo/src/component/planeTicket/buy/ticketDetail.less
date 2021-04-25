@@ -1,0 +1,68 @@
+#detailTicket{
+  width: 100%;
+  background-color: #ddd;
+  .detailHead{
+    width: 100%;
+    padding: 0 10%;
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+  }
+  .detailMain{
+    width: 80%;
+    margin: auto;
+    background-color: #ffffff;
+    .MainItem{
+      height: 110px;
+      padding: 15px;
+      display: flex;
+      border-bottom: 1px solid #ddd;
+      .planeLog{
+        width: 24px;
+        height: 80px;
+        line-height: 80px;
+      }
+      .MainLeftName{
+        width: 20%;
+        text-align: left;
+        .leftNameC{
+          color: #000;
+          font-size: 20px;
+        }
+        .leftNameE{
+          color: #ddd;
+          font-size: 15px;
+        }
+      }
+      .MainCenterTime{
+        width: 50%;
+        display: flex;
+        .startEndTime{
+          width: 30%;
+          .SETime{
+            color: #000;
+            font-size: 20px;
+          }
+          .SECity{
+            font-size: 15px;
+            color: #ddd;
+          }
+        }
+        .allTime{
+          border-bottom: 1px solid #ddd;
+          width: 30%;
+          margin: auto;
+        }
+      }
+      .rightMoney{
+       color:#ff8205;
+       .rightMoneyText{
+         font-size: 24px;
+       } 
+      }
+    }
+    .MainItem:hover{
+      cursor: pointer;
+      box-shadow: 2px 2px 10px #909090;
+    }
+  }
+}

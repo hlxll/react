@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component } from "react";
 import { Input, Image, Button } from "antd";
-// import { BrowserRouter as Router, NavLink as Link , Route, Switch } from 'react-router-dom'
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import { withRouter } from "react-router";
+import { HashRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 import "./index.less";
 import Head from "../../component/head";
 import LeftFixed from "../../component/leftFixed";
@@ -16,6 +14,7 @@ import GroupBuying from "../../component/groupBuying";
 import Tickets from "../../component/tickets";
 import Local from "../../component/local";
 import HotelSearch from "../../component/hotel/search/search";
+import PlateTSearch from "../../component/planeTicket/buy";
 const { Search } = Input;
 //创建一个context，传入默认值
 export const LoginContext = React.createContext("unLogin");
@@ -201,13 +200,14 @@ class Home extends Component {
           <Switch>
             <Route path="/main" component={Main} />
             <Route path="/planeTicket" component={PlaneTicket} />
+            <Route path="/PlateTSearch" component={PlateTSearch} />
             <Route path="/hotel" component={Hotel} />
+            <Route path="/hotels/HotelSearch" component={HotelSearch} />
             <Route path="/trainTickets" component={TrainTickets} />
             <Route path="/holiday" component={Holiday} />
             <Route path="/groupBuying" component={GroupBuying} />
             <Route path="/tickets" component={Tickets} />
             <Route path="/local" component={Local} />
-            <Route path="/hotelDetail" component={HotelSearch}></Route>
             <Route path="/" exact component={Main} />
           </Switch>
         </Router>

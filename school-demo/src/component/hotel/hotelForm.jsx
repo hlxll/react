@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Menu, Button, Form, Input, Select, DatePicker } from "antd";
-import { NavLink as Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { MailOutlined, AppstoreOutlined } from "@ant-design/icons";
 import "./hotelForm.less";
 const { Option } = Select;
@@ -14,17 +14,16 @@ class HotelForm extends Component {
     this.hotelFinished = this.hotelFinished.bind(this);
     this.hotelFinishFailed = this.hotelFinishFailed.bind(this);
   }
-  handleClick(e) {
+  handleClick (e) {
     this.setState({
       current: e.key,
     });
   }
-  hotelFinished(e) {
-    console.log(e);
-    // this.props.history.replace("/hotelDetail");
+  hotelFinished (e) {
+    this.props.history.push("/hotels/HotelSearch");
   }
-  hotelFinishFailed() {}
-  render() {
+  hotelFinishFailed () { }
+  render () {
     return (
       <div className="hotelForm">
         <div className="headBtn">
@@ -101,7 +100,8 @@ class HotelForm extends Component {
             </Form.Item>
             <Form.Item className="submitHotelForm">
               <Button type="primary" htmlType="submit" className="hotelOneBtn">
-                <Link to={{ pathname: "/hotelDetail" }}>立即搜索</Link>
+                {/* <Link to={{ pathname: "/hotelDetail" }}></Link> */}
+                立即搜索
               </Button>
             </Form.Item>
           </Form>
@@ -110,4 +110,4 @@ class HotelForm extends Component {
     );
   }
 }
-export default HotelForm;
+export default withRouter(HotelForm)
