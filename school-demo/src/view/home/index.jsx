@@ -26,7 +26,7 @@ class Home extends Component {
     };
     this.onSearch = this.onSearch.bind(this);
   }
-  componentDidMount() {
+  componentDidMount () {
     let pathName = this.props.location.pathname.split("").splice(1).join("");
     console.log(typeof pathName);
     console.log(pathName);
@@ -56,13 +56,13 @@ class Home extends Component {
       index = 7;
     }
     this.setState({
-      componentNum: index,
+      componentNum: +index,
     });
   }
-  onSearch() {}
-  toHomeChildRouter(index) {
+  onSearch () { }
+  toHomeChildRouter (index) {
     this.setState({
-      componentNum: index,
+      componentNum: +index,
     });
     index = +index;
     if (index === 0) {
@@ -90,7 +90,7 @@ class Home extends Component {
       this.props.history.replace("/local");
     }
   }
-  render() {
+  render () {
     return (
       <div className="home">
         <Head />
@@ -140,7 +140,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 1 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 1 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "1")}
           >
             机票
@@ -148,7 +148,7 @@ class Home extends Component {
           <Button
             type="text"
             size="large"
-            className={this.state.componentNum == 2 ? "clickEd" : "Noclick"}
+            className={this.state.componentNum === 2 ? "clickEd" : "Noclick"}
             onClick={this.toHomeChildRouter.bind(this, "2")}
           >
             酒店

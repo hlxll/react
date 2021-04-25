@@ -6,7 +6,7 @@ function login (name, pass) {
 }
 function upload (name, file) {
   return axios.post(
-    "api/user/upload", {
+    "/api/user/upload", {
     username: name,
     file: file
   }
