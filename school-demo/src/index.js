@@ -6,7 +6,7 @@ import reportWebVitals from "./reportWebVitals";
 import Login from "./view/login";
 import Home from "./view/home";
 import Order from "./view/order";
-
+//ak = mOs3rqPMqyM6G21CKIqyO8yFh9hWtR8p
 ReactDOM.render(
   <React.StrictMode>
     <Router>

@@ -289,90 +289,124 @@
     }
   </script> -->
   <script>
-    function clickMove(id) {
-      var ele = document.getElementById(id)
-      ele.onmousedown = (e) => {
-        var e = e || window.event
-        var x = e.offsetX;
-        var y = e.offsetY
-        document.onmousemove = (e) => {
-          var l = e.clientX - x
-          var t = e.clientY - y
-          ele.style.left = l + 'px'
-          ele.style.top = t + 'px'
-        }
-        document.onmouseup = function (e) {
-          document.onmousedown = null
-          document.onmousemove = null
-        }
-      }
-    }
-    clickMove('move')
-    function all(arr) {
-      return new Promise(function (resolve, reject) {
-        if (!isArray(arr)) {
-          return reject(new TypeError('错误'))
-        }
-        let len = arr.length
-        var returnResolve = []
-        var resolveNum = 0
-        arr.forEach(item => {
-          (() => {
-            Promise.resolve(arr[i]).then(function (val) {
-              resolveNum++
-              returnResolve.push(val)
-              if (resolveNum === returnResolve.length) {
-                return resolve(returnResolve)
-              }
-            }, function (val) {
-              return reject(val)
-            })
-          })()
+//     function clickMove(id) {
+//       var ele = document.getElementById(id)
+//       ele.onmousedown = (e) => {
+//         var e = e || window.event
+//         var x = e.offsetX;
+//         var y = e.offsetY
+//         document.onmousemove = (e) => {
+//           var l = e.clientX - x
+//           var t = e.clientY - y
+//           ele.style.left = l + 'px'
+//           ele.style.top = t + 'px'
+//         }
+//         document.onmouseup = function (e) {
+//           document.onmousedown = null
+//           document.onmousemove = null
+//         }
+//       }
+//     }
+//     clickMove('move')
+//     function all(arr) {
+//       return new Promise(function (resolve, reject) {
+//         if (!isArray(arr)) {
+//           return reject(new TypeError('错误'))
+//         }
+//         let len = arr.length
+//         var returnResolve = []
+//         var resolveNum = 0
+//         arr.forEach(item => {
+//           (() => {
+//             Promise.resolve(arr[i]).then(function (val) {
+//               resolveNum++
+//               returnResolve.push(val)
+//               if (resolveNum === returnResolve.length) {
+//                 return resolve(returnResolve)
+//               }
+//             }, function (val) {
+//               return reject(val)
+//             })
+//           })()
 
-        })
-      })
-    }
-    let obj = {
-      func1: function () {
-        console.log(this);
-      },
-      func2: () => {
-        console.log(this);
-      }
-    }
-    var list = [obj.func1, obj.func2];
-    var a1 = obj.func1;
-    var a2 = obj.func2;
+//         })
+//       })
+//     }
+//     let obj = {
+//       func1: function () {
+//         console.log(this);
+//       },
+//       func2: () => {
+//         console.log(this);
+//       }
+//     }
+//     var list = [obj.func1, obj.func2];
+//     var a1 = obj.func1;
+//     var a2 = obj.func2;
 
-    obj.func1();
-    obj.func2();
-    a1();
-    a2();
-    list[0]();
-    list[1]();
-    // object, window, window, window, Array(2)(输出list数组，此时this指向list[0])，window
+//     obj.func1();
+//     obj.func2();
+//     a1();
+//     a2();
+//     list[0]();
+//     list[1]();
+//     // object, window, window, window, Array(2)(输出list数组，此时this指向list[0])，window
 
-    function changeNum(num, len){
-    let newArr = []
-    let show = false
-    for(let i=0;i<num.length-1;i++){
-        if(num[i]=='a'&&num[i+1]=='b'){
-            newArr.push('b')
-            newArr.push('b')
-            newArr.push('a')
-            len++
-            i++
-            show = true
-        }else{
-            newArr.push(num[i])
+//     function changeNum(num, len){
+//     let newArr = []
+//     let show = false
+//     for(let i=0;i<num.length-1;i++){
+//         if(num[i]=='a'&&num[i+1]=='b'){
+//             newArr.push('b')
+//             newArr.push('b')
+//             newArr.push('a')
+//             len++
+//             i++
+//             show = true
+//         }else{
+//             newArr.push(num[i])
+//         }
+//     }
+//     if(show){
+//         return changeNum(newArr, len)
+//     }else{
+//         return len
+//     }
+// }
+
+function number2Hanyu( num ) {
+    let str = ['lin', 'yi', 'er', 'san', 'si', 'wu', 'liu', 'qi', 'ba', 'jiu']
+    let shiStr = ['shi', 'bai', 'qian', 'wan', 'yi']
+    let resStr = []
+    let numArr = num.toString().split('')
+    console.log(numArr);
+    
+    var wei = -1
+    for(let i=numArr.length-1;i>=0;i--){
+      console.log(wei);
+        if(numArr[i]!=0&&wei<=2&&wei>=0){
+            resStr.unshift(shiStr[wei])
         }
+        debugger
+        if(wei==2){
+            wei = -2
+        }
+        if(resStr.length==7){
+          resStr.unshift(shiStr[3])
+        }
+        if(i==0&&numArr.length==9){
+            resStr.unshift(shiStr[4])
+        }
+        if(numArr[i]!=0){
+          resStr.unshift(str[+numArr[i]])
+        }
+        wei += 1
     }
-    if(show){
-        return changeNum(newArr, len)
-    }else{
-        return len
-    }
+    return resStr.join('')
+    // write code here
 }
+console.log(number2Hanyu(999990009));
+
   </script>
 
 </body>
