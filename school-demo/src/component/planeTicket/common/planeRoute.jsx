@@ -10,18 +10,18 @@ class PlaneRoute extends Component {
     this.startCityChange = this.startCityChange.bind(this);
     this.startTimeChange = this.startTimeChange.bind(this);
   }
-  startCityChange() {}
-  startTimeChange(e) {
+  startCityChange () { }
+  startTimeChange (e) {
     console.log(e);
   }
-  render() {
+  render () {
     const routeList = this.props.routeList;
     return (
       <div className="planeRoute">
         <div className="planeRouteHead">
           <span className="word">国际港澳台·低价航线</span>
           <div className="planeRouteImg">
-            {this.props.type == "one" ? (
+            {this.props.type === "one" ? (
               <Image
                 src="./img/plane/bg_flyhd.png"
                 style={{ width: 200, height: 120, marginTop: -60 }}
@@ -60,7 +60,7 @@ class PlaneRoute extends Component {
               <div className="RouteMainChild">
                 <p className="left">
                   <p style={{ fontSize: 14, margin: 0 }}>{d.start}</p>
-                  {this.props.type == "one" ? (
+                  {this.props.type === "one" ? (
                     <SwapRightOutlined />
                   ) : (
                     <SwapOutlined />
@@ -68,7 +68,7 @@ class PlaneRoute extends Component {
                   <p style={{ fontSize: 14, margin: 0 }}>{d.arriver}</p>
                 </p>
                 <p className="right">
-                  {this.props.type == "one" ? (
+                  {this.props.type === "one" ? (
                     <p style={{ fontSize: 14, margin: 0, marginLeft: 10 }}>
                       {d.startTime}
                     </p>

@@ -19,17 +19,18 @@ class Home extends Component {
     this.onFinish = this.onFinish.bind(this);
     this.onFinishFailed = this.onFinishFailed.bind(this);
   }
-  checkLoginRegister (data) {
-    this.setState({
-      loginOrRegister: data ? "login" : "register"
-    });
-  }
+  componentDidMount () { }
+  onFinishFailed () { }
   onFinish (e) {
     console.log(this.verfication.current.state);
     console.log(e);
   }
-  componentDidMount () { }
-  onFinishFailed () { }
+  checkLoginRegister (data) {
+    let bolle = data ? "login" : "register"
+    this.setState({
+      loginOrRegister: bolle
+    })
+  }
   render () {
     return (
       <div className="loginMain">
@@ -42,13 +43,13 @@ class Home extends Component {
               style={{ width: 150, height: 50 }}
               src="https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg"
             />
-            {(this.state.loginOrRegister == "login" ? true : false) ? (
+            {(this.state.loginOrRegister === "login" ? true : false) ? (
               <span>账号登录</span>
             ) : (
               <span>账号注册</span>
             )}
           </div>
-          {(this.state.loginOrRegister == "login" ? true : false) ? (
+          {(this.state.loginOrRegister === "login" ? true : false) ? (
             <div className="CenterMain">
               <div className="MainLeft">
                 <Image
@@ -87,11 +88,6 @@ class Home extends Component {
                     style={{ width: 200 }}
                     placeholder="Select a person"
                     optionFilterProp="children"
-                    filterOption={(input, option) =>
-                      option.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
-                    }
                   >
                     <Option value="jack">Jack</Option>
                     <Option value="lucy">Lucy</Option>

@@ -50,7 +50,7 @@ class SmallLogin extends React.Component {
     this.setState({
       value: e.target.value,
     });
-    if (e.target.value == 2) {
+    if (+e.target.value === 2) {
       this.userFormRef.current.resetFields();
     } else {
       this.teleFormRef.current.resetFields();
@@ -126,7 +126,7 @@ class SmallLogin extends React.Component {
     ctx.fillRect(0, 0, this.state.options.width, this.state.options.height);
     var txtArr = this.state.options.numArr;
     for (var i = 1; i <= this.state.size; i++) {
-      if (i == 2) {
+      if (+i === 2) {
         this.setState((state) => {
           return {
             code: state + "+",
@@ -152,7 +152,7 @@ class SmallLogin extends React.Component {
         /**恢复旋转角度和坐标原点**/
         ctx.rotate((-deg * Math.PI) / 180);
         ctx.translate(-x, -y);
-      } else if (i == 4) {
+      } else if (+i === 4) {
         this.setState((state) => {
           return {
             code: state + "=",
@@ -245,7 +245,7 @@ class SmallLogin extends React.Component {
             </Radio.Group>
           </div>
           <div
-            className={this.state.value == 1 ? "UsernamePassword" : "LoginNone"}
+            className={+this.state.value === 1 ? "UsernamePassword" : "LoginNone"}
           >
             <Form
               layout="horizontal"
@@ -309,7 +309,7 @@ class SmallLogin extends React.Component {
           </div>
           <div
             className={
-              this.state.value == 2 ? "telephonePassword" : "LoginNone"
+              +this.state.value === 2 ? "telephonePassword" : "LoginNone"
             }
           >
             <Form

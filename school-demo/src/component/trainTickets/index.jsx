@@ -2,12 +2,12 @@ import { Component } from "react";
 import TrainForm from "./trainForm";
 import "./index.less";
 import { Image } from "antd";
-import TrainSpeak from "./common/trainSpeak";
 class TrainTickets extends Component {
   constructor(props) {
     super(props);
+    this.state = {}
   }
-  render() {
+  render () {
     return (
       <div className="trainTicket">
         <div className="trainTicketForm">

@@ -3,9 +3,6 @@ import { Select, DatePicker } from "antd";
 import "./ownOrder.less";
 let { Option } = Select;
 export default class Order extends Component {
-  constructor(props) {
-    super(props);
-  }
   render () {
     return (
       <div className="ownOrderComponent">

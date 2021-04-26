@@ -88,7 +88,7 @@ class PlaneForm extends Component {
             </Menu>
           </div>
           <div className="headRight">
-            {this.props.plane && this.props.plane == "plane" ? (
+            {this.props.plane && this.props.plane === "plane" ? (
               <>
                 <Link to={{ pathname: "" }}>我的订单</Link>
               </>
@@ -165,7 +165,7 @@ class PlaneForm extends Component {
               <Form.Item
                 name="arriveTime"
                 rules={
-                  this.state.oneRadio == "one"
+                  this.state.oneRadio === "one"
                     ? []
                     : [
                       {
@@ -175,7 +175,7 @@ class PlaneForm extends Component {
                 }
                 className="five"
               >
-                {this.state.oneRadio == "one" ? (
+                {this.state.oneRadio === "one" ? (
                   <DatePicker disabled />
                 ) : (
                   <DatePicker />
@@ -211,7 +211,7 @@ class PlaneForm extends Component {
                   <Radio value="four">多程</Radio>
                 </Radio.Group>
               </Form.Item>
-              {this.state.twoRadio == "one" || this.state.twoRadio == "two" ? (
+              {this.state.twoRadio === "one" || this.state.twoRadio === "two" ? (
                 <>
                   <Form.Item
                     className="two"
@@ -257,7 +257,7 @@ class PlaneForm extends Component {
                   <Form.Item
                     name="arriveTime"
                     rules={
-                      this.state.twoRadio == "one"
+                      this.state.twoRadio === "one"
                         ? []
                         : [
                           {
@@ -267,7 +267,7 @@ class PlaneForm extends Component {
                     }
                     className="five"
                   >
-                    {this.state.twoRadio == "one" ? (
+                    {this.state.twoRadio === "one" ? (
                       <DatePicker disabled />
                     ) : (
                       <DatePicker />
@@ -276,7 +276,7 @@ class PlaneForm extends Component {
                 </>
               ) : (
                 <>
-                  {this.state.twoRadio == "three" ? (
+                  {this.state.twoRadio === "three" ? (
                     <>
                       <Form.Item name="startCity" className="startCity">
                         <Select
@@ -286,11 +286,6 @@ class PlaneForm extends Component {
                           optionFilterProp="children"
                           onChange={this.onStartCityChange}
                           onSearch={this.onStartCitySearch}
-                          filterOption={(input, option) =>
-                            option.children
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          }
                         >
                           <Option value="jack">Jack</Option>
                           <Option value="lucy">Lucy</Option>
@@ -305,11 +300,6 @@ class PlaneForm extends Component {
                           optionFilterProp="children"
                           onChange={this.onArriverCityChange}
                           onSearch={this.onArriverCitySearch}
-                          filterOption={(input, option) =>
-                            option.children
-                              .toLowerCase()
-                              .indexOf(input.toLowerCase()) >= 0
-                          }
                         >
                           <Option value="jack">Jack</Option>
                           <Option value="lucy">Lucy</Option>
@@ -322,7 +312,7 @@ class PlaneForm extends Component {
                   )}
                 </>
               )}
-              {this.state.twoRadio != "four" ? (
+              {this.state.twoRadio !== "four" ? (
                 <Form.Item className="submitTwoForm">
                   <Button type="primary" htmlType="submit">
                     立即搜索

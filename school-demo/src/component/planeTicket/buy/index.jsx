@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PlaneTicketdetail from './ticketDetail'
-import { HashRouter as Router, withRouter, Route, Switch } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import BuyTicket from './buyTicket'
 class BuyChild extends Component {
   constructor(props) {

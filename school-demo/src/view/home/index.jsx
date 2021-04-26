@@ -9,12 +9,14 @@ import Main from "../../component/main";
 import PlaneTicket from "../../component/planeTicket";
 import Hotel from "../../component/hotel";
 import TrainTickets from "../../component/trainTickets";
+import TrainDetail from "../../component/trainTickets/common/trainDetail"
 import Holiday from "../../component/holiday";
 import GroupBuying from "../../component/groupBuying";
 import Tickets from "../../component/tickets";
 import Local from "../../component/local";
 import HotelSearch from "../../component/hotel/search/search";
 import PlateTSearch from "../../component/planeTicket/buy";
+import Hmap from '../../component/map'
 const { Search } = Input;
 //创建一个context，传入默认值
 export const LoginContext = React.createContext("unLogin");
@@ -198,12 +200,14 @@ class Home extends Component {
 
         <Router>
           <Switch>
+            <Route path="/map" component={Hmap} />
             <Route path="/main" component={Main} />
             <Route path="/planeTicket" component={PlaneTicket} />
             <Route path="/PlateTSearch" component={PlateTSearch} />
             <Route path="/hotel" component={Hotel} />
             <Route path="/hotels/HotelSearch" component={HotelSearch} />
             <Route path="/trainTickets" component={TrainTickets} />
+            <Route path="/trainDetail" component={TrainDetail} />
             <Route path="/holiday" component={Holiday} />
             <Route path="/groupBuying" component={GroupBuying} />
             <Route path="/tickets" component={Tickets} />

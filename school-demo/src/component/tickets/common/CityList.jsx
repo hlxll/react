@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { Image } from "antd";
 import "./cityList.less";
 class Tickets extends Component {
   constructor(props) {
@@ -15,6 +14,7 @@ class Tickets extends Component {
     const recommendCityList = [];
     this.state.recommendCity.forEach((item, index) => {
       recommendCityList.push(
+        // eslint-disable-next-line react/jsx-no-bind
         <div key={index} onClick={this.changeCity.bind(this, item)}>
           {item}
         </div>

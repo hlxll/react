@@ -105,7 +105,7 @@ class TicketForm extends Component {
             <Button type="text">全部></Button>
           </div>
         </div>
-        {this.state.current == 1 ? (
+        {+this.state.current === 1 ? (
           <div className="footName">
             <div className="hotTitle">本地最热</div>
             <div className="hotCity">

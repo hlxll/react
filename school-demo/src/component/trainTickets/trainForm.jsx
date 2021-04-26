@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Form, Menu, Button, Select, DatePicker } from "antd";
+import { withRouter } from 'react-router-dom'
 import { MailOutlined } from "@ant-design/icons";
 import "./trainForm.less";
 const { Option } = Select;
@@ -13,12 +14,13 @@ class TrainForm extends Component {
     this.OnFinish = this.OnFinish.bind(this);
     this.OnFinishFailed = this.OnFinishFailed.bind(this);
   }
-  handleClick() {}
-  OnFinish(e) {
+  handleClick () { }
+  OnFinish (e) {
     console.log(e);
+    this.props.history.push('/trainDetail')
   }
-  OnFinishFailed() {}
-  render() {
+  OnFinishFailed () { }
+  render () {
     return (
       <div className="trainForm">
         <div className="head">
@@ -100,4 +102,4 @@ class TrainForm extends Component {
     );
   }
 }
-export default TrainForm;
+export default withRouter(TrainForm);
