@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Radio, Select, DatePicker, Button, Row, Col, Image, Modal } from "antd";
 import { withRouter } from "react-router-dom";
+import Hmap from '../../map'
 import HotelDetail from '../detail'
 import "./search.less";
 const Option = Select;
@@ -29,11 +30,20 @@ class HotelSearch extends Component {
       ],
       trvalType: ["不限", "浪漫情侣", "亲子精选", "民宿", "钟点房"],
       travelVersion: ["不限", "二星", "三星", "四星", "五星"],
-      visible: true
+      visible: false,
+      mapVisible: false,
+      //酒店地图展示坐标
+      point: {
+        longitude: 115.877477,
+        latitude: 28.742922,
+        label: '母校'
+      }
     };
     this.formFinish = this.formFinish.bind(this);
     this.toDetail = this.toDetail.bind(this);
     this.closeDetail = this.closeDetail.bind(this);
+    this.closeMapDetail = this.closeMapDetail.bind(this);
+    this.openMapModal = this.openMapModal.bind(this);
   }
   formFinish () { }
   toDetail () {
@@ -44,6 +54,16 @@ class HotelSearch extends Component {
   closeDetail () {
     this.setState({
       visible: false
+    })
+  }
+  closeMapDetail () {
+    this.setState({
+      mapVisible: false
+    })
+  }
+  openMapModal () {
+    this.setState({
+      mapVisible: true
     })
   }
   render () {
@@ -142,6 +162,9 @@ class HotelSearch extends Component {
                 <div className="listRightType">
                   {this.state.trvalType[item.type]}
                 </div>
+                <div style={{ marginTop: '10px' }}>
+                  <Button onClick={this.openMapModal}>查看地图</Button>
+                </div>
               </div>
               <div className="listRightMoney">
                 <div className="listRightMon">
@@ -156,6 +179,16 @@ class HotelSearch extends Component {
             </div>
           ))}
         </div>
+        <Modal className="hotelModalDetail"
+          style={{ width: '1200px' }}
+          title="酒店地图"
+          visible={this.state.mapVisible}
+          closable
+          onCancel={this.closeMapDetail}
+          footer={null}
+        >
+          <Hmap point={this.state.point} />
+        </Modal>
         <Modal
           className="hotelModalDetail"
           style={{ width: '600px' }}

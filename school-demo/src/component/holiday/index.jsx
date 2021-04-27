@@ -35,17 +35,21 @@ class Holiday extends Component {
     this.onFinishFailed = this.onFinishFailed.bind(this);
     this.byDataSearch = this.byDataSearch.bind(this);
   }
-  onCitySearch() {}
-  rotateBottomTop() {
+  onCitySearch () { }
+  rotateBottomTop () {
     let state = !this.state.toBottom;
     this.setState({
       toBottom: state,
     });
   }
-  onFinish() {}
-  onFinishFailed() {}
-  byDataSearch() {}
-  render() {
+  onFinish () { }
+  onFinishFailed () { }
+  byDataSearch () { }
+  toHolidayDetail = (e) => {
+    console.log(e);
+    this.props.history.push({ pathname : '/holidayDetail', state : { title:e}})
+  }
+  render () {
     const productNum = this.state.holidayList.length;
     return (
       <div className="holiday">
@@ -149,7 +153,7 @@ class Holiday extends Component {
                       <div className="type">{d.type}</div>
                     </div>
                     <div className="money">
-                      <div className="forPeopleMOney">
+                      <div className="forPeopleMOney" onClick={this.toHolidayDetail.bind(this, d.title)}>
                         ¥<div style={{ fontSize: 28 }}>{d.money}</div>起/人
                       </div>
                       <div className="number">
@@ -162,7 +166,7 @@ class Holiday extends Component {
             </div>
           </div>
         </div>
-        <div className="rightSpeak"></div>
+        <div className="rightSpeak" />
       </div>
     );
   }

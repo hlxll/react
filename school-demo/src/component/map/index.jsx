@@ -4,6 +4,7 @@ let BMap = window.BMap
 class Hmap extends Component {
   constructor(props) {
     super(props)
+    console.log(props);
     this.state = {
       city: '南昌'
     }
@@ -13,12 +14,7 @@ class Hmap extends Component {
     this.map = new BMap.Map('bmap')
     //聚焦到杭州
     this.map.centerAndZoom(this.state.city, 10)
-    let point = {
-      longitude: 115.877477,
-      latitude: 28.742922,
-      label: '母校'
-    }
-    this.drawMap(point)
+    this.drawMap(this.props.point)
   }
   drawMap = (v) => {
     this.map.clearOverlays();
@@ -35,7 +31,7 @@ class Hmap extends Component {
     this.map.addOverlay(label)
   }
   render () {
-    return <div id="bmap" style={{ height: '1000px' }} />
+    return <div id="bmap" style={{ height: '700px' }} />
   }
 }
 export default Hmap

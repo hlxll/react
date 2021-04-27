@@ -17,6 +17,7 @@ import Local from "../../component/local";
 import HotelSearch from "../../component/hotel/search/search";
 import PlateTSearch from "../../component/planeTicket/buy";
 import Hmap from '../../component/map'
+import HolidayDetail from "../../component/holiday/detail";
 const { Search } = Input;
 //创建一个context，传入默认值
 export const LoginContext = React.createContext("unLogin");
@@ -209,6 +210,7 @@ class Home extends Component {
             <Route path="/trainTickets" component={TrainTickets} />
             <Route path="/trainDetail" component={TrainDetail} />
             <Route path="/holiday" component={Holiday} />
+            <Route path="/holidayDetail" component={HolidayDetail} />
             <Route path="/groupBuying" component={GroupBuying} />
             <Route path="/tickets" component={Tickets} />
             <Route path="/local" component={Local} />

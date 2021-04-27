@@ -21,7 +21,7 @@ class TrainDetail extends Component {
           time: ['08:57', '21:46']
         }
       ],
-      isModalVisible: true,
+      isModalVisible: false,
       formData: {
         username: ''
       },
