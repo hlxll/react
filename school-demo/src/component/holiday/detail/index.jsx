@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Image, Carousel, DatePicker, Form } from 'antd'
+import { Image, Carousel, DatePicker, Form, Button } from 'antd'
 import './index.less'
 class HolidayDetail extends Component {
   constructor(props) {
@@ -13,7 +13,10 @@ class HolidayDetail extends Component {
         productNum: 2406647408,
         moveGroup: ['丽江', '大理', '昆明'],
         productCharac: ['玉龙雪山', '网红打卡点', '洱海私人游艇', '赠送大型晚会']
-      }
+      },
+      PeopleNum: 0,
+      HomeNum: 0,
+      allMoney: 0
     }
   }
   componentDidMount () {
@@ -54,14 +57,25 @@ class HolidayDetail extends Component {
           </div>
         </div>
         <div className="holidayBuy">
+          <div className="buyTitle"><span className="titleLeft">选择出游日期和人数 </span><span className="titleRight"> 建议至少在当天23:59分前预订</span></div>
           <Form name="basic"
             initialValues={{ remember: true }}
             onFinish={this.buySuccess}
             onFinishFailed={this.buyFailed}
           >
-            <Form.Item label="">
+            <Form.Item label="出游日期">
               <DatePicker />
             </Form.Item>
+            <Form.Item label="出行人数">
+              <div className="movePeople">
+                <div style={{ display: 'flex', alignItems: 'center' }}><div className="leftReduce">-</div><div className="centerNum">{this.state.PeopleNum}</div><div className="rightAdd">+</div></div>人员
+                <div style={{ display: 'flex', alignItems: 'center' }}><div className="leftReduce">-</div><div className="centerNum">{this.state.HomeNum}</div><div className="rightAdd">+</div></div>房间
+              </div>
+            </Form.Item>
+            <Form.Item label="总价">
+              <span className="allMoney">{this.state.allMoney}</span>
+            </Form.Item>
+            <div className="footerBuy"><Button>立即预定</Button></div>
           </Form>
         </div>
       </div>
