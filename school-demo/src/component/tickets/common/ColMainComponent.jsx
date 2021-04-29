@@ -8,10 +8,10 @@ class ColMainComponent extends Component {
       data: this.props.data,
     };
   }
-  render() {
+  render () {
     return (
       <div className="colMain">
-        <Image src="" className="colImage" />
+        <Image src="https://imgs.qunarzz.com/sight/p0/1508/97/ea51af995c4d4de85c53855302b2f5af.water.jpg_224x148_0a434be8.jpg" preview={false} className="colImage" />
         <div className="colMainDetail">
           <div className="name">{this.state.data.name}</div>
           <div className="detail">{this.state.data.text}</div>

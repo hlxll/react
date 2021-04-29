@@ -14,13 +14,13 @@ class Tickets extends Component {
       openCity: false,
       hotCity: ["鼓浪屿", "南昌"],
       colData: [
-        { name: "鼓浪屿", text: "详细介绍", money: "66" },
-        { name: "鼓浪屿", text: "详细介绍", money: "66" },
+        { name: "鼓浪屿", text: "详细介绍", money: "66", type: 4, location: '江西省上饶市婺源县江湾镇黄陵村', number: 5.0 },
+        { name: "鼓浪屿", text: "详细介绍", money: "66", type: 4, location: '江西省上饶市婺源县江湾镇黄陵村', number: 5.0 },
       ],
     };
     this.openCityDiv = this.openCityDiv.bind(this);
   }
-  openCityDiv() {
+  openCityDiv () {
     this.setState((state, props) => {
       return {
         openCity: !state.openCity,
@@ -28,7 +28,7 @@ class Tickets extends Component {
       };
     });
   }
-  render() {
+  render () {
     const hotScenic = [];
     this.state.hotCity.forEach((item, index) => {
       hotScenic.push(<div key={index}>{item}</div>);
