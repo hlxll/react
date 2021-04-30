@@ -3,41 +3,33 @@ var router = express.Router();
 //登录http://localhost:3000/user/login?username=huanglin&password=123123
 router.get("/login", function (req, res, next) {
   var data = req.query;
-  console.log(data);
-  res.json({
-    data: {
-      username: '黄林',
-      isLogin: true
-    },
-    status: 200,
-  });
-  // var MongoClient = require("mongodb").MongoClient;
-  // var url = "mongodb://localhost:27017";
-  // MongoClient.connect(
-  //   url,
-  //   { useUnifiedTopology: true, useNewUrlParser: true },
-  //   function (err, db) {
-  //     if (err) throw err;
-  //     var dbo = db.db("admin");
-  //     var whereStr = {
-  //       username: data.username,
-  //       password: +data.password,
-  //     }; // 查询条件
-  //     //find是查询条件，limit是返回条数
-  //     dbo
-  //       .collection("user")
-  //       .find(whereStr)
-  //       .toArray(function (err, result) {
-  //         if (err) throw err;
-  //         db.close();
-  //         console.log(result);
-  //         res.json({
-  //           data: result,
-  //           status: 200,
-  //         });
-  //       });
-  //   }
-  // );
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+    function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("admin");
+      var whereStr = {
+        username: data.username,
+        password: +data.password,
+      }; // 查询条件
+      //find是查询条件，limit是返回条数
+      dbo
+        .collection("user")
+        .find(whereStr)
+        .toArray(function (err, result) {
+          if (err) throw err;
+          db.close();
+          console.log(result);
+          res.json({
+            data: result,
+            status: 200,
+          });
+        });
+    }
+  );
 });
 //注册http://localhost:3000/user/register?username=huanglin&password=123123
 router.get("/register", function (req, res) {
