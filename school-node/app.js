@@ -3,15 +3,16 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-var bodyParser = require('body-parser')
+var bodyParser = require("body-parser");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var planeRouter = require("./routes/planeTicket");
 var trainTicketRouter = require("./routes/trainTicket");
 var ticketsRouter = require("./routes/tickets");
 var localRouter = require("./routes/local");
-// var hotelRouter = require("./routes/hotel");
-// var holidayRouter = require("./routes/holiday");
+var hotelRouter = require("./routes/hotel");
+var holidayRouter = require("./routes/holiday");
 // var groupBuyingRouter = require("./routes/groupBuying");
 // var nodeRouter = require("./routes/node");
 
@@ -27,8 +28,8 @@ app.all("*", function (req, res, next) {
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -38,11 +39,12 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/user", usersRouter);
+app.use("/plane", planeRouter);
 app.use("/trainTicket", trainTicketRouter);
 app.use("/tickets", ticketsRouter);
 app.use("/local", localRouter);
-// app.use('/hotel', hotelRouter);
-// app.use('/holiday', holidayRouter);
+app.use("/hotel", hotelRouter);
+app.use("/holiday", holidayRouter);
 // app.use('/groupBuying', groupBuyingRouter);
 // app.use('/node', nodeRouter);
 

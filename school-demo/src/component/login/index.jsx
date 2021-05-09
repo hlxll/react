@@ -1,8 +1,9 @@
 import React from "react";
 import { CloseOutlined, LockOutlined, UserOutlined } from "@ant-design/icons";
+import { withRouter } from "react-router-dom";
 import { Tooltip, Radio, Form, Input, Button, message } from "antd";
 import "./index.less";
-import store from '../../store/index'
+import store from "../../store/index";
 import * as userApi from "../../api/user";
 class SmallLogin extends React.Component {
   constructor(props) {
@@ -33,20 +34,20 @@ class SmallLogin extends React.Component {
     this.randomColor = this.randomColor.bind(this);
     this.onTelePassFailed = this.onTelePassFailed.bind(this);
     this.onTelePassFinish = this.onTelePassFinish.bind(this);
-    this.storeChange = this.storeChange.bind(this)
+    this.storeChange = this.storeChange.bind(this);
 
     // store.subscribe(this.storeChange())
     //订阅store变化，但是新版本可以不要，如果input的change方法改变store，而且input也绑定这个store，就会出问题
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.CreateVerification();
     this.refresh();
   }
-  storeChange () {
-    this.setState(store.getState())
+  storeChange() {
+    this.setState(store.getState());
   }
-  onChange (e) {
+  onChange(e) {
     this.setState({
       value: e.target.value,
     });
@@ -56,31 +57,50 @@ class SmallLogin extends React.Component {
       this.teleFormRef.current.resetFields();
     }
   }
-  async onUserPassFinish (value) {
+  async onUserPassFinish(value) {
+    console.log(this.state.numCode);
+    let codeN = +value.code;
+    let num = +this.state.numCode[0];
+    let numTwo = +this.state.numCode[1];
+    console.log(codeN);
+    if (!codeN || codeN != num + numTwo) {
+      message.error("验证码错误");
+      return;
+    }
     let resData = await userApi.login(value.username, Number(value.password));
     if (resData.data.status === 200 && resData.data.data) {
+      console.log(resData.data.data);
+      let storeData = resData.data.data[0];
+      // storeData.headImg
+      const Imgaction = {
+        type: "changeHeadImg",
+        value: storeData.headImg,
+      };
+      store.dispatch(Imgaction);
+
       const action = {
-        type: 'changeIsLogin',
-        value: resData.data.data.isLogin
-      }
-      store.dispatch(action)
+        type: "changeIsLogin",
+        value: storeData.username ? true : false,
+      };
+      store.dispatch(action);
       const nameAction = {
-        type: 'changeUsername',
-        value: resData.data.data.username
-      }
-      store.dispatch(nameAction)
+        type: "changeUsername",
+        value: storeData.username,
+      };
+      store.dispatch(nameAction);
       message.success("登录成功");
+      this.props.history.replace("/main");
     } else {
       message.success("账号或密码错误");
     }
   }
-  onUserPassFailed () { }
-  onTelePassFinish (value) {
+  onUserPassFailed() {}
+  onTelePassFinish(value) {
     console.log(value);
   }
-  onTelePassFailed () { }
+  onTelePassFailed() {}
   // 创建验证码
-  CreateVerification () {
+  CreateVerification() {
     var con = document.getElementById(this.state.options.id);
     var canvas = document.createElement("canvas");
     this.setState({
@@ -98,17 +118,17 @@ class SmallLogin extends React.Component {
       parent.refresh();
     };
   }
-  randomNum (min, max) {
+  randomNum(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
   }
   /**生成一个随机色**/
-  randomColor (min, max) {
+  randomColor(min, max) {
     let r = this.randomNum(min, max);
     let g = this.randomNum(min, max);
     let b = this.randomNum(min, max);
     return "rgb(" + r + "," + g + "," + b + ")";
   }
-  refresh () {
+  refresh() {
     this.setState({
       code: "",
     });
@@ -226,7 +246,7 @@ class SmallLogin extends React.Component {
       ctx.fill();
     }
   }
-  render () {
+  render() {
     return (
       <div className="login">
         <div className="loginType">
@@ -245,7 +265,9 @@ class SmallLogin extends React.Component {
             </Radio.Group>
           </div>
           <div
-            className={+this.state.value === 1 ? "UsernamePassword" : "LoginNone"}
+            className={
+              +this.state.value === 1 ? "UsernamePassword" : "LoginNone"
+            }
           >
             <Form
               layout="horizontal"
@@ -283,8 +305,14 @@ class SmallLogin extends React.Component {
                 />
               </Form.Item>
               <Form.Item name="code">
+                <Input
+                  prefix={<UserOutlined className="site-form-item-icon" />}
+                  placeholder="请输入验证码"
+                />
+              </Form.Item>
+              <div>
                 <div className="Verification">
-                  <Input placeholder="请输入验证码" />
+                  {/* <Input placeholder="请输入验证码" id="CodeNumber" /> */}
                   <div className="VerificationContent" id="VerificationCode" />
                 </div>
                 <Button
@@ -294,7 +322,7 @@ class SmallLogin extends React.Component {
                 >
                   换一张
                 </Button>
-              </Form.Item>
+              </div>
               <Form.Item>
                 <Button
                   type="primary"
@@ -368,4 +396,4 @@ class SmallLogin extends React.Component {
     );
   }
 }
-export default SmallLogin;
+export default withRouter(SmallLogin);

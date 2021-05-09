@@ -2,19 +2,35 @@ import { Component } from "react";
 import { Select, Image, Space } from "antd";
 import "./planeRoute.less";
 import { SwapOutlined, SwapRightOutlined } from "@ant-design/icons";
+import ChinaJson from "../../china.json";
 const { Option } = Select;
 class PlaneRoute extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      chinaCity: [],
+    };
     this.startCityChange = this.startCityChange.bind(this);
     this.startTimeChange = this.startTimeChange.bind(this);
   }
-  startCityChange () { }
-  startTimeChange (e) {
+  componentDidMount() {
+    let resCity = [];
+    ChinaJson.forEach((item) => {
+      if (item.province.split("")[2] === "市") {
+        resCity.push(item.province);
+      } else {
+        item.city.map((cityItem) => resCity.push(cityItem.name));
+      }
+    });
+    this.setState({
+      chinaCity: resCity,
+    });
+  }
+  startCityChange() {}
+  startTimeChange(e) {
     console.log(e);
   }
-  render () {
+  render() {
     const routeList = this.props.routeList;
     return (
       <div className="planeRoute">
@@ -35,19 +51,16 @@ class PlaneRoute extends Component {
           </div>
           <div className="selectStartCity">
             <Space>
-              <Select
-                defaultValue="lucy"
-                style={{ width: 120 }}
-                onChange={this.startCityChange}
-              >
-                <Option value="jack">上饶出发</Option>
-                <Option value="lucy">南昌出发</Option>
+              <Select style={{ width: 120 }} onChange={this.startCityChange}>
+                {this.props.type === "one"
+                  ? this.state.chinaCity.map((item) => (
+                      <Option value={item}>{item + "出发"}</Option>
+                    ))
+                  : this.state.chinaCity.map((item) => (
+                      <Option value={item}>{item}</Option>
+                    ))}
               </Select>
-              <Select
-                defaultValue="lucy"
-                style={{ width: 120 }}
-                onChange={this.startTimeChange}
-              >
+              <Select style={{ width: 120 }} onChange={this.startTimeChange}>
                 <Option value="2.3">2月/3月</Option>
                 <Option value="4.5">4月/5月</Option>
               </Select>
@@ -84,7 +97,10 @@ class PlaneRoute extends Component {
                 </p>
 
                 <div className="money">
-                  ¥<p className="p">{d.money}</p>
+                  ¥
+                  <p className="p">
+                    {this.props.type === "one" ? d.money : d.money * 2}
+                  </p>
                 </div>
               </div>
             );

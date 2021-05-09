@@ -12,15 +12,20 @@ router.get("/searchTicket", function (req, res) {
     function (err, db) {
       if (err) throw err;
       var dbo = db.db("admin");
+      let whereStr = {
+        startCity: data.startCity || "",
+        arriveCity: data.arriveCity || "",
+      };
       //find是查询条件，limit是返回条数
+      console.log(whereStr);
+
       dbo
-        .collection("trainTicket")
-        .find(data)
+        .collection("trainTickets")
+        .find(whereStr)
         .toArray(function (err, result) {
           if (err) throw err;
           db.close();
           res.json({
-            status: 1,
             data: result,
             message: "查询成功",
           });
@@ -31,7 +36,7 @@ router.get("/searchTicket", function (req, res) {
 //购买火车票http://localhost:3000/trainTicket/buyTicket?name=K2288&type=1
 router.get("/buyTicket", function (req, res) {
   var data = req.query;
-  var type = data.type; //火车票种类
+  var trainType = data.trainType; //火车票种类
   var MongoClient = require("mongodb").MongoClient;
   var url = "mongodb://localhost:27017";
   MongoClient.connect(
@@ -45,16 +50,15 @@ router.get("/buyTicket", function (req, res) {
       };
       let money = 0;
       dbo
-        .collection("trainTicket")
+        .collection("trainTickets")
         .find(whereStr)
         .limit(1)
         .toArray(function (err, result) {
           if (err) throw err;
-          console.log(result[0].num[type]);
           var ticketNumber = result[0].num;
-          let lastNum = result[0].num[type];
+          let lastNum = result[0].num[trainType];
           if (lastNum > 0) {
-            money = result[0].money[type];
+            money = result[0].money[trainType];
             //添加订单记录
             MongoClient.connect(
               url,
@@ -63,17 +67,18 @@ router.get("/buyTicket", function (req, res) {
                 if (err) throw err;
                 var dbo = db.db("admin");
                 var duplicate = {
-                  type: 1,
+                  type: 3,
                   time: "2021-05-01",
                   money: money,
                   name: data.name,
+                  trainType: +trainType,
+                  user: data.user,
                 };
                 dbo
                   .collection("orderList")
                   .insertOne(duplicate, function (err, res) {
                     if (err) throw err;
-                    ticketNumber[type] = ticketNumber[type] - 1;
-                    console.log(ticketNumber);
+                    ticketNumber[trainType] = ticketNumber[trainType] - 1;
                     //修改火车票数量
                     MongoClient.connect(
                       url,
@@ -84,7 +89,7 @@ router.get("/buyTicket", function (req, res) {
                         var whereStr = { name: data.name }; // 查询条件
                         var updateStr = { $set: { num: ticketNumber } }; //修改数据
                         dbo
-                          .collection("trainTicket")
+                          .collection("trainTickets")
                           .updateOne(whereStr, updateStr, function (err, res) {
                             if (err) throw err;
                             db.close();
@@ -97,7 +102,7 @@ router.get("/buyTicket", function (req, res) {
             );
             res.json({
               status: 1,
-              message: "success",
+              message: "购买成功",
             });
           } else {
             res.json({

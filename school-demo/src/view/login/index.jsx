@@ -1,11 +1,14 @@
 import React, { Component, Suspense } from "react";
 import SmallLogin from "../../component/login";
 import LoginHead from "../../component/login/loginHead";
+import * as userApi from "../../api/user";
 import "./index.less";
-import { Image, Select, Form, Button, Input } from "antd";
+import { Image, Select, Form, Button, Input, message } from "antd";
 // import VerficationCode from "../../component/login/verificationCode";
 //lazy懒加载，也可以在路由中使用，方式相同
-const VerficationCode = React.lazy(() => import('../../component/login/verificationCode'));
+const VerficationCode = React.lazy(() =>
+  import("../../component/login/verificationCode")
+);
 const { Option } = Select;
 class Home extends Component {
   constructor(props) {
@@ -19,19 +22,26 @@ class Home extends Component {
     this.onFinish = this.onFinish.bind(this);
     this.onFinishFailed = this.onFinishFailed.bind(this);
   }
-  componentDidMount () { }
-  onFinishFailed () { }
-  onFinish (e) {
-    console.log(this.verfication.current.state);
+  componentDidMount() {}
+  onFinishFailed() {}
+  async onFinish(e) {
+    console.log(this.verfication.current.state.numCode);
     console.log(e);
+    let resData = await userApi.register(e.telephone, e.password);
+    console.log(resData);
+    if (resData.data.status == 200) {
+      message.success("成功注册");
+    } else {
+      message.error("用户已存在");
+    }
   }
-  checkLoginRegister (data) {
-    let bolle = data ? "login" : "register"
+  checkLoginRegister(data) {
+    let bolle = data ? "login" : "register";
     this.setState({
-      loginOrRegister: bolle
-    })
+      loginOrRegister: bolle,
+    });
   }
-  render () {
+  render() {
     return (
       <div className="loginMain">
         <div className="head">
@@ -127,7 +137,7 @@ class Home extends Component {
                     <VerficationCode ref={this.verfication} />
                   </Suspense>
                 </Form.Item>
-                <Form.Item style={{}}>
+                <Form.Item>
                   <Button type="primary" htmlType="submit">
                     同意协议并注册
                   </Button>

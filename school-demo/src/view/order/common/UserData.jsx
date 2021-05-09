@@ -1,6 +1,7 @@
 import { Component } from "react";
 import ReactFileReader from "react-file-reader";
 import { upload } from "../../../api/user";
+import store from "../../../store/index";
 import {
   Image,
   Form,
@@ -64,41 +65,43 @@ export default class UserData extends Component {
     this.changeTelephone = this.changeTelephone.bind(this);
     this.headSrcChange = this.headSrcChange.bind(this);
   }
-  componentDidMount () {
+  componentDidMount() {
     this.setState({
       telephone: this.changeTelephone("13407934178"),
     });
+    let storeData = store.getState();
+    console.log(storeData);
+    this.setState({
+      headImgSrc: storeData.headImg,
+    });
   }
-  changeUpdate () {
+  changeUpdate() {
     this.setState({
       update: false,
     });
   }
-  closeFormUpdate () {
+  closeFormUpdate() {
     this.setState({
       update: true,
     });
   }
-  OnFinish (val) {
+  OnFinish(val) {
     var year = val.birthday._d.getFullYear();
     var month = val.birthday._d.getMonth() + 1;
     var day = val.birthday._d.getDate();
     console.log(year + "/" + month + "/" + day);
   }
-  changeTelephone (num) {
+  changeTelephone(num) {
     num = num.split("");
     num.splice(3, 4, "****");
     return "86-" + num.join("");
   }
-  headSrcChange (val) {
+  headSrcChange(val) {
     console.log(val);
     this.setState({
       headImgSrc: val.base64,
     });
-    upload(
-      "huanglin",
-      val.base64
-    ).then((res) => {
+    upload("huanglin", val.base64).then((res) => {
       message.success(res.data.message);
     });
   }
@@ -112,7 +115,7 @@ export default class UserData extends Component {
   //   var dataURL = canvas.toDataURL("image/" + ext);
   //   console.log(dataURL)
   // }
-  render () {
+  render() {
     return (
       <div className="userData">
         <div className="userMain">

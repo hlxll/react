@@ -405,7 +405,24 @@
       // write code here
     }
     console.log(number2Hanyu(999990009));
-
+    var setInterNum = 0
+    setInterval(()=>{
+      setInterNum++
+      console.log(setInterNum)
+    },1000)
+    //定时器，setInterval，第一个参数是回调函数，第二个参数是指定多少时间进行循环执行
+    //在这里，设置setInterNum为全局变量，通过定时器操作，每一秒加一。然后打印。
+    function next_pic () {
+            var newLeft = parseInt(wrap.style.left)-600;
+            wrap.style.left = newLeft + "px";
+        }
+        function prev_pic () {
+            var newLeft = parseInt(wrap.style.left)+600;
+            wrap.style.left = newLeft + "px";
+        }
+        //轮播图，通过操控一个大的div，里面包含多个子div，改变外部大div的定位的left数据和right数据，每次移动的距离
+        //是子div的宽度，这样就能实现每次是轮播一个子div
+        //自动轮播，可以配合定时器，每次规定时间，自动执行一个左移动或者右移动
   </script>
 
 </body>

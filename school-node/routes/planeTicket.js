@@ -1,6 +1,6 @@
-var expiress = require("express");
-var router = expiress.Router();
-router.get("/searchTicket", function (req, res) {
+var express = require("express");
+var router = express.Router();
+router.get("/searchPlane", function (req, res, next) {
   var data = req.query;
   var MongoClient = require("mongodb").MongoClient;
   var url = "mongodb://localhost:27017";
@@ -10,15 +10,23 @@ router.get("/searchTicket", function (req, res) {
     function (err, db) {
       if (err) throw err;
       var dbo = db.db("admin");
-      var whereStr = data; // 查询条件
+      let whereStr = {};
+      for (let obj in data) {
+        if (data[obj] != "undefined") {
+          whereStr.obj = data[obj];
+        }
+      }
       //find是查询条件，limit是返回条数
       dbo
-        .collection("holiday")
+        .collection("planeTicket")
         .find(whereStr)
         .toArray(function (err, result) {
           if (err) throw err;
           db.close();
-          res.send(result);
+          res.json({
+            data: result,
+            status: 200,
+          });
         });
     }
   );

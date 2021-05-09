@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Input, Form, Radio, Button, Image } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import * as holidayApi from "../../api/holiday";
 import "./index.less";
 const { Search } = Input;
 class Holiday extends Component {
@@ -35,21 +36,31 @@ class Holiday extends Component {
     this.onFinishFailed = this.onFinishFailed.bind(this);
     this.byDataSearch = this.byDataSearch.bind(this);
   }
-  onCitySearch () { }
-  rotateBottomTop () {
+  async componentDidMount() {
+    let resData = await holidayApi.searchHoliday();
+    console.log(resData.data);
+    this.setState({
+      holidayList: resData.data,
+    });
+  }
+  onCitySearch() {}
+  rotateBottomTop() {
     let state = !this.state.toBottom;
     this.setState({
       toBottom: state,
     });
   }
-  onFinish () { }
-  onFinishFailed () { }
-  byDataSearch () { }
+  onFinish() {}
+  onFinishFailed() {}
+  byDataSearch() {}
   toHolidayDetail = (e) => {
     console.log(e);
-    this.props.history.push({ pathname : '/holidayDetail', state : { title:e}})
-  }
-  render () {
+    this.props.history.push({
+      pathname: "/holidayDetail",
+      state: { title: e },
+    });
+  };
+  render() {
     const productNum = this.state.holidayList.length;
     return (
       <div className="holiday">
@@ -142,10 +153,7 @@ class Holiday extends Component {
               {this.state.holidayList.map((d, index) => {
                 return (
                   <div key={index} className="Datalist">
-                    <Image
-                      className="img"
-                      src="https://imgs.qunarzz.com/vs_ceph_b2c_001/d6dcefcf-0dc2-404d-95dd-c1ec3b3db8cb.jpg_180x120x90_4a6033dd.jpg"
-                    />
+                    <Image className="img" preview={false} src={d.src} />
                     <div className="content">
                       <div className="contentTitle">{d.title}</div>
                       <div className="contentStart">{d.startCity}</div>
@@ -153,7 +161,10 @@ class Holiday extends Component {
                       <div className="type">{d.type}</div>
                     </div>
                     <div className="money">
-                      <div className="forPeopleMOney" onClick={this.toHolidayDetail.bind(this, d.title)}>
+                      <div
+                        className="forPeopleMOney"
+                        onClick={this.toHolidayDetail.bind(this, d.title)}
+                      >
                         ¥<div style={{ fontSize: 28 }}>{d.money}</div>起/人
                       </div>
                       <div className="number">

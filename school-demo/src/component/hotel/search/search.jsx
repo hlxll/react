@@ -1,8 +1,19 @@
 import React, { Component } from "react";
-import { Form, Radio, Select, DatePicker, Button, Row, Col, Image, Modal } from "antd";
+import * as hotelApi from "../../../api/hotel";
+import {
+  Form,
+  Radio,
+  Select,
+  DatePicker,
+  Button,
+  Row,
+  Col,
+  Image,
+  Modal,
+} from "antd";
 import { withRouter } from "react-router-dom";
-import Hmap from '../../map'
-import HotelDetail from '../detail'
+import Hmap from "../../map";
+import HotelDetail from "../detail";
 import "./search.less";
 const Option = Select;
 const dateFormat = "YYYY/MM/DD";
@@ -28,6 +39,7 @@ class HotelSearch extends Component {
           location: "中关村/五道口·靠近中国人民大学东门",
         },
       ],
+      hotelDetailData: {},
       trvalType: ["不限", "浪漫情侣", "亲子精选", "民宿", "钟点房"],
       travelVersion: ["不限", "二星", "三星", "四星", "五星"],
       visible: false,
@@ -36,37 +48,58 @@ class HotelSearch extends Component {
       point: {
         longitude: 115.877477,
         latitude: 28.742922,
-        label: '母校'
-      }
+        label: "母校",
+      },
+      pointCity: "",
     };
     this.formFinish = this.formFinish.bind(this);
-    this.toDetail = this.toDetail.bind(this);
     this.closeDetail = this.closeDetail.bind(this);
     this.closeMapDetail = this.closeMapDetail.bind(this);
-    this.openMapModal = this.openMapModal.bind(this);
   }
-  formFinish () { }
-  toDetail () {
+  async componentDidMount() {
+    let resData = await hotelApi.searchHotel();
     this.setState({
-      visible: true
-    })
+      hotelDetail: resData.data,
+    });
   }
-  closeDetail () {
+  formFinish() {}
+  toDetail(index) {
+    console.log(index);
+    console.log(this.state.hotelDetail[index]);
+
     this.setState({
-      visible: false
-    })
+      visible: true,
+      hotelDetailData: this.state.hotelDetail[index],
+    });
   }
-  closeMapDetail () {
+  closeDetail() {
     this.setState({
-      mapVisible: false
-    })
+      visible: false,
+    });
   }
-  openMapModal () {
+  closeMapDetail() {
     this.setState({
-      mapVisible: true
-    })
+      mapVisible: false,
+      point: {},
+    });
   }
-  render () {
+  openMapModal(index) {
+    console.log(this.state.hotelDetail[index]);
+    let lonlat = this.state.hotelDetail[index].latlon;
+    let obj = {
+      longitude: lonlat[0],
+      latitude: lonlat[1],
+      label: this.state.hotelDetail[index].name,
+    };
+    console.log(obj);
+
+    this.setState({
+      mapVisible: true,
+      point: obj,
+      pointCity: this.state.hotelDetail[index].city,
+    });
+  }
+  render() {
     return (
       <div id="hotelSearch">
         <div className="formSearch">
@@ -162,8 +195,10 @@ class HotelSearch extends Component {
                 <div className="listRightType">
                   {this.state.trvalType[item.type]}
                 </div>
-                <div style={{ marginTop: '10px' }}>
-                  <Button onClick={this.openMapModal}>查看地图</Button>
+                <div style={{ marginTop: "10px" }}>
+                  <Button onClick={this.openMapModal.bind(this, index)}>
+                    查看地图
+                  </Button>
                 </div>
               </div>
               <div className="listRightMoney">
@@ -171,7 +206,11 @@ class HotelSearch extends Component {
                   ¥<span style={{ fontSize: 30 + "px" }}>{item.money}</span>起
                 </div>
                 <div className="searchDetail">
-                  <Button type="primary" shape="round" onClick={this.toDetail}>
+                  <Button
+                    type="primary"
+                    shape="round"
+                    onClick={this.toDetail.bind(this, index)}
+                  >
                     查看详情
                   </Button>
                 </div>
@@ -179,28 +218,33 @@ class HotelSearch extends Component {
             </div>
           ))}
         </div>
-        <Modal className="hotelModalDetail"
-          style={{ width: '1200px' }}
+        <Modal
+          className="hotelModalDetail"
+          style={{ width: "1200px" }}
           title="酒店地图"
           visible={this.state.mapVisible}
           closable
           onCancel={this.closeMapDetail}
           footer={null}
         >
-          <Hmap point={this.state.point} />
+          {this.state.mapVisible ? (
+            <Hmap point={this.state.point} city={this.state.pointCity} />
+          ) : (
+            ""
+          )}
         </Modal>
         <Modal
           className="hotelModalDetail"
-          style={{ width: '600px' }}
+          style={{ width: "600px" }}
           title="酒店详情"
           visible={this.state.visible}
           closable
           onCancel={this.closeDetail}
           footer={null}
         >
-          <HotelDetail data={this.state.hotelDetail} />
+          <HotelDetail data={this.state.hotelDetailData} />
         </Modal>
-      </div >
+      </div>
     );
   }
 }

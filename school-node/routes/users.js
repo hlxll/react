@@ -3,41 +3,32 @@ var router = express.Router();
 //登录http://localhost:3000/user/login?username=huanglin&password=123123
 router.get("/login", function (req, res, next) {
   var data = req.query;
-  console.log(data);
-  res.json({
-    data: {
-      username: '黄林',
-      isLogin: true
-    },
-    status: 200,
-  });
-  // var MongoClient = require("mongodb").MongoClient;
-  // var url = "mongodb://localhost:27017";
-  // MongoClient.connect(
-  //   url,
-  //   { useUnifiedTopology: true, useNewUrlParser: true },
-  //   function (err, db) {
-  //     if (err) throw err;
-  //     var dbo = db.db("admin");
-  //     var whereStr = {
-  //       username: data.username,
-  //       password: +data.password,
-  //     }; // 查询条件
-  //     //find是查询条件，limit是返回条数
-  //     dbo
-  //       .collection("user")
-  //       .find(whereStr)
-  //       .toArray(function (err, result) {
-  //         if (err) throw err;
-  //         db.close();
-  //         console.log(result);
-  //         res.json({
-  //           data: result,
-  //           status: 200,
-  //         });
-  //       });
-  //   }
-  // );
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+    function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("admin");
+      var whereStr = {
+        username: data.username,
+        password: +data.password,
+      }; // 查询条件
+      //find是查询条件，limit是返回条数
+      dbo
+        .collection("user")
+        .find(whereStr)
+        .toArray(function (err, result) {
+          if (err) throw err;
+          db.close();
+          res.json({
+            data: result,
+            status: 200,
+          });
+        });
+    }
+  );
 });
 //注册http://localhost:3000/user/register?username=huanglin&password=123123
 router.get("/register", function (req, res) {
@@ -45,22 +36,58 @@ router.get("/register", function (req, res) {
   console.log(data);
   var MongoClient = require("mongodb").MongoClient;
   var url = "mongodb://localhost:27017";
-
-  MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
-    if (err) throw err;
-    var dbo = db.db("admin");
-    var myobj = {
-      username: data.username,
-      password: data.password,
-      jurisdiction: "admin",
-    };
-    dbo.collection("user").insertOne(myobj, function (err, res) {
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+    function (err, db) {
       if (err) throw err;
-      console.log("文档插入成功");
-      db.close();
-    });
-  });
-  res.send("成功注册");
+      var dbo = db.db("admin");
+      var whereStr = {
+        username: data.username,
+      }; // 查询条件
+      //find是查询条件，limit是返回条数
+      dbo
+        .collection("user")
+        .find(whereStr)
+        .toArray(function (err, result) {
+          if (err) throw err;
+          console.log(result);
+          if (result.length > 0) {
+            db.close();
+            res.json({
+              data: {
+                message: "账户名已存在",
+              },
+              status: 404,
+            });
+          } else {
+            MongoClient.connect(url, { useNewUrlParser: true }, function (
+              err,
+              db
+            ) {
+              if (err) throw err;
+              var dbo = db.db("admin");
+              var myobj = {
+                username: data.username,
+                password: data.password,
+                jurisdiction: "admin",
+              };
+              dbo.collection("user").insertOne(myobj, function (err, result) {
+                if (err) throw err;
+                console.log("文档插入成功");
+                db.close();
+                res.json({
+                  data: {
+                    message: "成功注册",
+                  },
+                  status: 200,
+                });
+              });
+            });
+          }
+        });
+    }
+  );
 });
 //查看订单http://localhost:3000/user/queryOrder
 router.get("/queryOrder", function (req, res) {
@@ -104,6 +131,11 @@ router.get("/addOrder", function (req, res) {
         time: data.time,
         money: data.money,
         name: data.name,
+        username: data.username || "",
+        telephone: data.telephone || "",
+        email: data.email || "",
+        gender: data.gender || "",
+        homeType: data.homeType || "",
       };
       dbo.collection("orderList").insertOne(duplicate, function (err, res) {
         if (err) throw err;
