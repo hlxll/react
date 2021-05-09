@@ -19,13 +19,16 @@ class Local extends Component {
     };
     this.onShowSizeChange = this.onShowSizeChange.bind(this);
   }
-  selectForm() {}
-  selectDataType() {}
-  onShowSizeChange(size, page) {
+  selectForm () { }
+  selectDataType () { }
+  onShowSizeChange (size, page) {
     console.log(size);
     console.log(page);
   }
-  render() {
+  localDetail=()=>{
+    this.props.history.push('/localDetail')
+  }
+  render () {
     return (
       <div className="local">
         <div className="localform">
@@ -48,7 +51,7 @@ class Local extends Component {
             </div>
           </div>
           <div className="img">
-            <Image src="./img/formRight.png" className="imgWH" />
+            <Image preview={false} src="./img/formRight.png" className="imgWH" height={240} />
           </div>
         </div>
         <div className="localDataTitle">{this.state.title}的搜索结果页</div>
@@ -69,12 +72,9 @@ class Local extends Component {
         </div>
         <div className="contentData">
           <Row>
-            <Col span={6}>
+            <Col span={6} className="localDataCol" onClick={this.localDetail}>
               <LocalData data={this.state.localData} />
             </Col>
-            <Col span={6}>col-8</Col>
-            <Col span={6}>col-8</Col>
-            <Col span={6}>col-8</Col>
           </Row>
         </div>
       </div>

@@ -13,7 +13,11 @@ var ticketsRouter = require("./routes/tickets");
 var localRouter = require("./routes/local");
 var hotelRouter = require("./routes/hotel");
 var holidayRouter = require("./routes/holiday");
+<<<<<<< HEAD
 // var groupBuyingRouter = require("./routes/groupBuying");
+=======
+var groupBuyingRouter = require("./routes/groupBuying");
+>>>>>>> 7bceb8fe44ef69532970096bf431b292c920d633
 // var nodeRouter = require("./routes/node");
 
 var app = express();
@@ -43,9 +47,15 @@ app.use("/plane", planeRouter);
 app.use("/trainTicket", trainTicketRouter);
 app.use("/tickets", ticketsRouter);
 app.use("/local", localRouter);
+<<<<<<< HEAD
 app.use("/hotel", hotelRouter);
 app.use("/holiday", holidayRouter);
 // app.use('/groupBuying', groupBuyingRouter);
+=======
+app.use('/hotel', hotelRouter);
+app.use('/holiday', holidayRouter);
+app.use('/groupBuying', groupBuyingRouter);
+>>>>>>> 7bceb8fe44ef69532970096bf431b292c920d633
 // app.use('/node', nodeRouter);
 
 // catch 404 and forward to error handler

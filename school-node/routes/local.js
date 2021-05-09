@@ -69,7 +69,7 @@ router.get("/buyTicket", function (req, res) {
               var dbo = db.db("admin");
               var duplicate = {
                 type: 1,
-                time: "2021-05-01",
+                time: new Date(),
                 money: money,
                 name: result.name,
               };
