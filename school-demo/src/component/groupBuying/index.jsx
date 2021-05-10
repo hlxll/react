@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Input, Image, Radio, Button, Row, Col } from "antd";
+import { withRouter, NavLink as Link } from "react-router-dom";
 import "./index.less";
 import {
   VerticalAlignBottomOutlined,
@@ -25,6 +26,7 @@ class GroupBuy extends Component {
         travelType: "",
         travelDays: "",
       },
+      groupType: ["自由行", "跟团游"],
     };
     this.groupCitySearch = this.groupCitySearch.bind(this);
     this.formFinish = this.formFinish.bind(this);
@@ -41,7 +43,11 @@ class GroupBuy extends Component {
   }
   //查询数据的接口函数
   async getDataList() {
-    let resData = await groupList({});
+    let resData = await groupList();
+    console.log(resData);
+    this.setState({
+      groupDataList: resData.data,
+    });
   }
   groupCitySearch() {}
   formFinish() {}
@@ -61,6 +67,27 @@ class GroupBuy extends Component {
     });
   }
   render() {
+    let ColMain = [];
+    this.state.groupDataList.forEach((item, index) => {
+      ColMain.push(
+        <Col className="gutter-row" span={8} key={index}>
+          <div className="dataMain">
+            <div className="type">{this.state.groupType[+item.type]}</div>
+            <Link
+              to={{ pathname: "/groupDetail", query: { title: item.name } }}
+            >
+              <Image src={item.src} className="image" preview={false} />
+            </Link>
+            <div className="title">{item.name}</div>
+            <div className="text">
+              <p>中旅自营 </p> | <p> 高档酒店</p>|<p>玩转张家界 </p> |{" "}
+              <p> 探险天门山</p>
+            </div>
+            <div className="money">¥{item.money}</div>
+          </div>
+        </Col>
+      );
+    });
     return (
       <div className="groupBuying">
         <div className="groupHead">
@@ -178,20 +205,7 @@ class GroupBuy extends Component {
           </div>
         </div>
         <div className="dataSpeak">
-          <Row gutter={16}>
-            <Col className="gutter-row" span={8}>
-              <div className="dataMain">
-                <div className="type">自由行</div>
-                <Image src="" className="image" />
-                <div className="title">张家界 3天2夜 自由行</div>
-                <div className="text">
-                  <p>中旅自营 </p> | <p> 高档酒店</p>|<p>玩转张家界 </p> |{" "}
-                  <p> 探险天门山</p>
-                </div>
-                <div className="money">¥1260</div>
-              </div>
-            </Col>
-          </Row>
+          <Row>{ColMain}</Row>
         </div>
         <div className="fightIcon">
           <div className="rightIcon">
@@ -215,4 +229,4 @@ class GroupBuy extends Component {
     );
   }
 }
-export default GroupBuy;
+export default withRouter(GroupBuy);

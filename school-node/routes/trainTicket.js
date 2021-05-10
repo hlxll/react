@@ -12,10 +12,12 @@ router.get("/searchTicket", function (req, res) {
     function (err, db) {
       if (err) throw err;
       var dbo = db.db("admin");
-      let whereStr = {
-        startCity: data.startCity || "",
-        arriveCity: data.arriveCity || "",
-      };
+      let whereStr = {};
+      for (let obj in data) {
+        if (data[obj] != "undefined") {
+          whereStr[obj] = data[obj];
+        }
+      }
       //find是查询条件，limit是返回条数
       console.log(whereStr);
 

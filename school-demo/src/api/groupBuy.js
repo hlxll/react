@@ -1,5 +1,5 @@
 import axios from "axios";
-function groupList() {
-  return axios.get("/api/groupList");
+function groupList(name) {
+  return axios.get("/api/groupBuying/searchTicket?name=" + name);
 }
 export { groupList };

@@ -13,7 +13,7 @@ router.get("/searchTicket", function (req, res) {
       let whereStr = {};
       for (let obj in data) {
         if (data[obj] != "undefined") {
-          whereStr.obj = data[obj];
+          whereStr[obj] = data[obj];
         }
       }
       //find是查询条件，limit是返回条数

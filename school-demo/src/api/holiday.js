@@ -1,5 +1,7 @@
 import axios from "axios";
-function searchHoliday() {
-  return axios.get("/api/holiday/searchTicket");
+function searchHoliday(title, money) {
+  return axios.get(
+    "/api/holiday/searchTicket?title=" + title + "&money=" + money
+  );
 }
 export { searchHoliday };

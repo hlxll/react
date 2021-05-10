@@ -6,7 +6,7 @@ export default class LocalData extends Component {
     super(props);
     this.state = {};
   }
-  render () {
+  render() {
     return (
       <div className="dataCol">
         <Image src="./img/local/dataBg.jpg" preview={false} className="image" />
@@ -14,7 +14,7 @@ export default class LocalData extends Component {
         <div className="money">￥{this.props.data.money}/天</div>
         <div className="footText">
           <div className="location">{this.props.data.city}</div>
-          <div>已售{this.props.data.number}</div>
+          <div>已售{this.props.data.num}</div>
         </div>
         <div className="leftTop">
           {+this.props.data.type === 1 ? "WIFI" : "票卷代购"}

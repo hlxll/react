@@ -1,7 +1,12 @@
 /* eslint-disable react/jsx-no-bind */
 import React, { Component } from "react";
 import { Input, Image, Button } from "antd";
-import { HashRouter as Router, Route, Switch, withRouter } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  withRouter,
+} from "react-router-dom";
 import "./index.less";
 import Head from "../../component/head";
 import LeftFixed from "../../component/leftFixed";
@@ -9,16 +14,17 @@ import Main from "../../component/main";
 import PlaneTicket from "../../component/planeTicket";
 import Hotel from "../../component/hotel";
 import TrainTickets from "../../component/trainTickets";
-import TrainDetail from "../../component/trainTickets/common/trainDetail"
+import TrainDetail from "../../component/trainTickets/common/trainDetail";
 import Holiday from "../../component/holiday";
 import GroupBuying from "../../component/groupBuying";
 import Tickets from "../../component/tickets";
+import TicketsMap from "../../component/tickets/ticketsMap";
 import Local from "../../component/local";
 import HotelSearch from "../../component/hotel/search/search";
 import PlateTSearch from "../../component/planeTicket/buy";
-import Hmap from '../../component/map'
-import HolidayDetail from "../../component/holiday/detail";
-import LocalDetail from "../../component/local/detail"
+import Hmap from "../../component/map";
+import HolidayDetail from "../../component/groupBuying/detail";
+import LocalDetail from "../../component/local/detail";
 const { Search } = Input;
 //创建一个context，传入默认值
 export const LoginContext = React.createContext("unLogin");
@@ -30,7 +36,7 @@ class Home extends Component {
     };
     this.onSearch = this.onSearch.bind(this);
   }
-  componentDidMount () {
+  componentDidMount() {
     let pathName = this.props.location.pathname.split("").splice(1).join("");
     console.log(typeof pathName);
     console.log(pathName);
@@ -63,8 +69,8 @@ class Home extends Component {
       componentNum: +index,
     });
   }
-  onSearch () { }
-  toHomeChildRouter (index) {
+  onSearch() {}
+  toHomeChildRouter(index) {
     this.setState({
       componentNum: +index,
     });
@@ -94,7 +100,7 @@ class Home extends Component {
       this.props.history.replace("/local");
     }
   }
-  render () {
+  render() {
     return (
       <div className="home">
         <Head />
@@ -213,7 +219,9 @@ class Home extends Component {
             <Route path="/holiday" component={Holiday} />
             <Route path="/holidayDetail" component={HolidayDetail} />
             <Route path="/groupBuying" component={GroupBuying} />
+            <Route path="/groupDetail" component={HolidayDetail} />
             <Route path="/tickets" component={Tickets} />
+            <Route path="/ticketsMap" component={TicketsMap} />
             <Route path="/local" component={Local} />
             <Route path="/localDetail" component={LocalDetail} />
             <Route path="/" exact component={Main} />

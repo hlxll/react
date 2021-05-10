@@ -13,10 +13,19 @@ router.get("/searchLocal", function (req, res) {
     function (err, db) {
       if (err) throw err;
       var dbo = db.db("admin");
+      let whereStr = {};
+      for (let obj in data) {
+        if (data[obj] != "undefined") {
+          whereStr[obj] = data[obj];
+        }
+      }
+      if (whereStr.type) {
+        whereStr.type = +whereStr.type;
+      }
       //find是查询条件，limit是返回条数
       dbo
         .collection("local")
-        .find(data)
+        .find(whereStr)
         .toArray(function (err, result) {
           if (err) throw err;
           db.close();
@@ -32,6 +41,12 @@ router.get("/searchLocal", function (req, res) {
               status: 1,
               message: "查询成功",
               data: outSort(result),
+            });
+          } else {
+            res.json({
+              status: 1,
+              message: "查询成功",
+              data: result,
             });
           }
         });

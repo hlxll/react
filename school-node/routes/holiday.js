@@ -10,7 +10,14 @@ router.get("/searchTicket", function (req, res) {
     function (err, db) {
       if (err) throw err;
       var dbo = db.db("admin");
-      var whereStr = data; // 查询条件
+      let whereStr = {};
+      for (let obj in data) {
+        if (data[obj] != "undefined") {
+          whereStr[obj] = obj == "money" ? +data[obj] : data[obj];
+        }
+      } // 查询条件
+      console.log(whereStr);
+
       //find是查询条件，limit是返回条数
       dbo
         .collection("holiday")
@@ -19,56 +26,6 @@ router.get("/searchTicket", function (req, res) {
           if (err) throw err;
           db.close();
           res.send(result);
-        });
-    }
-  );
-});
-router.get("/buyHoliday", function (req, res) {
-  var data = req.query;
-  var MongoClient = require("mongodb").MongoClient;
-  var url = "mongodb://localhost:27017";
-  MongoClient.connect(
-    url,
-    { useUnifiedTopology: true, useNewUrlParser: true },
-    function (err, db) {
-      if (err) throw err;
-      var dbo = db.db("admin");
-      var whereStr = {
-        name: data.name,
-      };
-      let money = 0;
-      dbo
-        .collection("holiday")
-        .find(whereStr)
-        .limit(1)
-        .toArray(function (err, result) {
-          if (err) throw err;
-          money = result.money;
-          //添加订单记录
-          MongoClient.connect(
-            url,
-            { useUnifiedTopology: true, useNewUrlParser: true },
-            function (err, db) {
-              if (err) throw err;
-              var dbo = db.db("admin");
-              var duplicate = {
-                type: 1,
-                time: new Date(),
-                money: money,
-                name: result.name,
-              };
-              dbo
-                .collection("orderList")
-                .insertOne(duplicate, function (err, res) {
-                  if (err) throw err;
-                  db.close();
-                  res.json({
-                    status: 1,
-                    message: "购买成功",
-                  });
-                });
-            }
-          );
         });
     }
   );

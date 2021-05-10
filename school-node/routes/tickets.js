@@ -13,9 +13,15 @@ router.get("/searchTicket", function (req, res) {
       if (err) throw err;
       var dbo = db.db("admin");
       //find是查询条件，limit是返回条数
+      let whereStr = {};
+      for (let obj in data) {
+        if (data[obj] != "undefined") {
+          whereStr[obj] = data[obj];
+        }
+      }
       dbo
         .collection("tickets")
-        .find(data)
+        .find(whereStr)
         .toArray(function (err, result) {
           if (err) throw err;
           db.close();

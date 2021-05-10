@@ -3,6 +3,22 @@
     "name": "西湖",
     "money": 9,
     "text": "在这里邂逅你的白娘子吧",
-    "src":"https://imgs.qunarzz.com/sight/p0/1603/87/87146cf32fa8635e90.water.png_224x148_ee9935a4.png"
+    "src": "https://imgs.qunarzz.com/sight/p0/1603/87/87146cf32fa8635e90.water.png_224x148_ee9935a4.png",
+    "city": "杭州",
+    "ticketType": "1",
+    "location": "浙江杭州西湖风景名区",
+    "number": "4.5",
+    "latlon": [120.21201, 30.2084]
+  },
+  {
+    "name": "西湖",
+    "money": 9,
+    "text": "在这里邂逅你的白娘子吧",
+    "src": "https://imgs.qunarzz.com/sight/p0/1603/87/87146cf32fa8635e90.water.png_224x148_ee9935a4.png",
+    "city": "上海",
+    "ticketType": "1",
+    "location": "浙江杭州西湖风景名区",
+    "number": "4.5",
+    "latlon": [120.21201, 30.2084]
   }
 ]

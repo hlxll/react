@@ -1,7 +1,7 @@
-var expiress = require('express')
-var router = expiress.Router()
+var expiress = require("express");
+var router = expiress.Router();
 //查询列表数据
-router.get('/searchTicket', function (req, res) {
+router.get("/searchTicket", function (req, res) {
   var data = req.query;
   var MongoClient = require("mongodb").MongoClient;
   var url = "mongodb://localhost:27017";
@@ -11,10 +11,15 @@ router.get('/searchTicket', function (req, res) {
     function (err, db) {
       if (err) throw err;
       var dbo = db.db("admin");
-      var whereStr = data; // 查询条件
+      let whereStr = {};
+      for (let obj in data) {
+        if (data[obj] != "undefined") {
+          whereStr[obj] = data[obj];
+        }
+      } // 查询条件
       //find是查询条件，limit是返回条数
       dbo
-        .collection("groupBuying")
+        .collection("groupBuy")
         .find(whereStr)
         .toArray(function (err, result) {
           if (err) throw err;
@@ -23,7 +28,7 @@ router.get('/searchTicket', function (req, res) {
         });
     }
   );
-})
+});
 //购买团购项目
 router.get("/buyGroup", function (req, res) {
   var data = req.query;
@@ -76,4 +81,4 @@ router.get("/buyGroup", function (req, res) {
   );
 });
 
-module.exports = router
+module.exports = router;

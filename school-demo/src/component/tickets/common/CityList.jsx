@@ -8,7 +8,7 @@ class Tickets extends Component {
     };
   }
   changeCity(city) {
-    console.log(city);
+    this.props.getCity(city);
   }
   render() {
     const recommendCityList = [];

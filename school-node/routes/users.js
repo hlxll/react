@@ -136,6 +136,8 @@ router.get("/addOrder", function (req, res) {
         email: data.email || "",
         gender: data.gender || "",
         homeType: data.homeType || "",
+        homeNum: data.HomeNum || "",
+        peopleNum: data.PeopleNum,
       };
       dbo.collection("orderList").insertOne(duplicate, function (err, res) {
         if (err) throw err;

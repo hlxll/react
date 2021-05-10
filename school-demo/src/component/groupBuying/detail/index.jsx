@@ -9,7 +9,7 @@ import {
   message,
 } from "antd";
 import { withRouter } from "react-router-dom";
-import * as holidayApi from "../../../api/holiday";
+import * as groupApi from "../../../api/groupBuy";
 import * as buyApi from "../../../api/user";
 import moment from "moment";
 import "./index.less";
@@ -46,7 +46,9 @@ class HolidayDetail extends Component {
   }
   componentDidMount() {
     //度假跳转传递的标题参数，在这个生命周期获取数据
-    this.searchData(this.props.location.state.title);
+    console.log(this.props.location.query.title);
+
+    this.searchData(this.props.location.query.title);
   }
   setNumValue = (e) => {
     let money = 0;
@@ -65,15 +67,17 @@ class HolidayDetail extends Component {
     });
   };
   async searchData(name) {
-    let resData = await holidayApi.searchHoliday(name);
+    let resData = await groupApi.groupList(name);
     let data = resData.data[0];
+    console.log(data);
+    debugger;
     let obj = {
-      name: data.title,
+      name: data.name,
       money: data.money,
       childMoney: data.money / 2,
       productNum: data._id,
-      moveGroup: data.startCity.split(","),
-      productCharac: data.type.split(","),
+      moveGroup: data.moveCity.split(","),
+      productCharac: data.productCharac.split(","),
     };
     this.setState({
       detailData: obj,
@@ -85,7 +89,7 @@ class HolidayDetail extends Component {
       date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
     console.log(this.state);
     let obj = {
-      type: 4,
+      type: 5,
       time: time,
       name: this.state.detailData.name,
       HomeNum: this.state.HomeNum,
@@ -96,7 +100,7 @@ class HolidayDetail extends Component {
     console.log(resData);
     if (resData.data.status == 200) {
       message.success(resData.data.message);
-      this.props.history.push("/holiday");
+      this.props.history.push("/groupBuying");
     }
   }
   render() {

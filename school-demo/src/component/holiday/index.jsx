@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Input, Form, Radio, Button, Image } from "antd";
+import { Input, Form, Radio, Button, Image, DatePicker } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import * as holidayApi from "../../api/holiday";
 import "./index.less";
@@ -38,7 +38,6 @@ class Holiday extends Component {
   }
   async componentDidMount() {
     let resData = await holidayApi.searchHoliday();
-    console.log(resData.data);
     this.setState({
       holidayList: resData.data,
     });
@@ -50,11 +49,16 @@ class Holiday extends Component {
       toBottom: state,
     });
   }
-  onFinish() {}
+  async onFinish(e) {
+    console.log(e);
+    let resData = await holidayApi.searchHoliday(e.title, +e.PriceRange);
+    this.setState({
+      holidayList: resData.data,
+    });
+  }
   onFinishFailed() {}
   byDataSearch() {}
   toHolidayDetail = (e) => {
-    console.log(e);
     this.props.history.push({
       pathname: "/holidayDetail",
       state: { title: e },
@@ -88,17 +92,19 @@ class Holiday extends Component {
             >
               <Form.Item
                 label="关键字"
-                name="keyword"
+                name="title"
                 rules={[{ message: "请输入目的地主题或关键字!" }]}
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
                 style={{ width: 260 }}
               >
                 <Input placeholder="请输入目的地主题或关键字" />
               </Form.Item>
-              <Form.Item label="出发日期" name="startDate">
-                <Radio.Group>
-                  <Radio value="a">不限</Radio>
-                  <Radio value="b">具体日期</Radio>
-                </Radio.Group>
+              <Form.Item label="出发日期" name="lowTime">
+                <DatePicker />
               </Form.Item>
               <Form.Item label="行程天数" name="TravelNum">
                 <Radio.Group>
@@ -108,8 +114,15 @@ class Holiday extends Component {
                 <Input style={{ width: 100 }} />～
                 <Input style={{ width: 100 }} />
               </Form.Item>
-              <Form.Item label="价格区间" name="PriceRange">
-                <Input style={{ width: 100 }} />～
+              <Form.Item
+                label="价格区间"
+                name="PriceRange"
+                rules={[
+                  {
+                    required: true,
+                  },
+                ]}
+              >
                 <Input style={{ width: 100 }} />
               </Form.Item>
               <Form.Item label="出行方式" name="TravelMode">

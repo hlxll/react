@@ -2,8 +2,15 @@
   {
     "name": "东南亚7国WIFI 4G 香港机场领取",
     "money": "27",
-    "num":"77",
-    "location":"越南",
-    "type": "1"
+    "num": "77",
+    "location": "越南",
+    "type": 1
+  },
+  {
+    "name": "东南亚7国当地游玩",
+    "money": "27",
+    "num": 0,
+    "location": "越南",
+    "type": 0
   }
 ]
