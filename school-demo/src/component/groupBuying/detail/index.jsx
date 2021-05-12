@@ -8,6 +8,7 @@ import {
   InputNumber,
   message,
 } from "antd";
+import store from "../../../store";
 import { withRouter } from "react-router-dom";
 import * as groupApi from "../../../api/groupBuy";
 import * as buyApi from "../../../api/user";
@@ -46,9 +47,7 @@ class HolidayDetail extends Component {
   }
   componentDidMount() {
     //度假跳转传递的标题参数，在这个生命周期获取数据
-    console.log(this.props.location.query.title);
-
-    this.searchData(this.props.location.query.title);
+    this.searchData(this.props.location.state.title);
   }
   setNumValue = (e) => {
     let money = 0;
@@ -87,7 +86,11 @@ class HolidayDetail extends Component {
     let date = new Date(e.startDate);
     let time =
       date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-    console.log(this.state);
+    if (!store.getState().loginUsername) {
+      message.error("请先登录");
+      this.props.history.push("/login");
+      return;
+    }
     let obj = {
       type: 5,
       time: time,
@@ -95,6 +98,7 @@ class HolidayDetail extends Component {
       HomeNum: this.state.HomeNum,
       PeopleNum: this.state.PeopleNum,
       money: this.state.allMoney,
+      username: store.getState().loginUsername,
     };
     let resData = await buyApi.addOrderList(obj);
     console.log(resData);
@@ -161,10 +165,7 @@ class HolidayDetail extends Component {
             onFinishFailed={this.buyFailed}
           >
             <Form.Item label="出游日期" name="startDate">
-              <DatePicker
-                defaultValue={moment("2021/01/01", dateFormat)}
-                format={dateFormat}
-              />
+              <DatePicker format={dateFormat} />
             </Form.Item>
             <Form.Item label="出行人数">
               <div className="movePeople">

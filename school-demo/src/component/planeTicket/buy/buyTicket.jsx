@@ -18,7 +18,9 @@ class BuyTickets extends Component {
   }
   componentDidMount() {
     let e = this.props.childData;
-    let day = e.date.split("/");
+    console.log(e);
+
+    let day = e.date[0].split("/");
     let startTime = [];
     startTime.push(day[1]);
     startTime.push("月");
@@ -27,9 +29,10 @@ class BuyTickets extends Component {
     startTime.push("-");
     startTime.push(e.startTime);
     let arriveTime = [];
-    arriveTime.push(day[1]);
+    let dat2 = e.date[1].split("/");
+    arriveTime.push(dat2[1]);
     arriveTime.push("月");
-    arriveTime.push(day[2]);
+    arriveTime.push(dat2[2]);
     arriveTime.push("日");
     arriveTime.push("-");
     arriveTime.push(e.arriveTime);
@@ -45,11 +48,12 @@ class BuyTickets extends Component {
     let obj = {
       type: 1,
       time: [this.state.startTime, this.state.arriveTime],
-      money: 123,
+      money: this.props.childData.money,
       name: this.state.planeType,
       username: e.username,
       telephone: e.telephone,
       email: e.email,
+      idCode: e.Identification,
     };
     let resData = await addOrder.addOrderList(obj);
     console.log(resData);

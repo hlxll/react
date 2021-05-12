@@ -9,7 +9,7 @@ export default class LocalData extends Component {
   render() {
     return (
       <div className="dataCol">
-        <Image src="./img/local/dataBg.jpg" preview={false} className="image" />
+        <Image src={this.props.data.src} preview={false} className="image" />
         <div className="text">{this.props.data.name}</div>
         <div className="money">￥{this.props.data.money}/天</div>
         <div className="footText">

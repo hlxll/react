@@ -3,6 +3,9 @@ import { Row, Col, Image, Button, message } from "antd";
 import ColMainComponent from "./ColMainComponent";
 import { NavLink as Link } from "react-router-dom";
 import * as buyApi from "../../../api/user";
+import { withRouter } from "react-router-dom";
+
+import store from "../../../store";
 import "./scienco.less";
 import Modal from "antd/lib/modal/Modal";
 class Scienco extends Component {
@@ -29,13 +32,18 @@ class Scienco extends Component {
     });
   };
   async buyTicket() {
-    console.log(this.state.modalTicketDetail);
+    if (!store.getState().loginUsername) {
+      message.error("请先登录");
+      this.props.history.push("/login");
+      return;
+    }
     let Data = this.state.modalTicketDetail;
     let obj = {
       type: 6,
       name: Data.name,
       money: Data.money,
       city: Data.city,
+      username: store.getState().loginUsername,
     };
     let resData = await buyApi.addOrderList(obj);
     message.success("添加成功");
@@ -117,4 +125,4 @@ class Scienco extends Component {
     );
   }
 }
-export default Scienco;
+export default withRouter(Scienco);

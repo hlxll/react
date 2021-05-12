@@ -52,9 +52,12 @@ class Local extends Component {
     console.log(size);
     console.log(page);
   }
-  localDetail = () => {
-    this.props.history.push("/localDetail");
-  };
+  localDetail(item) {
+    this.props.history.push({
+      pathname: "/localDetail",
+      data: { data: item },
+    });
+  }
   getChildCity = (e) => {
     console.log(e);
     this.searchLocalData(this.state.localType, e);
@@ -63,7 +66,11 @@ class Local extends Component {
     let ColMain = [];
     this.state.localData.forEach((item) => {
       ColMain.push(
-        <Col span={6} className="localDataCol" onClick={this.localDetail}>
+        <Col
+          span={6}
+          className="localDataCol"
+          onClick={this.localDetail.bind(this, item)}
+        >
           <LocalData data={item} />
         </Col>
       );
@@ -86,7 +93,10 @@ class Local extends Component {
               </Menu.Item>
             </Menu>
             <div className="dataForm">
-              <LocalForm getCity={this.getChildCity} />
+              <LocalForm
+                getCity={this.getChildCity}
+                type={this.state.localType}
+              />
             </div>
           </div>
           <div className="img">

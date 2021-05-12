@@ -16,6 +16,7 @@ import Hotel from "../../component/hotel";
 import TrainTickets from "../../component/trainTickets";
 import TrainDetail from "../../component/trainTickets/common/trainDetail";
 import Holiday from "../../component/holiday";
+import HolidayDetail from "../../component/holiday/detail";
 import GroupBuying from "../../component/groupBuying";
 import Tickets from "../../component/tickets";
 import TicketsMap from "../../component/tickets/ticketsMap";
@@ -23,7 +24,7 @@ import Local from "../../component/local";
 import HotelSearch from "../../component/hotel/search/search";
 import PlateTSearch from "../../component/planeTicket/buy";
 import Hmap from "../../component/map";
-import HolidayDetail from "../../component/groupBuying/detail";
+import GroupDetail from "../../component/groupBuying/detail";
 import LocalDetail from "../../component/local/detail";
 const { Search } = Input;
 //创建一个context，传入默认值
@@ -219,7 +220,7 @@ class Home extends Component {
             <Route path="/holiday" component={Holiday} />
             <Route path="/holidayDetail" component={HolidayDetail} />
             <Route path="/groupBuying" component={GroupBuying} />
-            <Route path="/groupDetail" component={HolidayDetail} />
+            <Route path="/groupDetail" component={GroupDetail} />
             <Route path="/tickets" component={Tickets} />
             <Route path="/ticketsMap" component={TicketsMap} />
             <Route path="/local" component={Local} />

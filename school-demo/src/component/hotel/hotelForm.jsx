@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { Menu, Button, Form, Input, Select, DatePicker } from "antd";
 import { withRouter } from "react-router-dom";
+import chinaJson from "../china.json";
 import { MailOutlined, AppstoreOutlined } from "@ant-design/icons";
 import "./hotelForm.less";
 const { Option } = Select;
@@ -9,21 +10,38 @@ class HotelForm extends Component {
     super(props);
     this.state = {
       current: "1",
+      chinaCity: [],
     };
     this.handleClick = this.handleClick.bind(this);
     this.hotelFinished = this.hotelFinished.bind(this);
     this.hotelFinishFailed = this.hotelFinishFailed.bind(this);
   }
-  handleClick (e) {
+  componentDidMount() {
+    let resCity = [];
+    chinaJson.forEach((item) => {
+      if (item.province.split("")[2] === "市") {
+        resCity.push(item.province);
+      } else {
+        item.city.map((cityItem) => resCity.push(cityItem.name));
+      }
+    });
+    this.setState({
+      chinaCity: resCity,
+    });
+  }
+  handleClick(e) {
     this.setState({
       current: e.key,
     });
   }
-  hotelFinished (e) {
-    this.props.history.push("/hotels/HotelSearch");
+  hotelFinished(e) {
+    this.props.history.push({
+      pathname: "/hotels/HotelSearch",
+      query: e,
+    });
   }
-  hotelFinishFailed () { }
-  render () {
+  hotelFinishFailed() {}
+  render() {
     return (
       <div className="hotelForm">
         <div className="headBtn">
@@ -59,10 +77,10 @@ class HotelForm extends Component {
               ]}
               className="city"
             >
-              <Select placeholder="目的地" allowClear>
-                <Option value="male">male</Option>
-                <Option value="female">female</Option>
-                <Option value="other">other</Option>
+              <Select placeholder="目的地" allowClear showSearch>
+                {this.state.chinaCity.map((item) => (
+                  <Option value={item}>{item}</Option>
+                ))}
               </Select>
             </Form.Item>
             <Form.Item
@@ -74,7 +92,7 @@ class HotelForm extends Component {
               ]}
               className="name"
             >
-              <Input placeholder="Basic usage" />
+              <Input placeholder="酒店名" />
             </Form.Item>
             <Form.Item
               name="inHotelDate"
@@ -110,4 +128,4 @@ class HotelForm extends Component {
     );
   }
 }
-export default withRouter(HotelForm)
+export default withRouter(HotelForm);

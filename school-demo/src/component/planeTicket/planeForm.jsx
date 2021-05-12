@@ -3,6 +3,7 @@ import { Menu, Button, Form, Space, Select, Radio, DatePicker } from "antd";
 import { NavLink as Link, withRouter } from "react-router-dom";
 import Multipass from "./multipass";
 import "./planeForm.less";
+import chinaJson from "../china.json";
 import { MailOutlined, AppstoreOutlined } from "@ant-design/icons";
 const { Option } = Select;
 const formItemLayout = {
@@ -19,6 +20,7 @@ class PlaneForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      chinaCity: [],
       current: "2",
       oneRadio: "one", //国内的行程类型
       twoRadio: "one", //国外的行程类型
@@ -35,39 +37,57 @@ class PlaneForm extends Component {
     this.onArriverCityChange = this.onArriverCityChange.bind(this);
     this.onArriverCitySearch = this.onArriverCitySearch.bind(this);
   }
-  handleClick (e) {
+  componentDidMount() {
+    let resCity = [];
+    chinaJson.forEach((item) => {
+      if (item.province.split("")[2] === "市") {
+        resCity.push(item.province);
+      } else {
+        item.city.map((cityItem) => resCity.push(cityItem.name));
+      }
+    });
+    this.setState({
+      chinaCity: resCity,
+    });
+  }
+  handleClick(e) {
     this.setState({ current: e.key });
   }
-  OneOnFinish (e) {
+  OneOnFinish(e) {
     console.log(e);
-    this.props.history.push('/PlateTSearch')
+    this.props.history.push({
+      pathname: "/PlateTSearch",
+      query: { data: e },
+    });
   }
-  OneOnFinishFailed () {
+  OneOnFinishFailed() {
     console.log("不成功");
   }
-  TwoOnFinish (e) {
-    console.log(e);
-    this.props.history.push('/PlateTSearch')
+  TwoOnFinish(e) {
+    this.props.history.push({
+      pathname: "/PlateTSearch",
+      query: { data: e },
+    });
   }
-  TwoOnFinishFailed () {
+  TwoOnFinishFailed() {
     console.log("不成功");
   }
-  oneRadioOnChange (e) {
+  oneRadioOnChange(e) {
     this.setState({
       oneRadio: e.target.value,
     });
   }
-  twoRadioOnChange (e) {
+  twoRadioOnChange(e) {
     this.setState({
       twoRadio: e.target.value,
     });
   }
   // 智能搜索的起始城市选择
-  onStartCityChange () { }
-  onStartCitySearch () { }
-  onArriverCityChange () { }
-  onArriverCitySearch () { }
-  render () {
+  onStartCityChange() {}
+  onStartCitySearch() {}
+  onArriverCityChange() {}
+  onArriverCitySearch() {}
+  render() {
     return (
       <div className="planeForm">
         <div className="head">
@@ -130,10 +150,14 @@ class PlaneForm extends Component {
                   },
                 ]}
               >
-                <Select placeholder="输入国家地区城市/机场" allowClear>
-                  <Option value="male">male</Option>
-                  <Option value="female">female</Option>
-                  <Option value="other">other</Option>
+                <Select
+                  placeholder="输入国家地区城市/机场"
+                  allowClear
+                  showSearch
+                >
+                  {this.state.chinaCity.map((item) => (
+                    <Option value={item}>{item}</Option>
+                  ))}
                 </Select>
               </Form.Item>
               <Form.Item
@@ -156,10 +180,14 @@ class PlaneForm extends Component {
                   },
                 ]}
               >
-                <Select placeholder="输入国家地区城市/机场" allowClear>
-                  <Option value="male">male</Option>
-                  <Option value="female">female</Option>
-                  <Option value="other">other</Option>
+                <Select
+                  placeholder="输入国家地区城市/机场"
+                  allowClear
+                  showSearch
+                >
+                  {this.state.chinaCity.map((item) => (
+                    <Option value={item}>{item}</Option>
+                  ))}
                 </Select>
               </Form.Item>
               <Form.Item
@@ -168,10 +196,10 @@ class PlaneForm extends Component {
                   this.state.oneRadio === "one"
                     ? []
                     : [
-                      {
-                        required: true,
-                      },
-                    ]
+                        {
+                          required: true,
+                        },
+                      ]
                 }
                 className="five"
               >
@@ -211,7 +239,8 @@ class PlaneForm extends Component {
                   <Radio value="four">多程</Radio>
                 </Radio.Group>
               </Form.Item>
-              {this.state.twoRadio === "one" || this.state.twoRadio === "two" ? (
+              {this.state.twoRadio === "one" ||
+              this.state.twoRadio === "two" ? (
                 <>
                   <Form.Item
                     className="two"
@@ -222,10 +251,14 @@ class PlaneForm extends Component {
                       },
                     ]}
                   >
-                    <Select placeholder="输入国家地区城市/机场" allowClear>
-                      <Option value="male">male</Option>
-                      <Option value="female">female</Option>
-                      <Option value="other">other</Option>
+                    <Select
+                      placeholder="输入国家地区城市/机场"
+                      allowClear
+                      showSearch
+                    >
+                      {this.state.chinaCity.map((item) => (
+                        <Option value={item}>{item}</Option>
+                      ))}
                     </Select>
                   </Form.Item>
                   <Form.Item
@@ -248,10 +281,14 @@ class PlaneForm extends Component {
                       },
                     ]}
                   >
-                    <Select placeholder="输入国家地区城市/机场" allowClear>
-                      <Option value="male">male</Option>
-                      <Option value="female">female</Option>
-                      <Option value="other">other</Option>
+                    <Select
+                      placeholder="输入国家地区城市/机场"
+                      showSearch
+                      allowClear
+                    >
+                      {this.state.chinaCity.map((item) => (
+                        <Option value={item}>{item}</Option>
+                      ))}
                     </Select>
                   </Form.Item>
                   <Form.Item
@@ -260,10 +297,10 @@ class PlaneForm extends Component {
                       this.state.twoRadio === "one"
                         ? []
                         : [
-                          {
-                            required: true,
-                          },
-                        ]
+                            {
+                              required: true,
+                            },
+                          ]
                     }
                     className="five"
                   >

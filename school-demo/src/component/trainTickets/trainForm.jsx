@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Form, Menu, Button, Select, DatePicker } from "antd";
-import { withRouter } from 'react-router-dom'
-import chinaJson from './common/china.json'
+import { withRouter } from "react-router-dom";
+import chinaJson from "./common/china.json";
 import { MailOutlined } from "@ant-design/icons";
 import "./trainForm.less";
 const { Option } = Select;
@@ -10,34 +10,34 @@ class TrainForm extends Component {
     super(props);
     this.state = {
       current: "1",
-      chinaCity: []
+      chinaCity: [],
     };
     this.handleClick = this.handleClick.bind(this);
     this.OnFinish = this.OnFinish.bind(this);
     this.OnFinishFailed = this.OnFinishFailed.bind(this);
   }
-  componentDidMount () {
-    let resCity = []
-    chinaJson.forEach(item => {
-      if (item.province.split('')[2] === '市') {
-        resCity.push(item.province)
+  componentDidMount() {
+    let resCity = [];
+    chinaJson.forEach((item) => {
+      if (item.province.split("")[2] === "市") {
+        resCity.push(item.province);
       } else {
-        item.city.map(cityItem =>
-          resCity.push(cityItem.name)
-        )
+        item.city.map((cityItem) => resCity.push(cityItem.name));
       }
-    })
+    });
     this.setState({
-      chinaCity: resCity
-    })
+      chinaCity: resCity,
+    });
   }
-  handleClick () { }
-  OnFinish (e) {
-    console.log(e);
-    this.props.history.push('/trainDetail')
+  handleClick() {}
+  OnFinish(e) {
+    this.props.history.push({
+      pathname: "/trainDetail",
+      query: e,
+    });
   }
-  OnFinishFailed () { }
-  render () {
+  OnFinishFailed() {}
+  render() {
     return (
       <div className="trainForm">
         <div className="head">
@@ -82,9 +82,9 @@ class TrainForm extends Component {
                 placeholder="输入城市名或车站名"
                 optionFilterProp="children"
               >
-                {
-                  this.state.chinaCity.map(item => <Option value={item}>{item}</Option>)
-                }
+                {this.state.chinaCity.map((item) => (
+                  <Option value={item}>{item}</Option>
+                ))}
               </Select>
             </Form.Item>
             <Form.Item
@@ -106,15 +106,16 @@ class TrainForm extends Component {
                   required: true,
                 },
               ]}
-            ><Select
-              showSearch
-              style={{ width: 200 }}
-              placeholder="输入城市名或车站名"
-              optionFilterProp="children"
             >
-                {
-                  this.state.chinaCity.map(item => <Option value={item}>{item}</Option>)
-                }
+              <Select
+                showSearch
+                style={{ width: 200 }}
+                placeholder="输入城市名或车站名"
+                optionFilterProp="children"
+              >
+                {this.state.chinaCity.map((item) => (
+                  <Option value={item}>{item}</Option>
+                ))}
               </Select>
             </Form.Item>
             <Form.Item className="submitOneForm">

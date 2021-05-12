@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Image, Table, Space, Button, message } from "antd";
 import * as hotelApi from "../../../api/user";
+import store from "../../../store/index";
 import "./index.less";
 const { Column, ColumnGroup } = Table;
 class HotelDetail extends Component {
@@ -25,24 +26,26 @@ class HotelDetail extends Component {
     };
   }
   async buyHotel(index) {
-    console.log(index);
-    console.log(this.props.data);
     let date = new Date();
     let dateDay =
       date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay();
-    let obj = {
-      type: 2,
-      time: dateDay,
-      money: index.money,
-      name: this.props.data.name,
-      username: "" || "",
-      telephone: "" || "",
-      email: "" || "",
-      homeType: index.homeType || "",
-    };
-    let resData = await hotelApi.addOrderList(obj);
-    console.log(resData);
-    message.success("预订成功");
+    if (store.getState().loginUsername) {
+      let obj = {
+        type: 2,
+        time: dateDay,
+        money: index.money,
+        name: this.props.data.name,
+        username: store.getState().loginUsername,
+        telephone: "" || "",
+        email: "" || "",
+        homeType: index.homeType || "",
+      };
+      let resData = await hotelApi.addOrderList(obj);
+      message.success("预订成功");
+    } else {
+      message.error("请先登录");
+      this.props.history.push("/login");
+    }
   }
   render() {
     return (

@@ -18,8 +18,37 @@ class BuyTickets extends Component {
     this.pushDetail = this.pushDetail.bind(this);
     this.onFinish = this.onFinish.bind(this);
     this.onFinishFailed = this.onFinishFailed.bind(this);
+    this.toTwoNum = this.toTwoNum.bind(this);
   }
-  componentDidMount() {
+  toTwoNum(num) {
+    if (num < 10) {
+      return 0 + "" + num;
+    } else {
+      return num;
+    }
+  }
+  async componentDidMount() {
+    let propsData = this.props.location.query.data;
+    let start = propsData.start.split("");
+    start.pop();
+    let arrive = propsData.arrive.split("");
+    arrive.pop();
+    let startTime = new Date(propsData.startTime);
+    let Stime =
+      startTime.getFullYear() +
+      "/" +
+      this.toTwoNum(startTime.getMonth() + 1) +
+      "/" +
+      this.toTwoNum(startTime.getDate());
+
+    let resData = await planeApi.searchPlate(
+      start.join(""),
+      arrive.join(""),
+      Stime
+    );
+    this.setState({
+      planeList: resData.data.data,
+    });
     let resCity = [];
     chinaJson.forEach((item) => {
       if (item.province.split("")[2] === "市") {
@@ -192,7 +221,7 @@ class BuyTickets extends Component {
                         min-width="264px"
                         className="loginBtn"
                       >
-                        登录
+                        搜索
                       </Button>
                     </Form.Item>
                   </Col>

@@ -13,6 +13,7 @@ import * as holidayApi from "../../../api/holiday";
 import * as buyApi from "../../../api/user";
 import moment from "moment";
 import "./index.less";
+import store from "../../../store";
 const dateFormat = "YYYY/MM/DD";
 class HolidayDetail extends Component {
   constructor(props) {
@@ -83,7 +84,11 @@ class HolidayDetail extends Component {
     let date = new Date(e.startDate);
     let time =
       date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-    console.log(this.state);
+    if (!store.getState().loginUsername) {
+      message.error("请先登录");
+      this.props.history.push("/login");
+      return;
+    }
     let obj = {
       type: 4,
       time: time,
@@ -91,6 +96,7 @@ class HolidayDetail extends Component {
       HomeNum: this.state.HomeNum,
       PeopleNum: this.state.PeopleNum,
       money: this.state.allMoney,
+      username: store.getState().loginUsername,
     };
     let resData = await buyApi.addOrderList(obj);
     console.log(resData);
@@ -157,10 +163,7 @@ class HolidayDetail extends Component {
             onFinishFailed={this.buyFailed}
           >
             <Form.Item label="出游日期" name="startDate">
-              <DatePicker
-                defaultValue={moment("2021/01/01", dateFormat)}
-                format={dateFormat}
-              />
+              <DatePicker format={dateFormat} />
             </Form.Item>
             <Form.Item label="出行人数">
               <div className="movePeople">

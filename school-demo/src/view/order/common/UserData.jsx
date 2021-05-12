@@ -70,7 +70,6 @@ export default class UserData extends Component {
       telephone: this.changeTelephone("13407934178"),
     });
     let storeData = store.getState();
-    console.log(storeData);
     this.setState({
       headImgSrc: storeData.headImg,
     });
@@ -97,13 +96,18 @@ export default class UserData extends Component {
     return "86-" + num.join("");
   }
   headSrcChange(val) {
-    console.log(val);
     this.setState({
       headImgSrc: val.base64,
     });
-    upload("huanglin", val.base64).then((res) => {
+    // store.getState().loginUsername
+    upload(store.getState().loginUsername, val.base64).then((res) => {
       message.success(res.data.message);
     });
+    const Imgaction = {
+      type: "changeHeadImg",
+      value: val.base64,
+    };
+    store.dispatch(Imgaction);
   }
   // getBase64Image (img) {
   //   var canvas = document.createElement("canvas");

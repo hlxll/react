@@ -1,4 +1,5 @@
 import { Component } from "react";
+import store from "../../../store";
 import {
   Button,
   Table,
@@ -62,9 +63,16 @@ class TrainDetail extends Component {
     this.addTrainUser = this.addTrainUser.bind(this);
     this.lssueTickets = this.lssueTickets.bind(this);
     this.searchTrainTicket = this.searchTrainTicket.bind(this);
+    this.TextChange = this.TextChange.bind(this);
   }
   async componentDidMount() {
-    this.searchTrainTicket();
+    console.log(this.props.location.query);
+    let propsQuery = this.props.location.query;
+    let start = propsQuery.startCity.split("");
+    start.pop();
+    let arrive = propsQuery.arriveCity.split("");
+    arrive.pop();
+    this.searchTrainTicket(start.join(""), arrive.join(""));
     let resCity = [];
     chinaJson.forEach((item) => {
       if (item.province.split("")[2] === "市") {
@@ -110,7 +118,6 @@ class TrainDetail extends Component {
   };
   onFinishFailed = () => {};
   onFinish = (e) => {
-    console.log(e);
     let start = e.startCity.split("");
     start.pop();
     let arrive = e.arriveCity.split("");
@@ -161,6 +168,10 @@ class TrainDetail extends Component {
   }
   //快速出票
   async lssueTickets() {
+    if (!this.state.isRead) {
+      message.error("请先勾选同意协议");
+      return;
+    }
     let userArr = [];
     this.state.trainUser.forEach((item) => {
       userArr.push(JSON.stringify(item));
@@ -172,6 +183,7 @@ class TrainDetail extends Component {
       city: modalD.city,
       trainType: modalD.type,
       user: userArr,
+      username: store.getState().loginUsername,
     };
     let resData = await trainApi.addOrderList(obj);
     message.success(resData.data.message);

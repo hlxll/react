@@ -6,12 +6,14 @@ import reportWebVitals from "./reportWebVitals";
 import Login from "./view/login";
 import Home from "./view/home";
 import Order from "./view/order";
+import Config from "./view/config";
 //ak = mOs3rqPMqyM6G21CKIqyO8yFh9hWtR8p
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
         <Route path="/login" component={Login} />
+        <Route path="/config" component={Config} />
         <Route path="/order" exact component={Order} />
         <Route path="/" component={Home} />
       </Switch>

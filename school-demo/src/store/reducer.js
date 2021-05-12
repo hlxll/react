@@ -3,6 +3,8 @@ const defaultState = {
   isLogin: false, //判断是否登录
   loginUsername: "",
   headImg: "",
+  admin: false,
+  jurisdiction: "",
 };
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = defaultState, action) => {
@@ -20,6 +22,16 @@ export default (state = defaultState, action) => {
   if (action.type === "changeHeadImg") {
     let newState = JSON.parse(JSON.stringify(state));
     newState.headImg = action.value;
+    return newState;
+  }
+  if (action.type === "changeAdmin") {
+    let newState = JSON.parse(JSON.stringify(state));
+    newState.admin = action.value;
+    return newState;
+  }
+  if (action.type === "changeUserType") {
+    let newState = JSON.parse(JSON.stringify(state));
+    newState.jurisdiction = action.value;
     return newState;
   }
   return state;

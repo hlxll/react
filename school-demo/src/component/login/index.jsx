@@ -35,7 +35,8 @@ class SmallLogin extends React.Component {
     this.onTelePassFailed = this.onTelePassFailed.bind(this);
     this.onTelePassFinish = this.onTelePassFinish.bind(this);
     this.storeChange = this.storeChange.bind(this);
-
+    this.getLocation = this.getLocation.bind(this);
+    this.showPosition = this.showPosition.bind(this);
     // store.subscribe(this.storeChange())
     //订阅store变化，但是新版本可以不要，如果input的change方法改变store，而且input也绑定这个store，就会出问题
   }
@@ -58,7 +59,6 @@ class SmallLogin extends React.Component {
     }
   }
   async onUserPassFinish(value) {
-    console.log(this.state.numCode);
     let codeN = +value.code;
     let num = +this.state.numCode[0];
     let numTwo = +this.state.numCode[1];
@@ -88,11 +88,45 @@ class SmallLogin extends React.Component {
         value: storeData.username,
       };
       store.dispatch(nameAction);
+      //保存是否是admin用户
+      const adminAction = {
+        type: "changeAdmin",
+        value: storeData.jurisdiction == "admin" ? true : false,
+      };
+      store.dispatch(adminAction);
+      const userTypeAction = {
+        type: "changeUserType",
+        value: storeData.jurisdiction,
+      };
+      store.dispatch(userTypeAction);
       message.success("登录成功");
-      this.props.history.replace("/main");
+      await this.getLocation();
+      if (this.props.toRouter) {
+        this.props.history.replace("/order");
+      } else {
+        this.props.history.replace("/");
+      }
     } else {
       message.success("账号或密码错误");
     }
+  }
+  getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(this.showPosition);
+    } else {
+      message.error("不支持");
+    }
+  }
+  async showPosition(position) {
+    console.log(position);
+    let obj = {
+      date: new Date(),
+      latitude: 37.09024,
+      longitude: -95.712891,
+      computed: "max",
+      username: store.getState().loginUsername,
+    };
+    let resData = await userApi.addLog(obj);
   }
   onUserPassFailed() {}
   onTelePassFinish(value) {

@@ -75,6 +75,7 @@ router.get("/buyTicket", function (req, res) {
                   name: data.name,
                   trainType: +trainType,
                   user: data.user,
+                  username: data.username,
                 };
                 dbo
                   .collection("orderList")
@@ -116,4 +117,5 @@ router.get("/buyTicket", function (req, res) {
     }
   );
 });
+
 module.exports = router;

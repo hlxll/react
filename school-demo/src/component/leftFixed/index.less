@@ -1,152 +1,176 @@
-.leftMain{
-    width: auto;
+.leftMain {
+  width: auto;
+  height: 100%;
+  .leftMainContent {
     height: 100%;
-    .leftMainContent{
-        height: 100%;
-        width: 35px;
-        background-color: #7c8994;
-        animation: openRight 2s;
-        .closeIcon{
-            height: 30%;
-            text-align: center;
-            color: #ffffff;
-            font-size: 14px;
-            padding-top: 10px;
-            .closeClick{
-                cursor: pointer;
-            }
-        }
-        .peopleIcon{
-            color: #ffffff;
-            text-align: center;
-            font-size: 16px;
-            width: 70%;
-            height: 65px;
-            margin: auto;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ffffff;
-            .peopleLong{
-                color: #fff;
-                width: 24px;
-                height: 24px;
-                overflow: hidden;
-            }
-            .peopleLong:hover{
-                background-color: #fff;
-                color: #7c8994;
-                width: 280px;
-                text-align: left;
-                height: 40px;
-                display: flex;
-                align-items: center;
-                border: 1px solid #ddd;
-            }
-        }
-        .whiteMailIcon{
-            margin-top: 10px;
-            color: #7c8994;
-            height: 60px;
-            background-color: #ffffff;
-            text-align: center;
-            cursor: pointer;
-            .smallLogin{
-                position: absolute;
-                left: 35px;
-                margin-top: -43px;
-                background-color: #ffffff;
-                color: #7c8994;
-                border: 1px solid #ddd;
-            }
-        }
-        .mailIcon{
-            margin-top: 10px;
-            color: #ffffff;
-            height: 60px;
-            text-align: center;
-            cursor: pointer;
-            .closeLogin{
-                width: 1px;
-                height: 1px;
-                overflow: hidden;
-                background-color: #ffffff;
-            }
-        }
-        .mailIcon:hover{
-            margin-top: 10px;
-            color: #7c8994;
-            text-align: center;
-            height: 60px;
-            background-color: #fff;
-        }
-        .moneyIcon{
-            color: #ffffff;
-            text-align: center;
-            margin: auto;
-            width: 100%;
-            height: 70px;
-            padding-bottom: 10px;
-            cursor: pointer;
-            .closeLogin{
-                width: 1px;
-                height: 1px;
-                overflow: hidden;
-                background-color: #ffffff;
-            }
-        }
-        .moneyIcon:hover{
-            color: #ffffff;
-            text-align: center;
-            margin: auto;
-            width: 100%;
-            height: 70px;
-            padding-bottom: 10px;
-            color: #7c8994;
-            background-color: #fff;
-        }
-        .qrCodeIcon{
-            border-top: 1px solid #ffffff;
-            height: calc(70% - 270px);
-            color: #ffffff;
-            text-align: center;
-            margin: auto;
-            padding-top: 100px;
-        }
+    width: 35px;
+    background-color: #7c8994;
+    animation: openRight 2s;
+    .closeIcon {
+      height: 30%;
+      text-align: center;
+      color: #ffffff;
+      font-size: 14px;
+      padding-top: 10px;
+      .closeClick {
+        cursor: pointer;
+      }
     }
-    @keyframes openRight {
-        0%{margin-left: -35px;}
-        100%{margin-left: 0;}
+    .peopleIcon {
+      color: #ffffff;
+      text-align: center;
+      font-size: 16px;
+      width: 70%;
+      height: 65px;
+      margin: auto;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #ffffff;
+      .peopleLong {
+        color: #fff;
+        width: 24px;
+        height: 24px;
+        overflow: hidden;
+      }
+      .peopleLong:hover {
+        background-color: #fff;
+        color: #7c8994;
+        width: 280px;
+        text-align: left;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #ddd;
+      }
     }
-    .leftMainContentClosed{
-        display: none;
+    .whiteMailIcon {
+      margin-top: 10px;
+      color: #7c8994;
+      height: 60px;
+      background-color: #ffffff;
+      text-align: center;
+      cursor: pointer;
+      .smallLogin {
+        position: absolute;
+        left: 35px;
+        margin-top: -43px;
+        background-color: #ffffff;
+        color: #7c8994;
+        border: 1px solid #ddd;
+      }
     }
-    .leftMainImg{
-        margin-top: 100px;
-        animation: toRight 2s;
-        .openRadius{
-            width: 57px;
-            height: 49px;
-            border-top-right-radius: 24px;
-            border-bottom-right-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            background-color: #7c8994;
-            .radius{
-                width: 36px;
-                height: 36px;
-                border-radius: 18px;
-                background-color: #fff;
-                margin-right: 9px;
-                cursor: pointer;
-            }
-        }
+    .mailIcon {
+      margin-top: 10px;
+      color: #ffffff;
+      height: 60px;
+      text-align: center;
+      cursor: pointer;
+      .closeLogin {
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        background-color: #ffffff;
+      }
     }
-    @keyframes toRight {
-        0%{margin-left: -100px;}
-        100%{margin-left: 0;}
+    .mailIcon:hover {
+      margin-top: 10px;
+      color: #7c8994;
+      text-align: center;
+      height: 60px;
+      background-color: #fff;
     }
-    .leftMainImgClosed{
-        display: none;
+    .moneyIcon {
+      color: #ffffff;
+      text-align: center;
+      margin: auto;
+      width: 100%;
+      height: 70px;
+      padding-bottom: 10px;
+      cursor: pointer;
+      .closeLogin {
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        background-color: #ffffff;
+      }
     }
-    
+    .moneyIcon:hover {
+      color: #ffffff;
+      text-align: center;
+      margin: auto;
+      width: 100%;
+      height: 70px;
+      padding-bottom: 10px;
+      color: #7c8994;
+      background-color: #fff;
+    }
+    .qrCodeIcon {
+      border-top: 1px solid #ffffff;
+      height: calc(70% - 270px);
+      color: #ffffff;
+      text-align: center;
+      margin: auto;
+      padding-top: 100px;
+      .smallqrLogin {
+        width: 100px;
+        position: absolute;
+        left: 35px;
+        margin-top: -43px;
+        background-color: #ffffff;
+        color: #7c8994;
+        border: 1px solid #ddd;
+      }
+      .closeLogin {
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        background-color: #ffffff;
+      }
+    }
+  }
+  @keyframes openRight {
+    0% {
+      margin-left: -35px;
+    }
+    100% {
+      margin-left: 0;
+    }
+  }
+  .leftMainContentClosed {
+    display: none;
+  }
+  .leftMainImg {
+    margin-top: 100px;
+    animation: toRight 2s;
+    .openRadius {
+      width: 57px;
+      height: 49px;
+      border-top-right-radius: 24px;
+      border-bottom-right-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      background-color: #7c8994;
+      .radius {
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
+        text-align: center;
+        border-radius: 18px;
+        background-color: #fff;
+        margin-right: 9px;
+        cursor: pointer;
+      }
+    }
+  }
+  @keyframes toRight {
+    0% {
+      margin-left: -100px;
+    }
+    100% {
+      margin-left: 0;
+    }
+  }
+  .leftMainImgClosed {
+    display: none;
+  }
 }

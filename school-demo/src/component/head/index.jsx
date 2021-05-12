@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Button, Menu, Dropdown } from "antd";
 import { NavLink as Link } from "react-router-dom";
-import store from '../../store/index'
+import store from "../../store/index";
 import "./index.less";
 import {
   MailOutlined,
@@ -14,57 +14,65 @@ class Head extends Component {
     super(prop);
     this.state = {
       condition: true,
-      isLogin: false
+      isLogin: false,
     };
-    this.logout = this.logout.bind(this)
+    this.logout = this.logout.bind(this);
   }
-  componentDidMount () {
-    let data = store.getState()
+  componentDidMount() {
+    let data = store.getState();
     this.setState({
-      isLogin: data.isLogin
-    })
+      isLogin: data.isLogin,
+    });
   }
-  logout () {
+  logout() {
     const action = {
-      type: 'changeIsLogin',
-      value: false
-    }
-    store.dispatch(action)
+      type: "changeIsLogin",
+      value: false,
+    };
+    store.dispatch(action);
     const nameAction = {
-      type: 'changeUsername',
-      value: ''
-    }
-    store.dispatch(nameAction)
-    let data = store.getState()
-    console.log(data);
+      type: "changeUsername",
+      value: "",
+    };
+    store.dispatch(nameAction);
+    let data = store.getState();
     this.setState({
-      isLogin: data.isLogin
-    })
+      isLogin: data.isLogin,
+    });
+    const adminAction = {
+      type: "changeAdmin",
+      value: false,
+    };
+    store.dispatch(adminAction);
   }
-  render () {
+  render() {
+    console.log(store.getState().jurisdiction);
+
     return (
       <div className="Head">
         <div className="loginTitle">
-          {
-            this.state.isLogin ? <>
-              <Button type="text" onClick={this.logout}>退出登录</Button> |
-            </> :
-              <>
-                <div className="loginBtn">
-                  请
-            <Link to={{ pathname: "/login", query: { type: "login" } }}>
-                    登录
-            </Link>
-            或
-            <Link to={{ pathname: "/login", query: { type: "register" } }}>
-                    免费注册
-            </Link>
-                </div> |
+          {this.state.isLogin ? (
+            <>
+              <Button type="text" onClick={this.logout}>
+                退出登录
+              </Button>{" "}
+              |
             </>
-
-          }
-
-
+          ) : (
+            <>
+              <div className="loginBtn">
+                请
+                <Link to={{ pathname: "/login", query: { type: "login" } }}>
+                  登录
+                </Link>
+                或
+                <Link to={{ pathname: "/login", query: { type: "register" } }}>
+                  免费注册
+                </Link>
+              </div>{" "}
+              |
+            </>
+          )}
           <div className="mail">
             <MailOutlined />
             <Button type="text">消息</Button>
@@ -85,6 +93,11 @@ class Head extends Component {
             <MobileOutlined />
           </div>
           <WechatOutlined />
+          {store.getState().jurisdiction != "ordinary" ? (
+            <Link to={{ pathname: "/config" }}>控制页</Link>
+          ) : (
+            <></>
+          )}
         </div>
       </div>
     );

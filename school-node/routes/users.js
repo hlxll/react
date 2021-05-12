@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+var ObjectId = require("mongodb").ObjectId;
 //登录http://localhost:3000/user/login?username=huanglin&password=123123
 router.get("/login", function (req, res, next) {
   var data = req.query;
@@ -29,6 +30,97 @@ router.get("/login", function (req, res, next) {
         });
     }
   );
+});
+//登录历史添加
+router.get("/addLog", function (req, res) {
+  var data = req.query;
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+    function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("admin");
+      dbo.collection("loginLog").insertOne(data, function (err, res) {
+        if (err) throw err;
+        db.close();
+      });
+    }
+  );
+  res.json({
+    status: 200,
+    message: "添加成功",
+  });
+});
+// searchLog
+router.get("/searchLog", function (req, res) {
+  var data = req.query;
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+    function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("admin");
+      var whereStr = data; // 查询条件
+      //find是查询条件，limit是返回条数
+      dbo
+        .collection("loginLog")
+        .find(whereStr)
+        .toArray(function (err, result) {
+          if (err) throw err;
+          db.close();
+          res.send(result);
+        });
+    }
+  );
+});
+router.get("/searchUse", function (req, res, next) {
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+    function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("admin");
+      //find是查询条件，limit是返回条数
+      dbo
+        .collection("user")
+        .find()
+        .toArray(function (err, result) {
+          if (err) throw err;
+          db.close();
+          res.json({
+            data: result,
+            status: 200,
+          });
+        });
+    }
+  );
+});
+router.get("/updateJuris", function (req, res, next) {
+  let data = req.query;
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+  MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("admin");
+    var whereStr = { username: data.username }; // 查询条件
+    var updateStr = { $set: { jurisdiction: data.jurisdiction } }; //修改数据
+    dbo
+      .collection("user")
+      .updateOne(whereStr, updateStr, function (err, result) {
+        if (err) throw err;
+        db.close();
+        res.json({
+          data: result,
+          status: 200,
+        });
+      });
+  });
 });
 //注册http://localhost:3000/user/register?username=huanglin&password=123123
 router.get("/register", function (req, res) {
@@ -89,6 +181,26 @@ router.get("/register", function (req, res) {
     }
   );
 });
+//删除用户
+router.get("/deleteUser", function (req, res) {
+  var data = req.query;
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+
+  MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("admin");
+    var whereStr = { username: data.username }; // 查询条件
+    dbo.collection("user").deleteOne(whereStr, function (err, obj) {
+      if (err) throw err;
+      db.close();
+      res.json({
+        message: "删除成功",
+        status: 200,
+      });
+    });
+  });
+});
 //查看订单http://localhost:3000/user/queryOrder
 router.get("/queryOrder", function (req, res) {
   var data = req.query;
@@ -133,6 +245,7 @@ router.get("/addOrder", function (req, res) {
         name: data.name,
         username: data.username || "",
         telephone: data.telephone || "",
+        idCode: data.idCode || "",
         email: data.email || "",
         gender: data.gender || "",
         homeType: data.homeType || "",
@@ -148,6 +261,26 @@ router.get("/addOrder", function (req, res) {
   res.json({
     status: 200,
     message: "添加成功",
+  });
+});
+//删除订单
+router.get("/deleteOrder", function (req, res) {
+  var data = req.query;
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+
+  MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("admin");
+    var whereStr = { _id: ObjectId(data.id) }; // 查询条件
+    dbo.collection("orderList").deleteOne(whereStr, function (err, obj) {
+      if (err) throw err;
+      db.close();
+      res.json({
+        message: "删除成功",
+        status: 200,
+      });
+    });
   });
 });
 //上传图片http://localhost:3000/user/upload?username=huanglin&file=base64

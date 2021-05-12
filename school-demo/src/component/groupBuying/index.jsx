@@ -28,28 +28,49 @@ class GroupBuy extends Component {
       },
       groupType: ["自由行", "跟团游"],
     };
+    this.minMoney = React.createRef();
+    this.maxMoney = React.createRef();
     this.groupCitySearch = this.groupCitySearch.bind(this);
     this.formFinish = this.formFinish.bind(this);
     this.clickMoney = this.clickMoney.bind(this);
     this.getDataList = this.getDataList.bind(this);
     this.clickNumber = this.clickNumber.bind(this);
     this.chinaCityChange = this.chinaCityChange.bind(this);
+    this.searchMoney = this.searchMoney.bind(this);
   }
   componentDidMount() {
     this.getDataList();
   }
   clickNumber() {
-    console.log(this.state.form);
-  }
-  //查询数据的接口函数
-  async getDataList() {
-    let resData = await groupList();
-    console.log(resData);
+    let list = this.state.groupDataList;
     this.setState({
-      groupDataList: resData.data,
+      groupDataList: list.reverse(),
     });
   }
-  groupCitySearch() {}
+  //查询数据的接口函数
+  async getDataList(name) {
+    let resData = await groupList(name);
+    let list = resData.data;
+    for (let i = 0; i < list.length; i++) {
+      for (let j = 0; j < list.length - i - 1; j++) {
+        if (list[j].number > list[j + 1].number) {
+          let center = list[j];
+          list[j] = list[j + 1];
+          list[j + 1] = center;
+        }
+      }
+    }
+    this.setState({
+      groupDataList: list,
+    });
+  }
+  groupCitySearch(e) {
+    if (e) {
+      this.getDataList(e);
+    } else {
+      this.getDataList();
+    }
+  }
   formFinish() {}
   clickMoney() {
     this.setState((state) => {
@@ -57,6 +78,25 @@ class GroupBuy extends Component {
         moneyTopOrBottom: !state.moneyTopOrBottom,
       };
     });
+    let list = this.state.groupDataList;
+    for (let i = 0; i < list.length; i++) {
+      for (let j = 0; j < list.length - i - 1; j++) {
+        if (list[j].money > list[j + 1].money) {
+          let center = list[j];
+          list[j] = list[j + 1];
+          list[j + 1] = center;
+        }
+      }
+    }
+    if (this.state.moneyTopOrBottom) {
+      this.setState({
+        groupDataList: list,
+      });
+    } else {
+      this.setState({
+        groupDataList: list.reverse(),
+      });
+    }
   }
   //国内出发地change函数
   chinaCityChange(val) {
@@ -64,6 +104,22 @@ class GroupBuy extends Component {
     state.form.chinaCity = val.target.value;
     this.setState({
       ...state,
+    });
+  }
+  //价格区间数据查询
+  async searchMoney() {
+    await this.getDataList();
+    let minMoney = this.minMoney.current.state.value;
+    let maxMoney = this.maxMoney.current.state.value;
+    let list = this.state.groupDataList;
+    let resArr = [];
+    list.forEach((item) => {
+      if (item.money <= maxMoney && item.money >= minMoney) {
+        resArr.push(item);
+      }
+    });
+    this.setState({
+      groupDataList: resArr,
     });
   }
   render() {
@@ -74,7 +130,7 @@ class GroupBuy extends Component {
           <div className="dataMain">
             <div className="type">{this.state.groupType[+item.type]}</div>
             <Link
-              to={{ pathname: "/groupDetail", query: { title: item.name } }}
+              to={{ pathname: "/groupDetail", state: { title: item.name } }}
             >
               <Image src={item.src} className="image" preview={false} />
             </Link>
@@ -201,7 +257,9 @@ class GroupBuy extends Component {
           </Button>
           <div className="betweenMoney">
             <p>价格区间：</p>
-            <Input />-<Input value="" />
+            <Input ref={this.minMoney} />-
+            <Input ref={this.maxMoney} />
+            <Button onClick={this.searchMoney}>搜索</Button>
           </div>
         </div>
         <div className="dataSpeak">

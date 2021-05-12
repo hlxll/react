@@ -2,9 +2,37 @@ import axios from "axios";
 function login(name, pass) {
   return axios.get("/api/user/login?username=" + name + "&password=" + +pass);
 }
+function addLog(date, latitude, longitude, computed, username) {
+  return axios.get(
+    "/api/user/addLog?date=" +
+      date +
+      "&latitude=" +
+      latitude +
+      "&longitude=" +
+      longitude +
+      "&computed=" +
+      computed +
+      "&username=" +
+      username
+  );
+}
+function searchLog(username) {
+  return axios.get("/api/user/searchLog?username=" + username);
+}
 function register(name, pass) {
   return axios.get(
     "/api/user/register?username=" + name + "&password=" + +pass
+  );
+}
+function deleteUser(name) {
+  return axios.get("/api/user/deleteUser?username=" + name);
+}
+function searchUser() {
+  return axios.get("/api/user/searchUse");
+}
+function updateJuris(name, jurisdiction) {
+  return axios.get(
+    "/api/user/updateJuris?username=" + name + "&jurisdiction=" + jurisdiction
   );
 }
 function upload(name, file) {
@@ -29,4 +57,22 @@ function addOrderList(obj) {
   }
   return axios.get("/api/user/addOrder?" + query);
 }
-export { login, upload, register, addOrderList };
+function searchOrder() {
+  return axios.get("/api/user/queryOrder");
+}
+function deleteOrder(id) {
+  return axios.get("/api/user/deleteOrder?id=" + id);
+}
+export {
+  login,
+  upload,
+  register,
+  addOrderList,
+  searchOrder,
+  searchUser,
+  updateJuris,
+  deleteUser,
+  addLog,
+  searchLog,
+  deleteOrder,
+};

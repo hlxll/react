@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import * as hotelApi from "../../../api/hotel";
+import { deleteShi } from "../../../api/fun";
+import chinaJson from "../../china.json";
 import {
   Form,
   Radio,
@@ -22,7 +24,7 @@ class HotelSearch extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      chinaCity: "",
+      chinaCity: [],
       form: {
         hotelMoney: "",
         travelVersion: "",
@@ -57,16 +59,52 @@ class HotelSearch extends Component {
     this.closeMapDetail = this.closeMapDetail.bind(this);
   }
   async componentDidMount() {
-    let resData = await hotelApi.searchHotel();
+    let city = this.props.location.query.city || "";
+    let name = this.props.location.query.name || "";
+    let resData = await hotelApi.searchHotel(deleteShi(city), name);
     this.setState({
       hotelDetail: resData.data,
     });
-  }
-  formFinish() {}
-  toDetail(index) {
-    console.log(index);
-    console.log(this.state.hotelDetail[index]);
 
+    let resCity = [];
+    chinaJson.forEach((item) => {
+      if (item.province.split("")[2] === "市") {
+        resCity.push(item.province);
+      } else {
+        item.city.map((cityItem) => resCity.push(cityItem.name));
+      }
+    });
+    this.setState({
+      chinaCity: resCity,
+    });
+  }
+  async formFinish(e) {
+    let resData = await hotelApi.searchHotel(deleteShi(e.city));
+    if (e.money && e.money != "undefined") {
+      let resD = resData.data;
+      let resArr = [];
+      resD.forEach((item) => {
+        if (
+          +e.money < 5 &&
+          item.money <= +e.money * 150 &&
+          item.money > (+e.money - 1) * 150
+        ) {
+          resArr.push(item);
+        }
+        if (+e.money == 5 && item.money >= 600) {
+          resArr.push(item);
+        }
+      });
+      this.setState({
+        hotelDetail: resArr,
+      });
+    } else {
+      this.setState({
+        hotelDetail: resData.data,
+      });
+    }
+  }
+  toDetail(index) {
     this.setState({
       visible: true,
       hotelDetailData: this.state.hotelDetail[index],
@@ -111,45 +149,51 @@ class HotelSearch extends Component {
             <div className="searchHead">
               <Row>
                 <Col span={4}>
-                  <Form.Item name="travelDate" label="目的地">
-                    <Select defaultValue="lucy" style={{ width: 120 }}>
-                      <Option value="jack">Jack</Option>
-                      <Option value="lucy">Lucy</Option>
-                      <Option value="Yiminghe">yiminghe</Option>
+                  <Form.Item name="city" label="目的地">
+                    <Select style={{ width: 120 }} showSearch>
+                      {this.state.chinaCity.map((item) => (
+                        <Option value={item}>{item}</Option>
+                      ))}
                     </Select>
                   </Form.Item>
                 </Col>
                 <Col span={4}>
-                  <Form.Item name="travelDate" label="入住">
+                  <Form.Item name="startTime" label="入住">
                     <DatePicker format={dateFormat} />
                   </Form.Item>
                 </Col>
                 <Col span={4}>
-                  <Form.Item name="travelDate" label="离店">
+                  <Form.Item name="overtime" label="离店">
                     <DatePicker format={dateFormat} />
                   </Form.Item>
                 </Col>
                 <Col span={4}>
-                  <Button type="primary">搜索</Button>
+                  <Form.Item>
+                    <Button type="primary" htmlType="submit">
+                      搜索
+                    </Button>
+                  </Form.Item>
                 </Col>
               </Row>
             </div>
-            <Form.Item name="travelDate" label="价格">
+            <Form.Item name="money" label="价格">
               <Radio.Group
                 className="radioButton"
                 value={this.state.form.hotelMoney}
+                defaultValue={"1"}
               >
-                <Radio.Button value="1">不限</Radio.Button>
-                <Radio.Button value="2">¥150以下</Radio.Button>
-                <Radio.Button value="4">¥300-450</Radio.Button>
+                <Radio.Button value="1">¥150以下</Radio.Button>
+                <Radio.Button value="2">¥150-300</Radio.Button>
+                <Radio.Button value="3">¥300-450</Radio.Button>
                 <Radio.Button value="4">¥450-600</Radio.Button>
-                <Radio.Button value="4">¥600以上</Radio.Button>
+                <Radio.Button value="5">¥600以上</Radio.Button>
               </Radio.Group>
             </Form.Item>
-            <Form.Item name="travelType" label="星级">
+            <Form.Item name="version" label="星级">
               <Radio.Group
                 className="radioButton"
                 value={this.state.form.travelVersion}
+                defaultValue={0}
               >
                 {this.state.travelVersion.map((item, index) => (
                   <Radio.Button value={index}>{item}</Radio.Button>
@@ -160,6 +204,7 @@ class HotelSearch extends Component {
               <Radio.Group
                 className="radioButton"
                 value={this.state.form.trvalType}
+                defaultValue={0}
               >
                 {this.state.trvalType.map((item, index) => (
                   <Radio.Button value={index}>{item}</Radio.Button>
@@ -169,7 +214,7 @@ class HotelSearch extends Component {
           </Form>
         </div>
         <div className="hotelNum">
-          <span>{this.state.hotelNum}</span>家酒店满足条件
+          <span>{this.state.hotelDetail.length}</span>家酒店满足条件
         </div>
         <div className="sortHotel">
           <Button>推荐排序</Button>

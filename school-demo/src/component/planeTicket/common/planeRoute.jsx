@@ -32,6 +32,8 @@ class PlaneRoute extends Component {
   }
   render() {
     const routeList = this.props.routeList;
+    console.log(routeList.length);
+
     return (
       <div className="planeRoute">
         <div className="planeRouteHead">
@@ -70,7 +72,7 @@ class PlaneRoute extends Component {
         <div className="planeRouteMain">
           {routeList.map((d, index) => {
             return (
-              <div className="RouteMainChild">
+              <div className="RouteMainChild" key={index}>
                 <p className="left">
                   <p style={{ fontSize: 14, margin: 0 }}>{d.start}</p>
                   {this.props.type === "one" ? (
@@ -95,7 +97,6 @@ class PlaneRoute extends Component {
                     </>
                   )}
                 </p>
-
                 <div className="money">
                   ¥
                   <p className="p">
