@@ -4,4 +4,21 @@ function searchHoliday(title, money) {
     "/api/holiday/searchTicket?title=" + title + "&money=" + money
   );
 }
-export { searchHoliday };
+function deleteHoliday(id) {
+  return axios.get("/api/holiday/deleteHoliday?id=" + id);
+}
+function addHoliday(obj) {
+  let query = "";
+  for (let key in obj) {
+    if (key != "startCity") {
+      query += "&";
+      query += key;
+      query += "=";
+      query += obj[key];
+    }
+  }
+  return axios.get(
+    "/api/holiday/addHoliday?startCity=" + obj.startCity + query
+  );
+}
+export { searchHoliday, deleteHoliday, addHoliday };

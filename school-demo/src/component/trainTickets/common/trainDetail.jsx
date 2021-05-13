@@ -106,8 +106,6 @@ class TrainDetail extends Component {
     });
   }
   numberZero = (numArr) => {
-    console.log(numArr);
-
     var resD = true;
     numArr.forEach((item) => {
       if (+item === 0) {

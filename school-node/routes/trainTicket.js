@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-
+var ObjectId = require("mongodb").ObjectId;
 //火车票列表http://localhost:3000/trainTicket/searchTicket
 router.get("/searchTicket", function (req, res) {
   var data = req.query;
@@ -117,5 +117,54 @@ router.get("/buyTicket", function (req, res) {
     }
   );
 });
+router.get("/deleteTrain", function (req, res) {
+  var data = req.query;
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
 
+  MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("admin");
+    var whereStr = { _id: ObjectId(data.id) }; // 查询条件
+    dbo.collection("trainTickets").deleteOne(whereStr, function (err, obj) {
+      if (err) throw err;
+      db.close();
+      res.json({
+        message: "删除成功",
+        status: 200,
+      });
+    });
+  });
+});
+router.get("/addTrain", function (req, res) {
+  var data = req.query;
+  console.log(data);
+
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+    function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("admin");
+      let whereStr = {};
+      for (let obj in data) {
+        if (data[obj] != "undefined") {
+          whereStr[obj] = data[obj];
+        }
+      }
+      whereStr.money = whereStr.money.split(",");
+      whereStr.num = whereStr.num.split(",");
+      dbo.collection("trainTickets").insertOne(whereStr, function (err, res) {
+        if (err) throw err;
+        db.close();
+      });
+    }
+  );
+  res.json({
+    status: 200,
+    message: "添加成功",
+  });
+});
 module.exports = router;

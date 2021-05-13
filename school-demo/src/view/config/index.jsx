@@ -4,6 +4,9 @@ import store from "../../store";
 import UserConfig from "./UserConfig";
 import PlaneConfig from "./PlaneConfig";
 import HotelConfig from "./HotelConfig";
+import TrainConfig from "./TrainConfig";
+import HolidayConfig from "./HolidayConfig";
+import GroupConfig from "./GroupConfig";
 import "./index.less";
 import { NavLink as Link } from "react-router-dom";
 const { TabPane } = Tabs;
@@ -26,6 +29,9 @@ class Config extends Component {
           <TabPane tab="商家管理" key="2">
             {+store.getState().jurisdiction == 1 ? <PlaneConfig /> : ""}
             {+store.getState().jurisdiction == 2 ? <HotelConfig /> : ""}
+            {+store.getState().jurisdiction == 3 ? <TrainConfig /> : ""}
+            {+store.getState().jurisdiction == 4 ? <HolidayConfig /> : ""}
+            {+store.getState().jurisdiction == 5 ? <GroupConfig /> : ""}
           </TabPane>
           <TabPane tab="Tab 3" key="3">
             Content of Tab Pane 3
