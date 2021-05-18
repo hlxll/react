@@ -26,6 +26,7 @@ import PlateTSearch from "../../component/planeTicket/buy";
 import Hmap from "../../component/map";
 import GroupDetail from "../../component/groupBuying/detail";
 import LocalDetail from "../../component/local/detail";
+import Source from "../../component/source";
 const { Search } = Input;
 //创建一个context，传入默认值
 export const LoginContext = React.createContext("unLogin");
@@ -225,6 +226,7 @@ class Home extends Component {
             <Route path="/ticketsMap" component={TicketsMap} />
             <Route path="/local" component={Local} />
             <Route path="/localDetail" component={LocalDetail} />
+            <Route path="/Source" component={Source} />
             <Route path="/" exact component={Main} />
           </Switch>
         </Router>
