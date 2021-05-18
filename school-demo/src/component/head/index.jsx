@@ -93,7 +93,8 @@ class Head extends Component {
             <MobileOutlined />
           </div>
           <WechatOutlined />
-          {store.getState().jurisdiction != "ordinary" ? (
+          {store.getState().isLogin &&
+          store.getState().jurisdiction != "ordinary" ? (
             <Link to={{ pathname: "/config" }}>控制页</Link>
           ) : (
             <></>

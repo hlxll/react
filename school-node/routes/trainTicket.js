@@ -38,6 +38,8 @@ router.get("/searchTicket", function (req, res) {
 //购买火车票http://localhost:3000/trainTicket/buyTicket?name=K2288&type=1
 router.get("/buyTicket", function (req, res) {
   var data = req.query;
+  console.log(data);
+
   var trainType = data.trainType; //火车票种类
   var MongoClient = require("mongodb").MongoClient;
   var url = "mongodb://localhost:27017";
@@ -70,7 +72,7 @@ router.get("/buyTicket", function (req, res) {
                 var dbo = db.db("admin");
                 var duplicate = {
                   type: 3,
-                  time: "2021-05-01",
+                  time: data.time,
                   money: money,
                   name: data.name,
                   trainType: +trainType,

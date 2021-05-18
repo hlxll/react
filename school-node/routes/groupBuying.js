@@ -101,8 +101,8 @@ router.get("/deleteGroup", function (req, res) {
     });
   });
 });
-router.get("/addGroup", function (req, res) {
-  var data = req.query;
+router.post("/addGroup", function (req, res) {
+  var data = req.body;
   console.log(data);
 
   var MongoClient = require("mongodb").MongoClient;

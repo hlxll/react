@@ -3,18 +3,7 @@ function groupList(name) {
   return axios.get("/api/groupBuying/searchTicket?name=" + name);
 }
 function addGroup(obj) {
-  let query = "";
-  for (let key in obj) {
-    if (key != "startCity") {
-      query += "&";
-      query += key;
-      query += "=";
-      query += obj[key];
-    }
-  }
-  return axios.get(
-    "/api/groupBuying/addGroup?startCity=" + obj.startCity + query
-  );
+  return axios.post("/api/groupBuying/addGroup", obj);
 }
 function deleteGroup(id) {
   return axios.get("/api/groupBuying/deleteGroup?id=" + id);

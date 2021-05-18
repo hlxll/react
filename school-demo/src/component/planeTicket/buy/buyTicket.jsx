@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Form, Input, Radio, Image, Button } from "antd";
+import { Form, Input, Radio, Image, Button, message } from "antd";
 import * as addOrder from "../../../api/user";
 import { withRouter } from "react-router-dom";
+import store from "../../../store";
 import "./buyTicket.less";
 class BuyTickets extends Component {
   constructor(props) {
@@ -45,6 +46,11 @@ class BuyTickets extends Component {
     });
   }
   async onFinish(e) {
+    if (!store.getState().isLogin) {
+      message.success("请先登录");
+      this.props.history.push("/login");
+      return;
+    }
     let obj = {
       type: 1,
       time: [this.state.startTime, this.state.arriveTime],

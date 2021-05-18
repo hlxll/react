@@ -83,8 +83,7 @@ export default class GroupConfig extends Component {
     moveCity.pop();
     query.moveCity = moveCity.join("");
     query.numbre = 15;
-    // query.src = this.state.uploadImg;
-    query.src = "";
+    query.src = this.state.uploadImg;
     console.log(query);
     let resData = await groupApi.addGroup(query);
     message.success("添加成功");
@@ -142,6 +141,8 @@ export default class GroupConfig extends Component {
         title: "类型",
         dataIndex: "type",
         key: "type",
+        render: (text) =>
+          text == 1 ? <span>跟团游</span> : <span>自由行</span>,
       },
       {
         title: "详细",
@@ -176,6 +177,7 @@ export default class GroupConfig extends Component {
           title="添加团购"
           visible={this.state.isModalVisible}
           onCancel={this.handleCancel}
+          footer={null}
         >
           <Form name="dynamic_rule" onFinish={this.onFinish}>
             <Form.Item
@@ -222,7 +224,8 @@ export default class GroupConfig extends Component {
               ]}
             >
               <Select>
-                <Option value={1}>1</Option>
+                <Option value={0}>自由行</Option>
+                <Option value={1}>跟团游</Option>
               </Select>
             </Form.Item>
             <Form.Item

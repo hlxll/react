@@ -48,9 +48,8 @@ router.get("/deleteHoliday", function (req, res) {
     });
   });
 });
-router.get("/addHoliday", function (req, res) {
-  var data = req.query;
-  console.log(data);
+router.post("/addHoliday", function (req, res) {
+  var data = req.body;
 
   var MongoClient = require("mongodb").MongoClient;
   var url = "mongodb://localhost:27017";

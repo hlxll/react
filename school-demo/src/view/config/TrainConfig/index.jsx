@@ -172,6 +172,7 @@ export default class TrainConfig extends Component {
           maskClosable={false}
           title="添加航班"
           visible={this.state.isModalVisible}
+          footer={null}
           onCancel={this.handleCancel}
         >
           <Form name="dynamic_rule" onFinish={this.onFinish}>

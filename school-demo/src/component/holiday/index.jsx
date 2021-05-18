@@ -166,7 +166,12 @@ class Holiday extends Component {
               {this.state.holidayList.map((d, index) => {
                 return (
                   <div key={index} className="Datalist">
-                    <Image className="img" preview={false} src={d.src} />
+                    <Image
+                      className="img"
+                      preview={false}
+                      src={d.src}
+                      width={120}
+                    />
                     <div className="content">
                       <div className="contentTitle">{d.title}</div>
                       <div className="contentStart">{d.startCity}</div>

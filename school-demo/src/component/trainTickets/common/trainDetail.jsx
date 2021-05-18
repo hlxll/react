@@ -166,6 +166,11 @@ class TrainDetail extends Component {
   }
   //快速出票
   async lssueTickets() {
+    if (!store.getState().isLogin) {
+      message.success("请先登录");
+      this.props.history.push("/login");
+      return;
+    }
     if (!this.state.isRead) {
       message.error("请先勾选同意协议");
       return;
@@ -175,6 +180,7 @@ class TrainDetail extends Component {
       userArr.push(JSON.stringify(item));
     });
     let modalD = this.state.modalData;
+
     let obj = {
       type: 3,
       name: modalD.name,
@@ -182,10 +188,10 @@ class TrainDetail extends Component {
       trainType: modalD.type,
       user: userArr,
       username: store.getState().loginUsername,
+      time: "2021-05-01",
     };
     let resData = await trainApi.addOrderList(obj);
     message.success(resData.data.message);
-    console.log(resData.data);
 
     if (resData.data.status == 1) {
       //关闭弹窗，重新刷新数据

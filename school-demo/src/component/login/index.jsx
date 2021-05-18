@@ -118,11 +118,11 @@ class SmallLogin extends React.Component {
     }
   }
   async showPosition(position) {
-    console.log(position);
+    console.log(position.coords);
     let obj = {
       date: new Date(),
-      latitude: 37.09024,
-      longitude: -95.712891,
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
       computed: "max",
       username: store.getState().loginUsername,
     };

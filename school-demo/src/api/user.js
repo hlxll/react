@@ -2,18 +2,19 @@ import axios from "axios";
 function login(name, pass) {
   return axios.get("/api/user/login?username=" + name + "&password=" + +pass);
 }
-function addLog(date, latitude, longitude, computed, username) {
+function addLog(obj) {
+  console.log(obj);
   return axios.get(
     "/api/user/addLog?date=" +
-      date +
+      obj.date +
       "&latitude=" +
-      latitude +
+      obj.latitude +
       "&longitude=" +
-      longitude +
+      obj.longitude +
       "&computed=" +
-      computed +
+      obj.computed +
       "&username=" +
-      username
+      obj.username
   );
 }
 function searchLog(username) {

@@ -9,14 +9,14 @@ import {
   Button,
   TimePicker,
 } from "antd";
-import * as holidayApi from "../../../api/holiday";
+import * as ticketApi from "../../../api/ticket";
 import ReactFileReader from "react-file-reader";
 import chinaJson from "../china.json";
 import Modal from "antd/lib/modal/Modal";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
-export default class HolidayConfig extends Component {
+export default class GroupConfig extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -48,9 +48,11 @@ export default class HolidayConfig extends Component {
     this.searchPlaneData();
   }
   async searchPlaneData() {
-    let resData = await holidayApi.searchHoliday();
+    let resData = await ticketApi.searchTicket();
+    console.log(resData);
+
     this.setState({
-      tableData: resData.data,
+      tableData: resData.data.data,
     });
   }
   radioTypeChange(e) {
@@ -76,29 +78,14 @@ export default class HolidayConfig extends Component {
     return resTime.join(".");
   };
   async onFinish(e) {
-    // lowTime: "2021-02-11"
-    // money: 120
-    // num: 10
-    // number: 10
-    // src: ""
-    // startCity: "上饶"
-    // title: "标题"
-    // type: "自然风光"
     let query = e;
-    let startCity = query.startCity.split("");
-    startCity.pop();
-    query.startCity = startCity.join("");
-    let lowTime = new Date(e.lowTime);
-    query.lowTime =
-      lowTime.getFullYear() +
-      "-" +
-      (lowTime.getMonth() + 1) +
-      "-" +
-      lowTime.getDate();
+    let city = query.city.split("");
+    city.pop();
+    query.city = city.join("");
     query.numbre = 5;
-    query.num = 0;
+    query.latlon = query.latlon.split(",");
     query.src = this.state.uploadImg;
-    let resData = await holidayApi.addHoliday(query);
+    let resData = await ticketApi.addTicket(query);
     message.success("添加成功");
     this.setState({
       isModalVisible: false,
@@ -119,7 +106,7 @@ export default class HolidayConfig extends Component {
   //删除该条数据
   async deleteRow(e) {
     console.log(e);
-    let res = await holidayApi.deleteHoliday(e._id);
+    let res = await ticketApi.deleteTicket(e._id);
     message.success("删除成功");
     this.searchPlaneData();
   }
@@ -130,9 +117,8 @@ export default class HolidayConfig extends Component {
     const columns = [
       {
         title: "名称",
-        dataIndex: "title",
-        key: "title",
-        render: (text) => <a>{text}</a>,
+        dataIndex: "name",
+        key: "name",
       },
       {
         title: "图形",
@@ -141,19 +127,30 @@ export default class HolidayConfig extends Component {
         render: (text) => <Image src={text} width={100} />,
       },
       {
-        title: "目的地",
-        dataIndex: "startCity",
-        key: "start",
+        title: "地址介绍",
+        dataIndex: "location",
+        key: "location",
       },
       {
-        title: "游玩时间",
-        dataIndex: "lowTime",
-        key: "lowTime",
+        title: "经纬度",
+        dataIndex: "latlon",
+        key: "latlon",
+        render: (text) => (
+          <div>
+            <p>经度：{text[0]}</p>
+            <p>纬度：{text[1]}</p>
+          </div>
+        ),
       },
       {
         title: "类型",
-        dataIndex: "type",
-        key: "type",
+        dataIndex: "ticketType",
+        key: "ticketType",
+      },
+      {
+        title: "详细",
+        dataIndex: "text",
+        key: "text",
       },
       {
         title: "价格",
@@ -180,15 +177,15 @@ export default class HolidayConfig extends Component {
         </div>
         <Modal
           maskClosable={false}
-          footer={null}
-          title="添加航班"
+          title="添加门票"
           visible={this.state.isModalVisible}
           onCancel={this.handleCancel}
+          footer={null}
         >
           <Form name="dynamic_rule" onFinish={this.onFinish}>
             <Form.Item
               label="目的地"
-              name="startCity"
+              name="city"
               rules={[
                 {
                   required: true,
@@ -208,20 +205,8 @@ export default class HolidayConfig extends Component {
               </Select>
             </Form.Item>
             <Form.Item
-              label="游玩时间"
-              name="lowTime"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your arriveTime",
-                },
-              ]}
-            >
-              <DatePicker />
-            </Form.Item>
-            <Form.Item
-              name="title"
-              label="项目名称"
+              name="name"
+              label="景点名称"
               rules={[
                 {
                   required: true,
@@ -232,8 +217,8 @@ export default class HolidayConfig extends Component {
               <Input placeholder="Please input your name" />
             </Form.Item>
             <Form.Item
-              name="type"
-              label="列车类型"
+              name="ticketType"
+              label="类型"
               rules={[
                 {
                   required: true,
@@ -242,7 +227,8 @@ export default class HolidayConfig extends Component {
               ]}
             >
               <Select>
-                <Option value={"自然风光"}>自然风格</Option>
+                <Option value={0}>0</Option>
+                <Option value={1}>1</Option>
               </Select>
             </Form.Item>
             <Form.Item
@@ -251,11 +237,47 @@ export default class HolidayConfig extends Component {
               rules={[
                 {
                   required: true,
-                  message: "请输入多行，每行一个数字,以逗号间隔",
+                  message: "please input",
                 },
               ]}
             >
               <Input placeholder="Please input your money" />
+            </Form.Item>
+            <Form.Item
+              name="location"
+              label="景点标题"
+              rules={[
+                {
+                  required: true,
+                  message: "please input location",
+                },
+              ]}
+            >
+              <Input placeholder="Please input your location" />
+            </Form.Item>
+            <Form.Item
+              name="latlon"
+              label="经纬度"
+              rules={[
+                {
+                  required: true,
+                  message: "please input location",
+                },
+              ]}
+            >
+              <Input placeholder="请输入经纬度，以逗号隔开" />
+            </Form.Item>
+            <Form.Item
+              name="text"
+              label="介绍"
+              rules={[
+                {
+                  required: true,
+                  message: "please input",
+                },
+              ]}
+            >
+              <Input placeholder="Please input your text" />
             </Form.Item>
             <Form.Item label="图片上传" name="src">
               <ReactFileReader

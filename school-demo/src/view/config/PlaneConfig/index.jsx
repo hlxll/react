@@ -51,7 +51,6 @@ export default class ShopConfig extends Component {
     });
   }
   async onFinish(e) {
-    console.log(this.uploadImg);
     let query = e;
     let startTime = new Date(e.arriveTime);
     query.startTime = startTime.getHours() + ":" + startTime.getMinutes();
@@ -146,6 +145,7 @@ export default class ShopConfig extends Component {
           title="添加航班"
           visible={this.state.isModalVisible}
           onCancel={this.handleCancel}
+          footer={null}
         >
           <Form name="dynamic_rule" onFinish={this.onFinish}>
             <Form.Item

@@ -1,5 +1,6 @@
 var expiress = require("express");
 var router = expiress.Router();
+var ObjectId = require("mongodb").ObjectId;
 
 //门票列表ttp://localhost:3000/tickets/searchTicket?name=西湖
 router.get("/searchTicket", function (req, res) {
@@ -86,5 +87,53 @@ router.get("/buyTicket", function (req, res) {
     }
   );
 });
+router.get("/deleteTicket", function (req, res) {
+  var data = req.query;
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
 
+  MongoClient.connect(url, { useNewUrlParser: true }, function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("admin");
+    var whereStr = { _id: ObjectId(data.id) }; // 查询条件
+    dbo.collection("tickets").deleteOne(whereStr, function (err, obj) {
+      if (err) throw err;
+      db.close();
+      res.json({
+        message: "删除成功",
+        status: 200,
+      });
+    });
+  });
+});
+router.post("/addTicket", function (req, res) {
+  var data = req.body;
+  console.log(data);
+
+  var MongoClient = require("mongodb").MongoClient;
+  var url = "mongodb://localhost:27017";
+  MongoClient.connect(
+    url,
+    { useUnifiedTopology: true, useNewUrlParser: true },
+    function (err, db) {
+      if (err) throw err;
+      var dbo = db.db("admin");
+      let whereStr = {};
+      for (let obj in data) {
+        if (data[obj] != "undefined") {
+          whereStr[obj] = data[obj];
+        }
+      }
+      // whereStr.latlon = whereStr.latlon.split(",");
+      dbo.collection("tickets").insertOne(whereStr, function (err, res) {
+        if (err) throw err;
+        db.close();
+      });
+    }
+  );
+  res.json({
+    status: 200,
+    message: "添加成功",
+  });
+});
 module.exports = router;

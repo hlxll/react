@@ -8,17 +8,6 @@ function deleteHoliday(id) {
   return axios.get("/api/holiday/deleteHoliday?id=" + id);
 }
 function addHoliday(obj) {
-  let query = "";
-  for (let key in obj) {
-    if (key != "startCity") {
-      query += "&";
-      query += key;
-      query += "=";
-      query += obj[key];
-    }
-  }
-  return axios.get(
-    "/api/holiday/addHoliday?startCity=" + obj.startCity + query
-  );
+  return axios.post("/api/holiday/addHoliday", obj);
 }
 export { searchHoliday, deleteHoliday, addHoliday };
