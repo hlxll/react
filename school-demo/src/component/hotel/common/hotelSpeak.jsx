@@ -19,10 +19,22 @@ export default class HotelSpeak extends Component {
         },
       ],
       chinaList: [
-        { titel: "试睡员推荐榜", content: "" },
-        { titel: "必住主题酒店榜单", content: "主题酒店，享受绝佳体验" },
-        { titel: "必住商务酒店榜单", content: "品质商旅，品质随性" },
-        { titel: "必住度假酒店榜单", content: "身的休息，心的享受" },
+        { titel: "试睡员推荐榜", content: "", src: "./img/hotel/shishui.png" },
+        {
+          titel: "必住主题酒店榜单",
+          content: "主题酒店，享受绝佳体验",
+          src: "./img/hotel/shishui2.jpg",
+        },
+        {
+          titel: "必住商务酒店榜单",
+          content: "品质商旅，品质随性",
+          src: "./img/hotel/shishui3.jpeg",
+        },
+        {
+          titel: "必住度假酒店榜单",
+          content: "身的休息，心的享受",
+          src: "./img/hotel/shishui4.jpeg",
+        },
       ],
       trvalType: ["不限", "浪漫情侣", "亲子精选", "民宿", "钟点房"],
       chinaCity: [],
@@ -70,7 +82,10 @@ export default class HotelSpeak extends Component {
             {this.state.chinaList.map((d, index) => {
               return (
                 <Col key={index} className="gutter-row" span={6}>
-                  <div className="hotelText">
+                  <div
+                    className="hotelText"
+                    style={{ backgroundImage: "url(" + d.src + ")" }}
+                  >
                     <p className="title">{d.titel}></p>
                     <p className="content">{d.content}</p>
                   </div>

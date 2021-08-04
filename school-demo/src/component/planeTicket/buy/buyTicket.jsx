@@ -144,7 +144,7 @@ class BuyTickets extends Component {
               <div className="footerText">
                 <span>点击提交订单表示已阅读并同意 </span>
                 <a href="http://touch.qunar.com/hd/contentStatement.html">
-                  内容声明、锂电池及危险品乘机须知，去哪儿网机票预订网络服务合同
+                  内容声明、锂电池及危险品乘机须知，机票预订网络服务合同
                 </a>
                 <span>出票方:官网优选</span>
                 <a href="https://qnf.trade.qunar.com/ns/licenseError">

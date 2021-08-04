@@ -7,6 +7,8 @@ import Login from "./view/login";
 import Home from "./view/home";
 import Order from "./view/order";
 import Config from "./view/config";
+import Source from "./component/source";
+
 //ak = mOs3rqPMqyM6G21CKIqyO8yFh9hWtR8p
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +16,7 @@ ReactDOM.render(
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/config" component={Config} />
+        <Route path="/Source" component={Source} />
         <Route path="/order" exact component={Order} />
         <Route path="/" component={Home} />
       </Switch>

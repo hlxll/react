@@ -1,5 +1,7 @@
 import { Component } from "react";
 import { Image } from "antd";
+import { NavLink as Link } from "react-router-dom";
+import Head from "../head";
 import "./index.less";
 export default class Source extends Component {
   constructor(props) {
@@ -9,6 +11,10 @@ export default class Source extends Component {
   render() {
     return (
       <div className="source">
+        <Head />
+        <div className="imgRouter">
+          <Link to={{ pathname: "/" }}>首页</Link>
+        </div>
         <p>积分商城</p>
         <p>玩转积分商城，旅行所需一站购</p>
         <div className="sourceNuym">

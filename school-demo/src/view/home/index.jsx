@@ -26,7 +26,6 @@ import PlateTSearch from "../../component/planeTicket/buy";
 import Hmap from "../../component/map";
 import GroupDetail from "../../component/groupBuying/detail";
 import LocalDetail from "../../component/local/detail";
-import Source from "../../component/source";
 const { Search } = Input;
 //创建一个context，传入默认值
 export const LoginContext = React.createContext("unLogin");
@@ -226,7 +225,6 @@ class Home extends Component {
             <Route path="/ticketsMap" component={TicketsMap} />
             <Route path="/local" component={Local} />
             <Route path="/localDetail" component={LocalDetail} />
-            <Route path="/Source" component={Source} />
             <Route path="/" exact component={Main} />
           </Switch>
         </Router>
@@ -243,7 +241,7 @@ class Home extends Component {
           </p>
           <p>
             Copyright ©2021
-            Qunar.com京公网安备11010802030542京ICP备05021087号京ICP证060856号营业执照信息(京)-非经营性-2016-0110去哪儿网客服电话95117
+            Qunar.com京公网安备11010802030542京ICP备05021087号京ICP证060856号营业执照信息(京)-非经营性-2016-0110客服电话95117
           </p>
           <p>
             违法和不良信息举报电话：010-59606977违法和不良信息举报邮箱：tousu@qunar.com

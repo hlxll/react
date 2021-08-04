@@ -27,19 +27,23 @@ class Config extends Component {
           ) : (
             <></>
           )}
+          {!store.getState().admin ? (
+            <TabPane tab="商家管理" key="2">
+              {+store.getState().jurisdiction == 1 ? <PlaneConfig /> : ""}
+              {+store.getState().jurisdiction == 2 ? <HotelConfig /> : ""}
+              {+store.getState().jurisdiction == 3 ? <TrainConfig /> : ""}
+              {+store.getState().jurisdiction == 4 ? <HolidayConfig /> : ""}
+              {+store.getState().jurisdiction == 5 ? <GroupConfig /> : ""}
+              {+store.getState().jurisdiction == 6 ? <TicketConfig /> : ""}
+              {+store.getState().jurisdiction == 7 ? <LocalConfig /> : ""}
+            </TabPane>
+          ) : (
+            <></>
+          )}
 
-          <TabPane tab="商家管理" key="2">
-            {+store.getState().jurisdiction == 1 ? <PlaneConfig /> : ""}
-            {+store.getState().jurisdiction == 2 ? <HotelConfig /> : ""}
-            {+store.getState().jurisdiction == 3 ? <TrainConfig /> : ""}
-            {+store.getState().jurisdiction == 4 ? <HolidayConfig /> : ""}
-            {+store.getState().jurisdiction == 5 ? <GroupConfig /> : ""}
-            {+store.getState().jurisdiction == 6 ? <TicketConfig /> : ""}
-            {+store.getState().jurisdiction == 7 ? <LocalConfig /> : ""}
-          </TabPane>
-          <TabPane tab="Tab 3" key="3">
+          {/* <TabPane tab="Tab 3" key="3">
             Content of Tab Pane 3
-          </TabPane>
+          </TabPane> */}
         </Tabs>
       </div>
     );

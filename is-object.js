@@ -1,82 +1,81 @@
-
-function type (val) {
-  function isBuffer (val) {
-    if (val.constructor && typeof val.constructor.isBuffer === 'function') {
+function type(val) {
+  function isBuffer(val) {
+    if (val.constructor && typeof val.constructor.isBuffer === "function") {
       return val.constructor.isBuffer(val);
     }
     return false;
   }
-  function isError (val) {
+  function isError(val) {
     return (
       val instanceof Error ||
-      (typeof val.message === 'string' &&
+      (typeof val.message === "string" &&
         val.constructor &&
-        typeof val.constructor.stackTraceLimit === 'number')
+        typeof val.constructor.stackTraceLimit === "number")
     );
   }
-  function isArguments (val) {
+  function isArguments(val) {
     try {
-      if (typeof val.length === 'number' && typeof val.callee === 'function') {
+      if (typeof val.length === "number" && typeof val.callee === "function") {
         return true;
       }
     } catch (err) {
-      if (err.message.indexOf('callee') !== -1) {
+      if (err.message.indexOf("callee") !== -1) {
         return true;
       }
     }
     return false;
   }
   if (val === void 0) {
-    return 'Undefined';
+    return "Undefined";
   }
   if (val === null) {
-    return 'Null';
+    return "Null";
   }
-  const ctorName = val => {
+  const ctorName = (val) => {
     return val.constructor ? val.constructor.name : null;
   };
   switch (ctorName(val)) {
-    case 'Symbol':
-      return 'Symbol';
-    case 'Promise':
-      return 'Promise';
-    case 'Map':
-      return 'Map';
-    case 'Set':
-      return 'Set';
-    case 'WeakMap':
-      return 'WeakMap';
-    case 'WeakSet':
-      return 'WeakSet';
+    case "Symbol":
+      return "Symbol";
+    case "Promise":
+      return "Promise";
+    case "Map":
+      return "Map";
+    case "Set":
+      return "Set";
+    case "WeakMap":
+      return "WeakMap";
+    case "WeakSet":
+      return "WeakSet";
   }
   if (isBuffer(val)) {
-    return 'Buffer';
+    return "Buffer";
   }
   if (isError(val)) {
-    return 'Error';
+    return "Error";
   }
   if (isArguments(val)) {
-    return 'Arguments';
+    return "Arguments";
   }
   const type = Object.prototype.toString
     .call(val)
     .slice(8, -1)
-    .replace(/\s/g, '');
-  if (type === 'Number' && val % 1 === 0) {
-    return 'Integer';
+    .replace(/\s/g, "");
+  if (type === "Number" && val % 1 === 0) {
+    return "Integer";
   }
-  if (type === 'Number' && /.*\..*/.test(val)) {
-    return 'Float';
+  if (type === "Number" && /.*\..*/.test(val)) {
+    return "Float";
   }
   return type;
 }
-function isFunction (val) {
-  return type(val) === 'Function'
+function isFunction(val) {
+  return type(val) === "Function";
 }
-function isNil (val) {
-  return (typeof val === 'undefined') || (val === null)
+function isNil(val) {
+  return typeof val === "undefined" || val === null;
 }
-const isObject = val => {
+const isObject = (val) => {
   if (isNil(val)) {
     return false;
   }
@@ -85,16 +84,15 @@ const isObject = val => {
     return false;
   }
   const prot = ctor.prototype;
-  if (type(prot) !== 'Object') {
+  if (type(prot) !== "Object") {
     return false;
   }
-  if (prot.hasOwnProperty('isPrototypeOf') === false) {
+  if (prot.hasOwnProperty("isPrototypeOf") === false) {
     return false;
   }
-  return type(val) === 'Object';
+  return type(val) === "Object";
 };
-console.log(isObject({ name: '黄林' }))
-
+console.log(isObject({ name: "黄林" }));
 
 const objectEqual = (obj1, obj2) => {
   // 当前Object对象
@@ -110,25 +108,39 @@ const objectEqual = (obj1, obj2) => {
       if (obj1[propName] !== obj2[propName]) {
         return false;
       }
-    }else if (isObject(obj1[propName]) && isObject(obj2[propName])){
-      return objectEqual(obj1[propName], obj2[propName])
-    }else{
-      return false
+    } else if (isObject(obj1[propName]) && isObject(obj2[propName])) {
+      return objectEqual(obj1[propName], obj2[propName]);
+    } else {
+      return false;
     }
-
   }
   return true;
-}
+};
 let obj1 = {
-  name: '黄林',
+  name: "黄林",
   age: {
-    name: '黄林'
-  }
-}
+    name: "黄林",
+  },
+};
 let obj2 = {
-  name: '黄林',
+  name: "黄林",
   age: {
-    name: '123'
+    name: "123",
+  },
+};
+console.log(objectEqual(obj1, obj2));
+
+function bubbleSort(arr) {
+  var len = arr.length;
+  for (var i = 0; i < len; i++) {
+    for (var j = 0; j < len - 1 - i; j++) {
+      if (arr[j] > arr[j + 1]) {
+        //相邻元素两两对比
+        var temp = arr[j + 1]; //元素交换
+        arr[j + 1] = arr[j];
+        arr[j] = temp;
+      }
+    }
   }
+  return arr;
 }
-console.log(objectEqual(obj1, obj2))

@@ -81,12 +81,16 @@ class Head extends Component {
           ｜
           <div className="order">
             <div className="orderBtn">
-              <Link to={{ pathname: "/order" }}> 查看订单 </Link>
+              {store.getState().isLogin ? (
+                <Link to={{ pathname: "/order" }}> 查看订单 </Link>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           |
           <div className="integral">
-            <Button type="text">积分商城</Button>
+            <Link to={{ pathname: "/source" }}>积分商城</Link>
           </div>
           |<Button type="text">联系客服</Button>|
           <div className="mobile">

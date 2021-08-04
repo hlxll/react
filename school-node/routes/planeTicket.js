@@ -24,7 +24,6 @@ router.get("/searchPlane", function (req, res, next) {
         .toArray(function (err, result) {
           if (err) throw err;
           db.close();
-          console.log(data);
 
           if (!data.date || data.date == "undefined") {
             res.json({

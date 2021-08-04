@@ -11,16 +11,32 @@ class IntervaImg extends Component {
         <div className="interval">
           <Carousel autoplay>
             <div>
-              <Image className="img" src="./img/intervalimg.png" />
+              <Image
+                className="img"
+                src="./img/intervalimg.png"
+                preview={false}
+              />
             </div>
             <div>
-              <Image className="img" src="./img/intervalimg.png" />
+              <Image
+                className="img"
+                src="https://imgs.qunarzz.com/vs_ceph_vcimg/c0a60fa20379efa4f02ce527a680dc1b.jpeg"
+                preview={false}
+              />
             </div>
             <div>
-              <Image className="img" src="./img/intervalimg.png" />
+              <Image
+                className="img"
+                src="https://imgs.qunarzz.com/vs_ceph_vcimg/79faa5a73731e84a7731db49d5baa91e.jpeg"
+                preview={false}
+              />
             </div>
             <div>
-              <Image className="img" src="./img/intervalimg.png" />
+              <Image
+                className="img"
+                src="./img/intervalimg.png"
+                preview={false}
+              />
             </div>
           </Carousel>
         </div>

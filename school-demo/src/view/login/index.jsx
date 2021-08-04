@@ -99,9 +99,8 @@ class Home extends Component {
                     placeholder="Select a person"
                     optionFilterProp="children"
                   >
-                    <Option value="jack">Jack</Option>
-                    <Option value="lucy">Lucy</Option>
-                    <Option value="tom">Tom</Option>
+                    <Option value="China">China</Option>
+                    <Option value="English">English</Option>
                   </Select>
                 </Form.Item>
                 <Form.Item
