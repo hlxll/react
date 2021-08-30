@@ -2,7 +2,7 @@ import React,{Component} from 'react';
 import { View, Button, Alert, Animated, 
     ActivityIndicator, FlatList, Modal, 
     Text, TextInput, TouchableHighlight,
-    Image, StyleSheet, Picker, Switch
+    Image, StyleSheet, Switch
 } from 'react-native';
 const styles = StyleSheet.create({
     container: {
@@ -37,7 +37,6 @@ export default class DemoCon extends Component{
             sureModal: false,
             age: 12,
             name: 'huaglin',
-            pickerValue: '',
             switchValue: false
         }
         fadeIn = ()=>{
@@ -75,14 +74,6 @@ export default class DemoCon extends Component{
                 />
                 <Button onPress={this.fadeIn} title="fadeIn"></Button>
                 <Button onPress={this.fadeOut} title="fadeOut"></Button>
-                <Picker
-                    selectedValue={this.state.pickerValue}
-                    onValueChange={(item, index)=>{this.setState({pickerValue: item})}}
-                    style={{height: 50,width: 150}}
-                >
-                    <Picker.Item label="one" value="one"></Picker.Item>
-                    <Picker.Item label="two" value="two"></Picker.Item>
-                </Picker>
                 <Switch
                     trackColor={{ false: "#767577", true: "#81b0ff" }}
                     thumbColor={this.state.switchValue ? "#f5dd4b" : "#f4f3f4"}
