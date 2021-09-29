@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Image, Platform, FlatList } from 'react-native';
-import DemoCom from './component/DemoCon'
+import DemoCom from './component/DemoCon.jsx'
 const DATA = [
   {
     id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
