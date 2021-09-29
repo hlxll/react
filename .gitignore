@@ -10,7 +10,8 @@
 
 # production
 /build
-
+/.expo
+/.expo-shared
 # misc
 .DS_Store
 .env.local
