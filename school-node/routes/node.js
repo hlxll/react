@@ -4,6 +4,7 @@ var Vue = require("vue");
 var path = require("path");
 var fs = require("fs");
 var http = require("http");
+var http2 = require("http2");
 var os = require("os");
 const dns = require("dns");
 var jwt = require("jsonwebtoken");
@@ -557,6 +558,29 @@ http.get("http://aicoder.com", (res) => {
     console.log("http的get请求");
   });
 });
+
+
+//http2=======================================================================================
+
+
+const http2Server = http2.createSecureServer()
+http2Server.on('error', (err)=> console.log(err))
+http2Server.on('stream', (stream, headers) => {
+  // stream is a Duplex
+  stream.respond({
+    'content-type': 'text/html; charset=utf-8',
+    ':status': 200
+  });
+  stream.end('<h1>Hello World</h1>');
+});
+http2Server.listen(8443, function(){
+  console.log('成功链接')
+});
+
+
+//http2+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
 server.on("connection", () => {
   console.log("握手");
 });
@@ -565,3 +589,4 @@ server.on("close", () => {
 });
 // 关闭服务功能
 // server.close();
+
