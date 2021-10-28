@@ -1,31 +1,33 @@
-//"react-native-web": "~0.13.12",使用这个版本
+import * as React from 'react';
+import { Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import React from 'react';
-import { View, Text, Button } from 'react-native';
-import { StackNavigator } from 'react-navigation';
-import DetailsScreen from './component/navigator'
-// import BottomScreen from './component/BottomScreen'
-const HomeScreen = ({ navigation }) => (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <Text>Home Screen</Text>
-    <Button title="跳转到抽屉导航" onPress={() => navigation.navigate('Details')} />
-    <Button title="跳转到底部导航" onPress={() => navigation.navigate('Bottom')} />
-  </View>
-);
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Home!</Text>
+    </View>
+  );
+}
 
-const RootNavigator = StackNavigator({
-  Home: {
-    screen: HomeScreen,
-    navigationOptions: {
-      headerTitle: 'Home'
-    }
-  },
-  Details: {
-    screen: DetailsScreen,
-  },
-  // Bottom: {
-  //     screen: BottomScreen
-  // }
-});
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
+}
 
-export default RootNavigator;
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
