@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AccessibilityInfo, View, Text, StyleSheet } from 'react-native';
+import { AccessibilityInfo, View, Text, StyleSheet, Button } from 'react-native';
 
 class AccessibilityStatusExample extends Component {
     state = {
@@ -25,18 +25,6 @@ class AccessibilityStatusExample extends Component {
         });
     }
 
-    componentWillUnmount() {
-        AccessibilityInfo.removeEventListener(
-            'reduceMotionChanged',
-            this._handleReduceMotionToggled
-        );
-
-        AccessibilityInfo.removeEventListener(
-            'screenReaderChanged',
-            this._handleScreenReaderToggled
-        );
-    }
-
     _handleReduceMotionToggled = reduceMotionEnabled => {
         this.setState({ reduceMotionEnabled });
     };
@@ -48,6 +36,7 @@ class AccessibilityStatusExample extends Component {
     render() {
         return (
             <View style={this.styles.container}>
+                <Button onPress={() => { this.props.navigation.navigate('Home') }} title="to Home"></Button>
                 <Text style={this.styles.status}>
                     The reduce motion is{' '}
                     {this.state.reduceMotionEnabled ? 'enabled' : 'disabled'}.

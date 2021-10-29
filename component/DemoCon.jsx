@@ -3,7 +3,7 @@ import {
     View, Button, Alert, Animated,
     ActivityIndicator, FlatList, Modal,
     Text, TextInput, TouchableHighlight,
-    Image, StyleSheet, Switch
+    Image, StyleSheet, Switch, Appearance
 } from 'react-native';
 const styles = StyleSheet.create({
     container: {
@@ -19,6 +19,14 @@ const styles = StyleSheet.create({
     },
 });
 export default class DemoCon extends Component {
+    constructor() {
+        super()
+        const colorScheme = Appearance.getColorScheme();
+        console.log('颜色：' + colorScheme)
+        if (colorScheme === 'dark') {
+            console.log('开启')
+        }
+    }
     state = {
         fadeAnim: new Animated.Value(0),
         DATA: [
@@ -70,6 +78,8 @@ export default class DemoCon extends Component {
         const { sureModal } = this.state;
         return (
             <View>
+                <Button onPress={() => { this.props.navigation.navigate('Detail') }} title="to Detail"></Button>
+
                 <Animated.View style={{ opacity: this.state.fadeAnim }}>
                     <Text>Animation</Text>
                 </Animated.View>

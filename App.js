@@ -1,33 +1,29 @@
+// In App.js in a new project
+
 import * as React from 'react';
-import { Text, View } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-function HomeScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Home!</Text>
-    </View>
-  );
-}
+import DrawNavigator from './component/DrawerNavigator'
+import BottomNavigator from './component/BottomScreen'
 
-function SettingsScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings!</Text>
-    </View>
-  );
-}
+import DemoCon from './component/DemoCon';
+import AccessibilityInfo from './component/AccessibilityInfo'
 
-const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-export default function App() {
+function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingsScreen} />
-      </Tab.Navigator>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={DemoCon} />
+        <Stack.Screen name="Detail" component={AccessibilityInfo} />
+        {/* <Stack.Screen name="Draw" component={DrawNavigator} /> */}
+        {/* <Stack.Screen name="Bottom" component={BottomNavigator} /> */}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+export default App;
