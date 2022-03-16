@@ -4,10 +4,12 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import Login from "./view/login";
-import Home from "./view/home";
+// import Home from "./view/home";
 import Order from "./view/order";
 import Config from "./view/config";
 import Source from "./component/source";
+
+import DocComponent from "./doc/index.jsx";
 
 //ak = mOs3rqPMqyM6G21CKIqyO8yFh9hWtR8p
 ReactDOM.render(
@@ -18,7 +20,8 @@ ReactDOM.render(
         <Route path="/config" component={Config} />
         <Route path="/Source" component={Source} />
         <Route path="/order" exact component={Order} />
-        <Route path="/" component={Home} />
+        {/* <Route path="/" component={Home} /> */}
+        <Route path="/" component={DocComponent} />
       </Switch>
     </Router>
   </React.StrictMode>,
