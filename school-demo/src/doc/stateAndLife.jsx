@@ -5,6 +5,7 @@ class StateAndLife extends Component {
     super(props);
     this.state = {
       name: "huanglin",
+      list: [1, 2, 3, 4],
     };
     this.change = this.change.bind(this);
   }
@@ -24,6 +25,10 @@ class StateAndLife extends Component {
       <div>
         <span>{this.state.name}</span>
         <button onClick={this.change}>改变name</button>
+        <p>列表展示和key</p>
+        {this.state.list.map((item) => {
+          return <p key={item}>{item}</p>;
+        })}
       </div>
     );
   }
