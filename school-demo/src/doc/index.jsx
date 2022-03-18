@@ -7,7 +7,10 @@ import ContextCom from "./hostComponent/context";
 import { MyContext, UserContext } from './hostComponent/createContext'
 import FragmentCom from "./hostComponent/fragment";
 import HotComponent from "./hostComponent/hotComponent";
-
+import YouHua from "./hostComponent/youhua"
+import ProtalCom from "./hostComponent/protalCom";
+import RefCompon from "./hostComponent/refCompon";
+import RenderProp from "./hostComponent/renderProp";
 class Doc extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +22,11 @@ class Doc extends Component {
     return (
       <div>
         <p style={{ textAlign: "center" }}>文档学习</p>
+
+        <p style={{ textAlign: "center" }}>render prop术语??</p>
+        <RenderProp />
+        <p style={{ textAlign: "center" }}>ref获取</p>
+        <RefCompon />
         <p style={{ textAlign: "center" }}>组件和props</p>
         <ComponAndPropFun name="huanglin" age={this.state.age} />
         <ComponAndProp name="huanglin" age={this.state.age} />
@@ -36,6 +44,12 @@ class Doc extends Component {
         <FragmentCom></FragmentCom>
         <p style={{ textAlign: "center" }}>高阶组件</p>
         <HotComponent />
+        <p style={{ textAlign: "center" }}>优化</p>
+        <YouHua />
+        <p style={{ textAlign: "center" }}>Protal</p>
+        <ProtalCom>
+          protal挂载到body上
+        </ProtalCom>
       </div>
     );
   }
