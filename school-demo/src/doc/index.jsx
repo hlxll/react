@@ -1,9 +1,12 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { ComponAndPropFun, ComponAndProp } from "./componentAndProp";
 import StateAndLife from "./stateAndLife";
 import ExtendSetup from "./extendAndsetup";
 
-
+import ContextCom from "./hostComponent/context";
+import { MyContext, UserContext } from './hostComponent/createContext'
+import FragmentCom from "./hostComponent/fragment";
+import HotComponent from "./hostComponent/hotComponent";
 
 class Doc extends Component {
   constructor(props) {
@@ -23,6 +26,16 @@ class Doc extends Component {
         <StateAndLife />
         <p style={{ textAlign: "center" }}>组合和继承</p>
         <ExtendSetup />
+        <p style={{ textAlign: "center" }}>context学习</p>
+        <MyContext.Provider value="MyContext_providerValue">
+          <UserContext.Provider value="UserContext_provideValue">
+            <ContextCom />
+          </UserContext.Provider>
+        </MyContext.Provider>
+        <p style={{ textAlign: "center" }}>fragment组件</p>
+        <FragmentCom></FragmentCom>
+        <p style={{ textAlign: "center" }}>高阶组件</p>
+        <HotComponent />
       </div>
     );
   }

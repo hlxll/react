@@ -17,6 +17,7 @@ export default class Order extends Component {
       ],
     };
     this.searchOrderList = this.searchOrderList.bind(this);
+    this.deleteItem = this.deleteItem.bind(this)
   }
   async componentDidMount() {
     this.searchOrderList();
@@ -33,7 +34,7 @@ export default class Order extends Component {
     });
   }
   async deleteItem(item) {
-    let resData = await deleteOrder(item._id);
+    await deleteOrder(item._id);
     this.searchOrderList();
   }
   render() {
@@ -65,7 +66,7 @@ export default class Order extends Component {
         key: "",
         render: (text, item) => (
           <div>
-            <Button type="primary" onClick={this.deleteItem.bind(this, item)}>
+            <Button type="primary" onClick={this.deleteItem(item)}>
               删除订单
             </Button>
           </div>
