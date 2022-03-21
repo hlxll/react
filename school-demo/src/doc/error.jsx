@@ -16,7 +16,7 @@ class ErrorComponent extends Component {
   }
   componentDidCatch(error, errorInfo) {
     //打印错误信息
-    logErrorToMyService(error, errorInfo);
+    // logErrorToMyService(error, errorInfo);
   }
   render() {
     if (this.state.hasError) {

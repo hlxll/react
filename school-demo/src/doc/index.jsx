@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { ComponAndPropFun, ComponAndProp } from "./componentAndProp";
 import StateAndLife from "./stateAndLife";
-import RefCompon from "./refCompon";
 import ExtendSetup from "./extendAndsetup";
 
 import ContextCom from "./hostComponent/context";
@@ -12,6 +11,7 @@ import YouHua from "./hostComponent/youhua";
 import ProtalCom from "./hostComponent/protalCom";
 import RefCompon from "./hostComponent/refCompon";
 import RenderProp from "./hostComponent/renderProp";
+import LifeComponent from "./lifeComponent";
 class Doc extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +27,8 @@ class Doc extends Component {
         {/* 严格模式，监测不安全生命周期，使用过时ref字符串，监测过时context，意外副作用等 */}
         <React.StrictMode>
           <p style={{ textAlign: "center" }}>文档学习</p>
+          <p style={{ textAlign: "center" }}>生命周期</p>
+          <LifeComponent name="huanglin" age={this.state.age} />
           <p style={{ textAlign: "center" }}>组件和props</p>
           <ComponAndPropFun name="huanglin" age={this.state.age} />
           <ComponAndProp name="huanglin" age={this.state.age} />

@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import Login from "./view/login";
+// import Login from "./view/login";
 // import Home from "./view/home";
-import Order from "./view/order";
-import Config from "./view/config";
-import Source from "./component/source";
+// import Order from "./view/order";
+// import Config from "./view/config";
+// import Source from "./component/source";
 
 import DocComponent from "./doc/index.jsx";
 
@@ -16,10 +16,10 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
-        <Route path="/login" component={Login} />
+        {/* <Route path="/login" component={Login} />
         <Route path="/config" component={Config} />
         <Route path="/Source" component={Source} />
-        <Route path="/order" exact component={Order} />
+        <Route path="/order" exact component={Order} /> */}
         {/* <Route path="/" component={Home} /> */}
         <Route path="/" component={DocComponent} />
       </Switch>
