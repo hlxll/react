@@ -10,7 +10,7 @@ import reportWebVitals from "./reportWebVitals";
 // import Source from "./component/source";
 
 import DocComponent from "./doc/index.jsx";
-
+import HookIndex from "./doc/hook/index";
 //ak = mOs3rqPMqyM6G21CKIqyO8yFh9hWtR8p
 ReactDOM.render(
   <React.StrictMode>
@@ -21,7 +21,7 @@ ReactDOM.render(
         <Route path="/Source" component={Source} />
         <Route path="/order" exact component={Order} /> */}
         {/* <Route path="/" component={Home} /> */}
-        <Route path="/" component={DocComponent} />
+        <Route path="/" component={HookIndex} />
       </Switch>
     </Router>
   </React.StrictMode>,
