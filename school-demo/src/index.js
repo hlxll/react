@@ -9,7 +9,10 @@ import Order from "./view/order";
 import Config from "./view/config";
 import Source from "./component/source";
 
-import DocComponent from "./doc/index.jsx";
+// import DocComponent from "./doc/index.jsx";
+// import RDComponent from './doc/ReactDomComponent/index'
+// import ReactDOMServer from './doc/ReactDOMServer/index'
+import HookComponent from './doc/hookComponent/index'
 
 //ak = mOs3rqPMqyM6G21CKIqyO8yFh9hWtR8p
 ReactDOM.render(
@@ -21,7 +24,7 @@ ReactDOM.render(
         <Route path="/Source" component={Source} />
         <Route path="/order" exact component={Order} />
         {/* <Route path="/" component={Home} /> */}
-        <Route path="/" component={DocComponent} />
+        <Route path="/" component={HookComponent} />
       </Switch>
     </Router>
   </React.StrictMode>,

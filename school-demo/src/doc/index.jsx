@@ -29,7 +29,7 @@ class Doc extends Component {
         <RefCompon />
         <p style={{ textAlign: "center" }}>组件和props</p>
         <ComponAndPropFun name="huanglin" age={this.state.age} />
-        <ComponAndProp name="huanglin" age={this.state.age} />
+        <ComponAndProp age={this.state.age} />
         <p style={{ textAlign: "center" }}>state和生命周期</p>
         <StateAndLife />
         <p style={{ textAlign: "center" }}>组合和继承</p>

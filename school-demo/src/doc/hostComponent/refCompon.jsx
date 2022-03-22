@@ -17,11 +17,12 @@ class RefCompon extends React.Component {
     }
     render() {
         return (
-            <div ref={this.divRef}>
+            <div>
                 {/* ref也可以使用回调函数获取，子组件暴露ref出来 */}
                 <RefChild refInput={el => this.refElement = el} />
                 <button onClick={this.pullRef}>获取ref</button>
                 <button onClick={this.refCallback}>获取Child的ref</button>
+                <RefComponent ref={this.divRef} />
             </div>
         )
     }
@@ -38,4 +39,10 @@ class RefChild extends React.Component {
         )
     }
 }
-export default RefCompon
+
+//函数接收传递的ref，返回渲染函数，创建一个react组件
+const RefComponent = React.forwardRef((props, ref) => (
+    <div style={{ textAlign: 'center' }} ref={ref}>forwardRef接收ref</div>
+))
+
+export default RefCompon;

@@ -69,4 +69,6 @@ class CloneElementCom extends React.Component {
     }
 }
 
+
+
 export default PureCom;

@@ -18,7 +18,13 @@ class StateAndLife extends Component {
     // });
     this.setState((state, props) => ({
       name: state.name + "22",
-    }));
+    }), () => {
+      //setState第二个参数函数，在重新渲染组件后执行，通常使用componentDidUpdate替代
+      console.log();
+    });
+
+    //强制组件重新渲染，当前组件会跳过shouldComponentUpdate，但是子组件还是会正常进行生命周期
+    this.forceUpdate()
   }
   render() {
     return (
