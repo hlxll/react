@@ -4,13 +4,14 @@ import StateAndLife from "./stateAndLife";
 import ExtendSetup from "./extendAndsetup";
 
 import ContextCom from "./hostComponent/context";
-import { MyContext, UserContext } from './hostComponent/createContext'
+import { MyContext, UserContext } from "./hostComponent/createContext";
 import FragmentCom from "./hostComponent/fragment";
 import HotComponent from "./hostComponent/hotComponent";
-import YouHua from "./hostComponent/youhua"
+import YouHua from "./hostComponent/youhua";
 import ProtalCom from "./hostComponent/protalCom";
 import RefCompon from "./hostComponent/refCompon";
 import RenderProp from "./hostComponent/renderProp";
+import LifeComponent from "./lifeComponent";
 class Doc extends Component {
   constructor(props) {
     super(props);
@@ -21,8 +22,21 @@ class Doc extends Component {
   render() {
     return (
       <div>
-        <p style={{ textAlign: "center" }}>文档学习</p>
+        <p style={{ textAlign: "center" }}>严格模式检查</p>
 
+        {/* 严格模式，监测不安全生命周期，使用过时ref字符串，监测过时context，意外副作用等 */}
+        <React.StrictMode>
+          <p style={{ textAlign: "center" }}>文档学习</p>
+          <p style={{ textAlign: "center" }}>生命周期</p>
+          <LifeComponent name="huanglin" age={this.state.age} />
+          <p style={{ textAlign: "center" }}>组件和props</p>
+          <ComponAndPropFun name="huanglin" age={this.state.age} />
+          <ComponAndProp name="huanglin" age={this.state.age} />
+          <p style={{ textAlign: "center" }}>state和生命周期</p>
+          <StateAndLife />
+          <p style={{ textAlign: "center" }}>ref转发</p>
+          <RefCompon />
+        </React.StrictMode>
         <p style={{ textAlign: "center" }}>render prop术语??</p>
         <RenderProp />
         <p style={{ textAlign: "center" }}>ref获取</p>
@@ -47,9 +61,7 @@ class Doc extends Component {
         <p style={{ textAlign: "center" }}>优化</p>
         <YouHua />
         <p style={{ textAlign: "center" }}>Protal</p>
-        <ProtalCom>
-          protal挂载到body上
-        </ProtalCom>
+        <ProtalCom>protal挂载到body上</ProtalCom>
       </div>
     );
   }
