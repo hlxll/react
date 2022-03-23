@@ -12,7 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 // import DocComponent from "./doc/index.jsx";
 // import RDComponent from './doc/ReactDomComponent/index'
 // import ReactDOMServer from './doc/ReactDOMServer/index'
-import HookComponent from './doc/hookComponent/index'
+import HookComponent from './doc/hook/index'
 
 //ak = mOs3rqPMqyM6G21CKIqyO8yFh9hWtR8p
 ReactDOM.render(
