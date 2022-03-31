@@ -64,8 +64,8 @@ class PureCom extends React.PureComponent {
 //memo只适用函数组件，对props相同的，渲染结果就相同的组件封装，以记忆组件功能优化渲染，第二次渲染直接
 //取用缓存。memo仅检查props。如果有useState或useContext，当context变化，还是会重新渲染
 //第二个参数可选，是自定义比较方法
-function qreEqual(pre, next) {}
-const MemoCompn = React.memo(function MyComponent(prop) {}, qreEqual);
+function qreEqual(pre, next) { }
+const MemoCompn = React.memo(function MyComponent(prop) { }, qreEqual);
 
 //创建react元素，JSX方式创建组件也会转化成createElement形式,createElement第一个参数可以是组件或html字符串
 class CreateNotJsx extends React.Component {

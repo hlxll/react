@@ -15,6 +15,10 @@ class ComponAndProp extends Component {
     );
   }
 }
+//默认prop，当他未赋值，但是不能未null的时候
+ComponAndProp.defaultProps = {
+  name: '默认props'
+}
 function ComponAndPropFun(props) {
   return (
     <div>

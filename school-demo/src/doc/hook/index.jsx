@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { MyContext } from '../hostComponent/createContext.js'
 
 // 只能在函数最外层调用 Hook。不要在循环、条件判断或者子函数中调用。
 // 只能在 React 的函数组件中调用 Hook。不要在其他 JavaScript 函数中调用
@@ -6,12 +7,15 @@ import { useState, useEffect } from "react";
 function HookIndex() {
   //返回的修改函数，和setState差不多，但是不会合并新旧state，而且初始state不一定需要对象
   const [name, setName] = useState("hl");
-  // 相当于 componentDidMount 和 componentDidUpdate:多个effect，按照声明顺序执行
+  // 相当于 componentDidMount，componentDidUpdate 和 componentWillUnmount 多个effect，按照声明顺序执行
+  //effect会生成新的effect，替换之前的，不会阻塞浏览器更新，响应更快，大多数effect不需要同步执行
   useEffect(
     () => {
       document.title = "新标题";
-      //可以返回一个函数用来清除副作用，在组件销毁时候执行
+      console.log(1);
+      //可以返回一个函数用来清除副作用，在组件销毁时候执行,首次渲染不会执行，重新渲染的时候，会在副作用前执行
       return () => {
+        console.log(2);
         document.title = "旧标题";
       };
     },
@@ -19,6 +23,10 @@ function HookIndex() {
     //如果传入空数组，就实现只执行一次初始化的
     [name]
   );
+
+  //useContext,获取最近的父组件provider的value值
+  const theme = useContext(MyContext)
+
   return (
     <div>
       <p>{name}</p>
