@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 
-var indexRouter = require("./routes/index");
+var indexRouter = require("./routes/apiLearn/index1");
 var usersRouter = require("./routes/users");
 var planeRouter = require("./routes/planeTicket");
 var trainTicketRouter = require("./routes/trainTicket");
