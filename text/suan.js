@@ -1,27 +1,42 @@
-function changeNum(num, len) {
-  console.log(num);
-  let newArr = [];
-  let show = false;
-  for (let i = 0; i < num.length - 1; i++) {
-    if (num[i] == "a" && num[i + 1] == "b") {
-      newArr.push("b");
-      newArr.push("b");
-      newArr.push("a");
-      len++;
-      i++;
-      show = true;
-    } else {
-      newArr.push(num[i]);
-      if (i == num.length - 2) {
-        newArr.push(num[i + 1]);
+
+var deserialize = function (s) {
+  let list = s.split('')
+  if (list.length == 0) {
+    return ''
+  }
+  if (list[0] != '[') {
+    return +s
+  }
+  let arr = []
+  let result = []
+  for (let i = 0; i < list.length; i++) {
+    if (list[i] != ']') {
+      arr.push(list[i])
+    }
+    if (list[i] == ']') {
+      let popStr = arr.pop()
+      let ownArr = []
+      let ownStr = []
+      while (popStr != '[') {
+        if (popStr != ',') {
+          ownStr.unshift(popStr)
+        } else {
+          if (ownStr.length > 0) {
+            ownArr.push(+ownStr.join(''))
+          }
+          ownStr = []
+        }
+        popStr = arr.pop()
       }
+      if (ownStr.length > 0) {
+        ownArr.push(+ownStr.join(''))
+      }
+      if (result.length > 0) {
+        ownArr.push(result)
+      }
+      result = ownArr
     }
   }
-  if (show) {
-    return changeNum(newArr, len);
-  } else {
-    return len;
-  }
-}
-let arr = "aab".split("");
-console.log(changeNum(arr, 0));
+  return result
+};
+console.log(deserialize("324"))
