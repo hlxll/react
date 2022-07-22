@@ -29,7 +29,10 @@ app.all("*", function (req, res, next) {
 });
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+//配置模版文件后缀
+app.set("view engine", "html");
+//配置模版文件解析工具,这里使用ejs
+app.engine("html", require("ejs").renderFile);
 
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
