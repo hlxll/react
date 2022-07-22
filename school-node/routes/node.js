@@ -451,7 +451,7 @@ app.get("/pullUrlData", function (req, res) {
     body
   ) {
     //console.log(body)
-    //bode是爬虫得到的DOM节点。通过正则获取指定的内容
+    //body是爬虫得到的DOM节点。通过正则获取指定的内容
     let reg1 = /<a href="(.*?)".*?>(.*?)<\/a>/gis;
     let arrClass = [];
     var res;
@@ -564,7 +564,7 @@ http.get("http://aicoder.com", (res) => {
 
 
 const http2Server = http2.createSecureServer()
-http2Server.on('error', (err)=> console.log(err))
+http2Server.on('error', (err) => console.log(err))
 http2Server.on('stream', (stream, headers) => {
   // stream is a Duplex
   stream.respond({
@@ -573,7 +573,7 @@ http2Server.on('stream', (stream, headers) => {
   });
   stream.end('<h1>Hello World</h1>');
 });
-http2Server.listen(8443, function(){
+http2Server.listen(8443, function () {
   console.log('成功链接')
 });
 

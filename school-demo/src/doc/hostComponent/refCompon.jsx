@@ -48,7 +48,14 @@ class RefChild extends React.Component {
 
 //函数接收传递的ref，返回渲染函数，创建一个react组件
 const RefComponent = React.forwardRef((props, ref) => (
+<<<<<<< HEAD
   <div style={{ textAlign: 'center' }} ref={ref}>forwardRef接收ref</div>
 ))
+=======
+  <div style={{ textAlign: "center" }} ref={ref}>
+    forwardRef接收ref
+  </div>
+));
+>>>>>>> 2e9266d320d2522b0076ea083b7f3eb4b51b0fdd
 
 export default RefCompon;

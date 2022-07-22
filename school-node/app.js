@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 
-var indexRouter = require("./routes/index");
+var indexRouter = require("./routes/apiLearn/index3");
 var usersRouter = require("./routes/users");
 var planeRouter = require("./routes/planeTicket");
 var trainTicketRouter = require("./routes/trainTicket");
@@ -17,6 +17,7 @@ var groupBuyingRouter = require("./routes/groupBuying");
 var queryStringRouter = require("./routes/queryString");
 
 // var nodeRouter = require("./routes/node");
+var pathModule = require("./routes/path_module");
 
 var app = express();
 app.all("*", function (req, res, next) {
@@ -48,7 +49,7 @@ app.use("/local", localRouter);
 app.use("/hotel", hotelRouter);
 app.use("/holiday", holidayRouter);
 app.use("/groupBuying", groupBuyingRouter);
-app.use("/queryStringRouter", queryStringRouter);
+app.use("/pathModule", pathModule);
 // app.use('/node', nodeRouter);
 
 // catch 404 and forward to error handler
