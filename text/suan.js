@@ -1,27 +1,25 @@
-function changeNum(num, len) {
-  console.log(num);
-  let newArr = [];
-  let show = false;
-  for (let i = 0; i < num.length - 1; i++) {
-    if (num[i] == "a" && num[i + 1] == "b") {
-      newArr.push("b");
-      newArr.push("b");
-      newArr.push("a");
-      len++;
-      i++;
-      show = true;
-    } else {
-      newArr.push(num[i]);
-      if (i == num.length - 2) {
-        newArr.push(num[i + 1]);
-      }
-    }
+var rotate = function (nums, k) {
+  if (nums.length == 0) {
+    return nums;
   }
-  if (show) {
-    return changeNum(newArr, len);
-  } else {
-    return len;
+  let i = 1;
+  while (i <= k) {
+    let res = nums.pop();
+    nums.unshift(res);
+    i++;
   }
-}
-let arr = "aab".split("");
-console.log(changeNum(arr, 0));
+};
+
+// var rotate = function (nums, k) {
+//   const n = nums.length;
+//   const newArr = new Array(n);
+//   for (let i = 0; i < n; ++i) {
+//     newArr[(i + k) % n] = nums[i];
+//   }
+//   for (let i = 0; i < n; ++i) {
+//     nums[i] = newArr[i];
+//   }
+// };
+console.time();
+rotate([1, 2, 3, 4, 5, 6, 7], 3);
+console.timeEnd();

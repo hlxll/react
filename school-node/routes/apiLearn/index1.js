@@ -131,7 +131,6 @@ route.get("/", function (req, res) {
     });
     writeText();
   }
-  writeStream();
   res.send("123");
 });
 module.exports = route;
