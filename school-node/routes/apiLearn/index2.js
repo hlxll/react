@@ -4,7 +4,7 @@ route = express.Router();
 var mongo = require('mongodb').MongoClient;
 
 route.get('/', function (req, res) {
-    res.render('index.ejs', {
+    res.render('index.html', {
         title: '首页',
     });
 })

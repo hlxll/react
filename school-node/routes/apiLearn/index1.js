@@ -269,7 +269,6 @@ route.get("/", function (req, res) {
       res.truncate(0)
     })
   }
-  promiseFun()
   res.send("123");
 });
 module.exports = route;
