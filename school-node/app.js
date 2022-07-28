@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
 
-var indexRouter = require("./routes/apiLearn/index1");
+var indexRouter = require("./routes/apiLearn/index5");
 var usersRouter = require("./routes/users");
 var planeRouter = require("./routes/planeTicket");
 var trainTicketRouter = require("./routes/trainTicket");
@@ -20,13 +20,6 @@ var queryStringRouter = require("./routes/queryString");
 var pathModule = require("./routes/path_module");
 
 var app = express();
-app.all("*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 //配置模版文件后缀
@@ -38,12 +31,58 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(logger("dev"));
+app.use(express.Router({}))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
+var options = {
+  dotfiles: 'ignore',
+  etag: false,
+  extensions: ['htm', 'html'],
+  index: false,
+  maxAge: '1d',
+  redirect: false,
+  setHeaders: function (res, path, stat) {
+    res.set('x-timestamp', Date.now())
+  }
+}
+app.use(express.static(path.join(__dirname, "public"), options));
 
-app.use("/", indexRouter);
+// app.use("/", indexRouter);
+app.use((req, res, next) => {
+  // console.log(req.body);
+  next()
+})
+app.use((err, req, res, next) => {
+  if (err) {
+    res.status(500).send('Something broke!')
+  }
+  next()
+})
+app.locals.title = '开发express'
+app.use('/huanglin', (req, res, next) => {
+  console.log('特定路由中间件');
+})
+// app.get('/:name', (req, res, next) => {
+//   // console.log(req);
+//   next()
+// }, function (req, res) {
+//   res.send(app.locals || '空的')
+// })
+function funLog(req, res, next) {
+  next()
+}
+function funTip(req, res, next) {
+  next()
+}
+var funs = [funLog, funTip]
+app.get('/name/:id', funs, function (req, res) {
+  res.send(app.locals || '空的')
+})
+
+// 挂载
+var adminRouter = require('./routes/apiLearn/express.js')
+app.use("/admin", adminRouter)
 app.use("/user", usersRouter);
 app.use("/plane", planeRouter);
 app.use("/trainTicket", trainTicketRouter);

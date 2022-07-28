@@ -3,11 +3,11 @@ import React, { createRef } from "react";
 //虽然DOM是不在父DOM下，但是像context这样的功能还是不变的
 class RefCompon extends React.Component {
   constructor(props) {
-    super(props);
-    this.divRef = createRef();
-    this.refElement = "";
-    this.pullRef = this.pullRef.bind(this);
-    this.refCallback = this.refCallback.bind(this);
+    super(props)
+    this.divRef = createRef()
+    this.refElement = ''
+    this.pullRef = this.pullRef.bind(this)
+    this.refCallback = this.refCallback.bind(this)
   }
   pullRef() {
     console.log(this.divRef);
@@ -19,12 +19,12 @@ class RefCompon extends React.Component {
     return (
       <div>
         {/* ref也可以使用回调函数获取，子组件暴露ref出来 */}
-        <RefChild refInput={(el) => (this.refElement = el)} />
+        <RefChild refInput={el => this.refElement = el} />
         <button onClick={this.pullRef}>获取ref</button>
         <button onClick={this.refCallback}>获取Child的ref</button>
         <RefComponent ref={this.divRef} />
       </div>
-    );
+    )
   }
 }
 //只有forwardRef第二个参数有ref，函数和class不存在ref，prop也没有ref。
@@ -48,9 +48,14 @@ class RefChild extends React.Component {
 
 //函数接收传递的ref，返回渲染函数，创建一个react组件
 const RefComponent = React.forwardRef((props, ref) => (
+<<<<<<< HEAD
+  <div style={{ textAlign: 'center' }} ref={ref}>forwardRef接收ref</div>
+))
+=======
   <div style={{ textAlign: "center" }} ref={ref}>
     forwardRef接收ref
   </div>
 ));
+>>>>>>> 2e9266d320d2522b0076ea083b7f3eb4b51b0fdd
 
 export default RefCompon;

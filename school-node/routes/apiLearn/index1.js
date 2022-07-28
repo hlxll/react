@@ -2,6 +2,8 @@ var fs = require("fs");
 
 var path = require("path");
 var express = require("express");
+const { ReadStream } = require("tty");
+const { dirname } = require("path");
 route = express.Router();
 
 /**
@@ -20,7 +22,7 @@ route.get("/", function (req, res) {
           if (stats.isFile()) {
             console.log(item);
           } else {
-            fs.ReadStream(str, () => {});
+            fs.ReadStream(str, () => { });
             readRoute(str + "/" + item.toString());
           }
         });
@@ -51,15 +53,16 @@ route.get("/", function (req, res) {
   function changeChmod() {
     //改变文件权限
     let str = path.join(__dirname, "./learn.txt");
-    fs.chmod(str, 0o400, (err) => {
-      console.log(err);
-    });
+    // fs.chmod(str, 0o400, (err) => {
+    //   console.log(err);
+    // });
   }
   function chmon() {
     //改变文件所有者
-    fs.chown(learnText, root, root, (err) => {
+    fs.chown(learnText, 0, 0, (err) => {
       console.log(err);
     });
+    // fs.lchownSync(learnText, 0, 0)
   }
   //constants，用于一些类的参数，是文件系统数据
   function copyFile() {
@@ -112,25 +115,161 @@ route.get("/", function (req, res) {
     //     autoClose: true
     //   };
     //也可以有start，写入从指定位置开始，flags需要设置r+
-    let str = path.resolve(__dirname, "./copyFile.txt");
+    let str = path.resolve(__dirname, "./writeStream.txt");
     let ws = fs.createWriteStream(str, {
-      highWaterMark: 3,
+      highWaterMark: 5,
+      autoClose: true,
     });
-    let i = 0;
-    function writeText() {
-      let flag = true;
-
-      while (i < 10 && flag) {
-        flag = ws.write("c");
-        i++;
-      }
-      console.log(flag);
+    for (let i = 0; i < 100; i++) {
+      ws.write(`hello, #${i}!\n`);
     }
-    ws.on("drain", () => {
-      writeText();
+    ws.end('This is the end\n');
+    ws.on('finish', () => {
+      console.log('All writes are now complete.');
     });
-    writeText();
+    // let i = 0;
+    // function writeText() {
+    //   let flag = true;
+
+    //   while (i < 20 && flag) {
+    //     flag = ws.write("c", "utf-8");
+    //     i++;
+    //     if (!flag) {
+    //       console.log(i)
+    //     }
+    //   }
+    // }
+    // ws.once("drain", () => {
+    //   writeText();
+    // });
+    // writeText();
+  }
+  function fdChmod() {
+    let str = path.join(__dirname, './learn.txt')
+    // fs.chmod(str, 0777, (err) => {
+    //   if (err)
+    //     throw err
+    // })
+    //打开文件之后，改变权限不能用r打开，当权限只读，fchmod无效
+    fs.open(str, 'a', function (err1, fd) {
+      if (err1)
+        throw (err1)
+      console.log(fd);
+      fs.fchmod(fd, 0777, (err2) => {
+        if (err2)
+          throw err2
+        fs.close(fd, (err3) => {
+
+        })
+      })
+    })
+  }
+  function fdataSync() {
+
+    let url = path.join(__dirname, './copyFile.txt')
+    fs.chmod(url, 0777, (err) => {
+      if (err)
+        throw err
+
+      fs.open(url, 'r+', (err, fd) => {
+        fs.writeFile(fd, 'huangln', () => {
+          fs.fdatasync(fd, (err) => {
+            if (err)
+              throw err
+          })
+        })
+      })
+    })
+  }
+  function trunCateFile() {
+    let url = path.join(__dirname, './copyFile.txt')
+    let fd = fs.openSync(url, 'r+')
+    //截断，会对文件修改
+    fs.ftruncate(fd, 4, (err) => {
+      if (err)
+        throw err
+    })
+    //截取文件内容truncate
+    fs.truncate(path.join(__dirname, './copyFile.txt'), 0, (err) => {
+      if (err)
+        throw err
+    })
+    console.log(fs.readFileSync(path.join(__dirname, './copyFile.txt'), 'utf-8'));
+
+  }
+  function changeTime() {
+    let url = path.join(__dirname, './copyFile.txt')
+    fs.lstat(url, (err, stats) => {
+      console.log(stats.atime);
+    })
+    fs.open(url, 'r+', (err, fd) => {
+      let tiem = new Date()
+      fs.futimesSync(fd, tiem, tiem)
+      fs.fstat(fd, (err, stats) => {
+        console.log(stats.atime);
+      })
+    })
+
+  }
+  function linkpath() {
+    // link是将一个文件的引用连接创建一个新的，使用新的
+    fs.linkSync(learnText, 'newpath')
+    fs.readFile('newpath', 'utf-8', (err, str) => {
+      if (err)
+        throw err
+      console.log(str);
+    })
+  }
+  function mkdir() {
+    fs.mkdir(__dirname + '/name/a', { recursive: true }, (err) => {
+      if (err)
+        throw err
+    })
+  }
+  function realStr() {
+    //解析文件，返回路径，第二个参数是解析方法,加了native是仅支持可转换为UTF8字符串的路径。
+    fs.realpath.native(learnText, { encoding: 'UTF-8' }, (err, data) => {
+      console.log(data);
+    })
+  }
+
+  // ??
+  function symlink() {
+    let url1 = path.join(__dirname, './learn.txt')
+    let url = path.join(__dirname, './name')
+
+    //unlink异步删除文件或符号链接
+    // fs.unlink(url1, (err) => {
+    //   if (err)
+    //     throw err
+    // })
+    fs.symlink(url1, 'markdown1.txt', (err) => {
+      if (err)
+        throw err
+
+    })
+  }
+
+  function watchFile() {
+    let url = path.join(__dirname, './learn.txt')
+    fs.watchFile(url, {
+      persistent: true,//只要监视文件，进行是否继续运行
+      recursive: false,//是否递归监视子文件
+      encoding: 'utf8'//指定传递给回调函数的文件名字符编码
+    }, (event, file) => {
+      console.log(event);
+    })
+    //接触监视，不传递监视器，就是接触所有监视器
+    fs.unwatchFile(url)
+  }
+  function promiseFun() {
+    var fileHandle = fs.promises;
+    let promiseOpen = fileHandle.open(path.join(__dirname, './copyFile.txt'), 'r+')
+    promiseOpen.then(res => {
+      res.truncate(0)
+    })
   }
   res.send("123");
 });
 module.exports = route;
+
