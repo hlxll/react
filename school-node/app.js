@@ -4,7 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
-
+var session = require("express-session");
 var indexRouter = require("./routes/apiLearn/index5");
 var usersRouter = require("./routes/users");
 var planeRouter = require("./routes/planeTicket");
@@ -28,41 +28,55 @@ app.set("view engine", "html");
 app.engine("html", require("ejs").renderFile);
 
 app.use(bodyParser.json({ limit: "50mb" }));
+//配置请求参数，配置bodyParser之后就可以直接使用req.body获取参数
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 app.use(logger("dev"));
-app.use(express.Router({}))
+app.use(express.Router({}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+//配置session
+app.use(
+  session({
+    secret: "secret key",
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 3600,
+    },
+  })
+);
+
+//静态文件配置
 var options = {
-  dotfiles: 'ignore',
+  dotfiles: "ignore",
   etag: false,
-  extensions: ['htm', 'html'],
+  extensions: ["htm", "html"],
   index: false,
-  maxAge: '1d',
+  maxAge: "1d",
   redirect: false,
   setHeaders: function (res, path, stat) {
-    res.set('x-timestamp', Date.now())
-  }
-}
+    res.set("x-timestamp", Date.now());
+  },
+};
 app.use(express.static(path.join(__dirname, "public"), options));
 
 // app.use("/", indexRouter);
 app.use((req, res, next) => {
   // console.log(req.body);
-  next()
-})
+  next();
+});
 app.use((err, req, res, next) => {
   if (err) {
-    res.status(500).send('Something broke!')
+    res.status(500).send("Something broke!");
   }
-  next()
-})
-app.locals.title = '开发express'
-app.use('/huanglin', (req, res, next) => {
-  console.log('特定路由中间件');
-})
+  next();
+});
+app.locals.title = "开发express";
+app.use("/huanglin", (req, res, next) => {
+  console.log("特定路由中间件");
+});
 // app.get('/:name', (req, res, next) => {
 //   // console.log(req);
 //   next()
@@ -70,19 +84,19 @@ app.use('/huanglin', (req, res, next) => {
 //   res.send(app.locals || '空的')
 // })
 function funLog(req, res, next) {
-  next()
+  next();
 }
 function funTip(req, res, next) {
-  next()
+  next();
 }
-var funs = [funLog, funTip]
-app.get('/name/:id', funs, function (req, res) {
-  res.send(app.locals || '空的')
-})
+var funs = [funLog, funTip];
+app.get("/name/:id", funs, function (req, res) {
+  res.send(app.locals || "空的");
+});
 
 // 挂载
-var adminRouter = require('./routes/apiLearn/express.js')
-app.use("/admin", adminRouter)
+var adminRouter = require("./routes/apiLearn/index8.js");
+app.use("/admin", adminRouter);
 app.use("/user", usersRouter);
 app.use("/plane", planeRouter);
 app.use("/trainTicket", trainTicketRouter);

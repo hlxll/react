@@ -25,9 +25,27 @@
         );
         http.send();
       }
+
+      function fn() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            console.log("hellow world");
+            resolve();
+          });
+        });
+      }
+      async function fun() {
+        while (true) {
+          await fn();
+        }
+      }
+      fun();
     </script>
   </head>
   <body>
-    <button onclick="afterLogin()">提交</button>
+    <button onclick="afterLogin()" style="width: 1p">提交</button>
+    <span>jjj</span>
+    <input placeholder="用户名" />
+    <input placeholder="密码" />
   </body>
 </html>
