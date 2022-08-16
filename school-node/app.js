@@ -31,6 +31,14 @@ app.use(bodyParser.json({ limit: "50mb" }));
 //配置请求参数，配置bodyParser之后就可以直接使用req.body获取参数
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
+// app.all("*", function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   next();
+// });
+
 app.use(logger("dev"));
 app.use(express.Router({}));
 app.use(express.json());
@@ -95,7 +103,7 @@ app.get("/name/:id", funs, function (req, res) {
 });
 
 // 挂载
-var adminRouter = require("./routes/apiLearn/index8.js");
+var adminRouter = require("./routes/apiLearn/index2.js");
 app.use("/admin", adminRouter);
 app.use("/user", usersRouter);
 app.use("/plane", planeRouter);
