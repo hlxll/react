@@ -4,30 +4,56 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script>
-      var http = new XMLHttpRequest();
-      http.onreadystatechange = function (res) {
-        console.log(res);
-      };
-      http.open("POST", "http://localhost:4000/admin/jwt", true);
-      http.setRequestHeader("Content-Type", "application/json;charset=utf-8");
-      http.send(JSON.stringify({ username: "huanglin", password: 123456 }));
-
-      function afterLogin() {
-        var http = new XMLHttpRequest();
-        http.onreadystatechange = function () {
-          console.log("监听");
-        };
-        http.open("GET", "http://localhost:4000/admin/afterLogin", true);
-        http.setRequestHeader(
-          "authorization",
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imh1YW5nbGluIiwiaWF0IjoxNjU5MDIyOTc5LCJleHAiOjE2NTkwMjMwMDl9.pKjVt5bw4ffSMESjBblUZwxLsqpRlsIW7chfMXmxS8I"
-        );
-        http.send();
-      }
-    </script>
   </head>
   <body>
     <button onclick="afterLogin()">提交</button>
+    <button onclick="f_transform()">选择移动</button>
+    <div class="transform"></div>
   </body>
+  <script>
+    // var http = new XMLHttpRequest();
+    // var token = ''
+    // http.onreadystatechange = function (res) {
+    //   let obj = JSON.parse(res.currentTarget.response)
+    //   token = obj.token
+    // };
+    // http.open("POST", "http://localhost:4000/admin/jwt", true);
+    // http.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+    // http.send(JSON.stringify({ username: "huanglin", password: 123456 }));
+
+    // function afterLogin() {
+    //   var http = new XMLHttpRequest();
+    //   http.onreadystatechange = function () {
+    //     console.log("监听");
+    //   };
+    //   http.open("GET", "http://localhost:4000/admin/afterLogin", true);
+    //   http.setRequestHeader(
+    //     "authorization",
+    //     "Bearer "+token
+    //   );
+    //   http.send();
+    // }
+      function f_transform(){
+        let node = document.getElementsByClassName('transform')
+        node[0].classList.add('rotate')
+      }
+      let num = [{
+        name: '1'
+      }]
+      num.forEach(item=>{
+        item.name = 2
+      })
+      console.log(num)
+
+  </script>
+  <style>
+    .transform{
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+    .rotate{
+      transform:  rotate(45deg) translateX(90px);
+    }
+  </style>
 </html>

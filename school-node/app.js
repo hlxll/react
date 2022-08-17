@@ -20,6 +20,8 @@ var queryStringRouter = require("./routes/queryString");
 var pathModule = require("./routes/path_module");
 
 var app = express();
+
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 //配置模版文件后缀
@@ -80,8 +82,16 @@ app.get('/name/:id', funs, function (req, res) {
   res.send(app.locals || '空的')
 })
 
+// app.all("*", function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//   res.header("Access-Control-Allow-Headers", "Content-Type");
+//   next();
+// });
+
 // 挂载
-var adminRouter = require('./routes/apiLearn/express.js')
+var adminRouter = require('./routes/apiLearn/index2.js')
 app.use("/admin", adminRouter)
 app.use("/user", usersRouter);
 app.use("/plane", planeRouter);
