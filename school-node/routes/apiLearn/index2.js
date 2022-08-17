@@ -1,8 +1,9 @@
 var express = require('express');
 var QRCode = require('qrcode')
+
 route = express.Router();
 
-var mongo = require('mongodb').MongoClient;
+var mongo = require("mongodb").MongoClient;
 
 route.get('/', function (req, res) {
     res.render('index.html', {
@@ -15,4 +16,4 @@ route.get('/qrCode', function (req, res) {
     })
 })
 
-module.exports = route
+module.exports = route;
