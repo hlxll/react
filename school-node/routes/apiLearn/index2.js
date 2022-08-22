@@ -17,6 +17,13 @@ route.get('/qrCode', function (req, res) {
         res.send(url)
     })
 })
+route.get('/getSession', function (req, res) {
+    if (req.session.username) {
+        res.send(true)
+    } else {
+        res.send(false)
+    }
+})
 route.get('/login', function (req, res) {
     res.json({
         msg: req.session.username,
