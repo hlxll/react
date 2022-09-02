@@ -113,7 +113,7 @@ app.get("/name/:id", funs, function (req, res) {
 // });
 
 // 挂载
-var adminRouter = require('./routes/apiLearn/index2.js')
+var adminRouter = require('./routes/apiLearn/index10.js')
 app.use("/admin", adminRouter)
 
 app.use("/user", usersRouter);
