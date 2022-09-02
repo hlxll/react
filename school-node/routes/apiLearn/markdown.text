@@ -1,4 +1,4 @@
-index1.js  打印出目录下所有文件，fs学习
+index1.js  fs和stream
 启动mongodb：D:\mongo\bin>mongod --dbpath d:\mongodb，进入mongodb安装目录的bin下，执行该命令，d:\mongodb是存数据的目录
 index2.js 搭建一个微博网站
 index3.js path学习
@@ -9,9 +9,7 @@ index7.js database学习
 app.js  express学习
 
 index8.js实现一个session登陆
-index9.js开发ws
+index9.js开发ws 搭建一个在线聊天室??
 index10.js爬虫微博数据
 
 搭建一个博客网站
-搭建一个在线聊天室
-写一个简单的爬虫
