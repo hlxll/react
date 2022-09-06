@@ -4,6 +4,7 @@ var path = require("path");
 var express = require("express");
 const { ReadStream } = require("tty");
 const { dirname } = require("path");
+const { createGzip } = require("zlib");
 route = express.Router();
 
 /**
@@ -76,34 +77,58 @@ route.get("/", function (req, res) {
    * 大文件读取时，先读一部分处理完继续读取，使用读取流
    *highWaterMark，定义每次读取的内容大小,
    on事件有（open打开时运行，close关闭时运行，error错误时运行，data获取到一次数据运行，end所有数据读取完运行，pause暂停，resume继续）
+   可读流是对被消费的数据的来源的抽象
   */
+
+
   function streamRead() {
     let str = path.join(__dirname, "./copyFile.txt");
     let fd = fs.createReadStream(str, {
-      encoding: "utf-8",
+      // encoding: "utf-8",
       highWaterMark: 5,
       //   start: 0,
       //   end: 5,
       autoClose: true,
     });
+    fd.setEncoding('utf8')
+
     // fd.on("open", () => {
     //   console.log("文件打开");
     // });
     let amount = 0;
+    let writeUrl = path.join(__dirname, './writeFile.txt')
     fd.on("data", (data) => {
-      console.log(data);
+      fs.writeFileSync(writeUrl, data, {
+        flag: 'a'
+      })
+
       if (amount == 1) {
+        //停止
         fd.pause();
       }
       amount++;
     });
+    //有新的数据可读，或者到达末尾，就会触发readable事件，前一种情况使用this.read()读取数据，后一种返回null
+    fd.on('readable', function () {
+      console.log(this.read());
+    })
     fd.on("pause", () => {
       console.log("停止");
       fd.resume();
     });
+    fd.on("end", () => {
+      console.log('没有数据可消费')
+    })
     fd.on("close", () => {
       console.log("关闭");
     });
+
+    // pipe将数据推送到可写流中,unpipe分离pipe绑定的writeable流，不传参数是分离全部流
+    let pipeTxt = fs.createWriteStream(path.join(__dirname, './pipe.txt'))
+    let pipeZip = createGzip()
+    fd.pipe(pipeZip).pipe(pipeTxt)
+    // fd.unpipe(pipeZip)
+
   }
   function writeStream() {
     //option默认参数
@@ -144,6 +169,7 @@ route.get("/", function (req, res) {
     // });
     // writeText();
   }
+  writeStream()
   function fdChmod() {
     let str = path.join(__dirname, './learn.txt')
     // fs.chmod(str, 0777, (err) => {
