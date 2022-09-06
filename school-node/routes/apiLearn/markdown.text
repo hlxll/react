@@ -11,5 +11,5 @@ app.js  express学习
 index8.js实现一个session登陆
 index9.js开发ws 搭建一个在线聊天室??
 index10.js爬虫微博数据
-
+index11.js实现一个大文件的解压缩，读取，复制，压缩，对一个压缩文件解压后复制一份
 搭建一个博客网站
