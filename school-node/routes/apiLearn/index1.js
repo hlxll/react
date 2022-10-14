@@ -12,7 +12,10 @@ route = express.Router();
  * lstat,stat,fstat可以得到Stats对象，该对象是文件一些信息方法
  * flags：操作模式，如w，r+等，w覆盖写入，r+后续添加写入
  * */
+let etag = 1
 route.get("/", function (req, res) {
+  etag++
+  // res.set('ETag', etag)
   let str = path.join(__dirname, "../../routes");
   let learnText = path.join(__dirname, "./learn.txt");
   function readRoute(str) {

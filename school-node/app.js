@@ -53,7 +53,7 @@ app.use(
     secret: "secret key",
     saveUninitialized: false,
     cookie: {
-      maxAge: 3600,
+      maxAge: 13600,
     },
   })
 );
@@ -113,7 +113,7 @@ app.get("/name/:id", funs, function (req, res) {
 // });
 
 // 挂载
-var adminRouter = require('./routes/apiLearn/index1.js')
+var adminRouter = require('./routes/apiLearn/index2.js')
 app.use("/admin", adminRouter)
 
 app.use("/user", usersRouter);
