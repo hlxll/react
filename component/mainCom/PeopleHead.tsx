@@ -9,7 +9,7 @@ function PeopleHead() {
         source={require("../../static/image/header.jpg")}
       />
       <View style={styles.headCenterName}>
-        <View style={styles.headCenterTitle}>依古比古的小毯子</View>
+        <Text style={styles.headCenterTitle}>依古比古的小毯子</Text>
         <View style={styles.headStateParent}>
           <View style={styles.headStateZero}></View>
           <Text style={{ color: "white", fontSize: 8 }}>手机在线-4G</Text>

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import LinearGradient from "react-native-linear-gradient";
+// import LinearGradient from "react-native-linear-gradient";
 import {
   Text,
   Modal,
@@ -73,7 +73,6 @@ const News = () => {
         })}
       </View>
       <Text onClick={openLeftModal}>打开左侧</Text>
-      <LinearGradient>sss</LinearGradient>
       {isShow ? (
         <Modal visible={isShow} transparent={true}>
           <Animated.View
@@ -90,7 +89,7 @@ const News = () => {
             <View style={styles.modalMain}>
               <View style={styles.addCat}>
                 <MaterialCommunityIcons color={"white"} size={30} name="book" />
-                <View style={styles.dakaBtn}>打卡</View>
+                <Text style={styles.dakaBtn}>打卡</Text>
               </View>
               <MaterialCommunityIcons
                 style={styles.closeModal}
@@ -111,7 +110,7 @@ const News = () => {
                     <Text style={styles.name}>依古比古的小毯子</Text>
                     {/* <Image source={require('')}/> */}
                   </View>
-                  <View>ssssss</View>
+                  <Text>ssssss</Text>
                   <View>
                     <Text style={styles.detailTip} numberOfLines={1}>
                       8月29号，是我难忘的一天。希望我和他一直这样下去
