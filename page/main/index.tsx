@@ -4,6 +4,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import News from "../news";
 import FrequencyChannel from "../frequencyChannel";
 import PeopleHead from "../../component/mainCom/PeopleHead";
+import SmollWord from "../SmollWord";
 const Tab = createBottomTabNavigator();
 
 const menuCustom = (props: { num: number }) => {
@@ -26,14 +27,12 @@ export default function App() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="News"
-        component={News}
+        name="SmollWord"
+        component={SmollWord}
         options={{
-          header: () => {
-            return <PeopleHead />;
-          },
-          title: "消息",
-          tabBarIcon: () => menuCustom({ num: 100 }),
+          header: () => {},
+          title: "小世界",
+          tabBarIcon: () => menuCustom({ num: 0 }),
         }}
       />
       <Tab.Screen
@@ -46,14 +45,17 @@ export default function App() {
         }}
       />
       <Tab.Screen
-        name="SmollWord"
-        component={FrequencyChannel}
+        name="News"
+        component={News}
         options={{
-          header: () => {},
-          title: "小世界",
-          tabBarIcon: () => menuCustom({ num: 0 }),
+          header: () => {
+            return <PeopleHead />;
+          },
+          title: "消息",
+          tabBarIcon: () => menuCustom({ num: 100 }),
         }}
       />
+
       <Tab.Screen
         name="Contacts"
         component={FrequencyChannel}
