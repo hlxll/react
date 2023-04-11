@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import News from "../news";
@@ -18,8 +18,10 @@ const menuCustom = (props: { num: number }) => {
     <View>
       <MaterialCommunityIcons name="home" color={"black"} size={"10px"} />
       {newsNum != "0" ? (
-        <Text style={styles.iconRightIcon}>{newsNum}</Text>
-      ) : null}
+        <View style={styles.iconRightIcon}>{newsNum}</View>
+      ) : (
+        ""
+      )}
     </View>
   );
 };
@@ -27,12 +29,14 @@ export default function App() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="SmollWord"
-        component={SmollWord}
+        name="News"
+        component={News}
         options={{
-          header: () => {},
-          title: "小世界",
-          tabBarIcon: () => menuCustom({ num: 0 }),
+          header: () => {
+            return <PeopleHead />;
+          },
+          title: "消息",
+          tabBarIcon: () => menuCustom({ num: 100 }),
         }}
       />
       <Tab.Screen
@@ -45,17 +49,14 @@ export default function App() {
         }}
       />
       <Tab.Screen
-        name="News"
-        component={News}
+        name="SmollWord"
+        component={SmollWord}
         options={{
-          header: () => {
-            return <PeopleHead />;
-          },
-          title: "消息",
-          tabBarIcon: () => menuCustom({ num: 100 }),
+          header: () => {},
+          title: "小世界",
+          tabBarIcon: () => menuCustom({ num: 0 }),
         }}
       />
-
       <Tab.Screen
         name="Contacts"
         component={FrequencyChannel}
