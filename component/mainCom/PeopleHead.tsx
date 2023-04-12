@@ -1,33 +1,52 @@
+import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-function PeopleHead() {
+function PeopleHead(props: any) {
   return (
     <View style={styles.mainHead}>
       <Image
         style={styles.head_left_image}
         source={require("../../static/image/header.jpg")}
       />
-      <View style={styles.headCenterName}>
-        <Text style={styles.headCenterTitle}>依古比古的小毯子</Text>
-        <View style={styles.headStateParent}>
-          <View style={styles.headStateZero}></View>
-          <Text style={{ color: "white", fontSize: 8 }}>手机在线-4G</Text>
+      {props.isNews ? (
+        <View style={styles.headCenterName}>
+          <Text style={styles.headCenterTitle}>依古比古的小毯子</Text>
+          <View style={styles.headStateParent}>
+            <View style={styles.headStateZero}></View>
+            <Text style={{ color: "white", fontSize: 8 }}>手机在线-4G</Text>
+          </View>
         </View>
-      </View>
+      ) : (
+        <View style={styles.newsCenter}>
+          <Text style={styles.newsCenterText}>联系人</Text>
+        </View>
+      )}
+
       <View style={styles.headRightBtn}>
-        <MaterialCommunityIcons
-          style={styles.headRightBtnItem}
-          name="github"
-          color={"black"}
-          size={30}
-        />
-        <MaterialCommunityIcons
-          style={styles.headRightBtnItem}
-          name="plus"
-          color={"black"}
-          size={30}
-        />
+        {props.isNews ? (
+          <>
+            <MaterialCommunityIcons
+              style={styles.headRightBtnItem}
+              name="github"
+              color={"black"}
+              size={30}
+            />
+            <MaterialCommunityIcons
+              style={styles.headRightBtnItem}
+              name="plus"
+              color={"black"}
+              size={30}
+            />
+          </>
+        ) : (
+          <MaterialCommunityIcons
+            style={styles.headRightBtnItem}
+            name="plus"
+            color={"black"}
+            size={30}
+          />
+        )}
       </View>
     </View>
   );
@@ -55,6 +74,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginLeft: 10,
     marginRight: "auto",
+  },
+  newsCenter: {
+    width: "calc(100% - 100px)",
+    textAlign: "center",
+  },
+  newsCenterText: {
+    color: "white",
+    fontSize: 18,
+    textAlign: "center",
   },
   headCenterTitle: {
     color: "white",

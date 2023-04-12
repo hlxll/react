@@ -5,6 +5,8 @@ import News from "../news";
 import FrequencyChannel from "../frequencyChannel";
 import PeopleHead from "../../component/mainCom/PeopleHead";
 import SmollWord from "../SmollWord";
+import Contacts from "../Contact";
+
 const Tab = createBottomTabNavigator();
 
 const menuCustom = (props: { num: number }) => {
@@ -32,9 +34,7 @@ export default function App() {
         name="News"
         component={News}
         options={{
-          header: () => {
-            return <PeopleHead />;
-          },
+          header: () => <PeopleHead isNews={true} />,
           title: "消息",
           tabBarIcon: () => menuCustom({ num: 100 }),
         }}
@@ -59,9 +59,9 @@ export default function App() {
       />
       <Tab.Screen
         name="Contacts"
-        component={FrequencyChannel}
+        component={Contacts}
         options={{
-          header: () => {},
+          header: () => <PeopleHead isNews={false} />,
           title: "联系人",
           tabBarIcon: () => menuCustom({ num: 2 }),
         }}
